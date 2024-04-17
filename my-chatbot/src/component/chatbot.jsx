@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { OpenAI } from 'openai';
+
+OpenAI.apiKey = "sk-proj-4tEwkFqVjZdvh9CrwOkLT3BlbkFJP5U8wT6HvJUd0ErIBuw2";
+console.log(OpenAI);
 
 function Chatbot() {
     const [userInput, setUserInput] = useState('');
@@ -7,8 +10,16 @@ function Chatbot() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await axios.post('/chatbot', { user_input: userInput });
-        setChatbotResponse(response.data.response);
+        const response = await OpenAI.Completion.create({
+            model: 'text-davinci-002',
+            prompt: `User: ${userInput}\nAssistant:`,
+            temperature: 0.9,
+            max_tokens: 100,
+            top_p: 1,
+            frequency_penalty: 0.0,
+            presence_penalty: 0.0
+        });
+        setChatbotResponse(response.choices[0].text);
         setUserInput('');
     };
 
