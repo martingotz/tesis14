@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+/* import React, { useState } from 'react';
 import { OpenAI } from 'openai';
 import '../chatbox.css';
 import '../header.css';
 
-OpenAI.apiKey = "sk-proj-4tEwkFqVjZdvh9CrwOkLT3BlbkFJP5U8wT6HvJUd0ErIBuw2";
-console.log(OpenAI);
+const OPENAI_API_KEY = "sk-proj-4tEwkFqVjZdvh9CrwOkLT3BlbkFJP5U8wT6HvJUd0ErIBuw2";
+OpenAI.apiKey = OPENAI_API_KEY;
+const client = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 function Header() {
   return (
@@ -33,15 +34,15 @@ function Chatbox() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await OpenAI.Completion.create({
-      model: 'text-davinci-002',
-      prompt: `User: ${userInput}\nAssistant:`,
-      temperature: 0.9,
-      max_tokens: 100,
-      top_p: 1,
-      frequency_penalty: 0.0,
-      presence_penalty: 0.0
+
+    const response = await client.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        { role: "system", content: "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair." },
+        { role: "user", content: `${userInput}` }
+      ]
     });
+
     setChatbotResponse(response.choices[0].text);
     setUserInput('');
   };
@@ -91,3 +92,4 @@ function Chatbox() {
 }
 
 export default Chatbox;
+ */
