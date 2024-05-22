@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const axios = require('axios');
+const xlsx = require('xlsx');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const port = 3000;
@@ -10,12 +12,48 @@ const port = 3000;
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
+// Function to read data from XLSX file
+function readXlsxData(filePath) {
+  const workbook = xlsx.readFile(filePath);
+  const sheetName = workbook.sheetNames[0]; // Read the first sheet
+  const sheet = workbook.sheets[sheetName];
+  const data = xlsx.utils.sheet_to_json(sheet);
+  return data;
+}
+
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+let userContexts = {};
+
 // Define a route for the chatbot
 app.post('/chatbot', async (req, res) => {
-  const { userInput } = req.body;
+  let { userInput, userId } = req.body;
+
+  // Generate a new userId if it does not exist
+  if (!userId) {
+    userId = uuidv4();
+    userContexts[userId] = [];
+  }
+
+  // Add the user's input to the conversation context
+  userContexts[userId].push({ role: 'user', content: userInput });
+
+  // Check if the user is asking for recommendations about what to study
+  const isAskingForRecommendations = userInput.toLowerCase().includes('recomienda') && userInput.toLowerCase().includes('estudiar');
+
+  if (isAskingForRecommendations) {
+    // Read data from the XLSX file
+    const xlsxData = readXlsxData(path.join(__dirname, 'Prueba_2_actualizada_final.xlsx'));
+
+    // Format the XLSX data into a string or JSON
+    const xlsxDataString = JSON.stringify(xlsxData);
+
+    userContexts[userId].push({
+      role: 'system',
+      content: `Here is some additional data: ${xlsxDataString}`
+    });
+  }
 
   try {
     const response = await axios.post(
@@ -23,11 +61,11 @@ app.post('/chatbot', async (req, res) => {
       {
         model: 'gpt-3.5-turbo',
         messages: [
-          { role: 'system', content: 'You are a helpful assistant, skilled in explaining complex programming concepts with creative flair.' },
-          { role: 'user', content: userInput }
+          { role: 'system', content: 'You are a helpful assistant.' },
+          ...userContexts[userId],
         ],
-        max_tokens: 100,
-        temperature: 0.5,
+        max_tokens: 200,
+        temperature: 0.3,
         top_p: 1,
         frequency_penalty: 0,
         presence_penalty: 0
@@ -40,7 +78,10 @@ app.post('/chatbot', async (req, res) => {
       }
     );
 
-    res.json({ chatbotResponse: response.data.choices[0].message.content.trim() });
+    const chatbotResponse = response.data.choices[0].message.content.trim();
+    userContexts[userId].push({ role: 'assistant', content: chatbotResponse });
+
+    res.json({ chatbotResponse, userId });
   } catch (error) {
     console.error('Error with OpenAI API request:', error.message);
     if (error.response) {
@@ -50,6 +91,15 @@ app.post('/chatbot', async (req, res) => {
     }
     res.status(500).json({ error: 'Something went wrong with the OpenAI API request.' });
   }
+});
+
+// Endpoint to clear the conversation context (end the chat)
+app.post('/end-chat', (req, res) => {
+  const { userId } = req.body;
+  if (userContexts[userId]) {
+    delete userContexts[userId];
+  }
+  res.json({ message: 'Chat ended and context cleared.' });
 });
 
 // Send the index.html file for any route
