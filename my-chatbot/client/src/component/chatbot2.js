@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import axios from 'axios';
 import Header from "./Header";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVolumeUp, faCopy, faSyncAlt, faThumbsDown, faThumbsUp, faStar, faChevronDown, faPencilAlt, faMicrophone,faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faVolumeUp, faCopy, faSyncAlt, faThumbsDown, faThumbsUp, faStar, faChevronDown, faPencilAlt, faMicrophone,faPaperPlane, faSliders } from '@fortawesome/free-solid-svg-icons';
 
 const PageContainer = styled.div`
   display: flex;
@@ -20,22 +20,24 @@ const MainContent = styled.div`
 `;
 
 const LeftColumn = styled.div`
-  width: 25%;
+  width: 30%;
   background-color: #2c2c2c;
   color: #ffffff;
   padding: 20px;
   overflow: hidden;
+  display: ${(props) => (props.visible ? 'block' : 'none')};
 `;
 
 const Divider = styled.div`
   width: 5px;
   background-color: #a0e00d;
+   display: ${(props) => (props.visible ? 'block' : 'none')};
 `;
 
 const ChatContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 75%;
+  width: ${(props) => (props.fullWidth ? '100%' : '70%')};
   height: 100%;
   background-color: #070806;
 `;
@@ -167,6 +169,15 @@ const spinnerAnimation = keyframes`
   100% { transform: rotate(360deg); }
 `;
 
+const Plane = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #a0e00d;
+  font-size: 24px;
+  padding: 10px
+`;
+
 const Spinner = styled.div`
   border: 8px solid rgba(0, 0, 0, 0.1);
   border-top: 8px solid #a0e00d;
@@ -175,6 +186,12 @@ const Spinner = styled.div`
   height: 60px;
   animation: ${spinnerAnimation} 1s linear infinite;
   margin: auto;
+`;
+
+const ToggleButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;  // Align to the left
+  margin-bottom: 10px;
 `;
 
 function ChatBot() {
@@ -288,7 +305,7 @@ function ChatBot() {
   const toggleThumbsDownColor = (id) => {
     setThumbsDownColor(prev => ({
       ...prev,
-      [id]: prev[id] ? "" : "#00FF00"
+      [id]: prev[id] ? "" : "#FF0000"
     }));
     if (thumbsUpColor[id]) {
       setThumbsUpColor(prev => ({
@@ -309,6 +326,11 @@ function ChatBot() {
         [id]: ""
       }));
     }
+  };
+  const [isLeftColumnVisible, setIsLeftColumnVisible] = useState(true);
+
+  const toggleLeftColumn = () => {
+    setIsLeftColumnVisible(!isLeftColumnVisible);
   };
 
   const handleMicClick = () => {
@@ -338,7 +360,10 @@ function ChatBot() {
     <PageContainer>
       <Header />
       <MainContent>
-        <LeftColumn>
+        <LeftColumn visible={isLeftColumnVisible}>
+          <ToggleButtonContainer>
+            <FontAwesomeIcon icon={faSliders} onClick={toggleLeftColumn}/>
+          </ToggleButtonContainer>
           <SearchHistoryContainer>
             <SearchHistoryTitle>Historial de Búsqueda</SearchHistoryTitle>
             {searchHistory.map((item) => (
@@ -350,8 +375,9 @@ function ChatBot() {
             ))}
           </SearchHistoryContainer>
         </LeftColumn>
-        <Divider />
-        <ChatContainer>
+        <Divider visible={isLeftColumnVisible} />
+        <ChatContainer fullWidth={!isLeftColumnVisible}>
+        <FontAwesomeIcon icon={faSliders} color="white"  onClick={toggleLeftColumn}/>
           <MessagesContainer>
             {messages.map((msg) => (
               <Message key={msg.id} user={msg.user}>
@@ -367,7 +393,7 @@ function ChatBot() {
                       onChange={(e) => setEditText(e.target.value)}
                     />
                     <SendButton type="submit">
-                      <SendIcon src="/enviar.png" alt="Send" />
+                      <FontAwesomeIcon icon={faPaperPlane} color="white" />
                     </SendButton>
                   </form>
                 ) : (
@@ -414,9 +440,9 @@ function ChatBot() {
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
               />
-              <SendButton onClick={sendMessage}>
+              <Plane onClick={sendMessage}>
                 <FontAwesomeIcon icon={faPaperPlane} />
-              </SendButton>
+              </Plane>
             </form>
           </InputContainer>
         </ChatContainer>
