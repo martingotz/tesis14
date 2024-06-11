@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import LoginForm from './LoginForm';
-import RegistrationForm from './RegistrationForm';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -36,7 +34,7 @@ const NavContainer = styled.div`
   justify-content: space-evenly; /* Distribute items evenly */
 `;
 
-const NavItem = styled.a`
+const NavItem = styled(NavLink)`
   color: #ffffff;
   text-decoration: none;
   font-size: 18px;
@@ -66,7 +64,7 @@ const LoginButton = styled(NavLink)`
   }
 `;
 
-const ChatBotButton = styled.button`
+const ChatBotButton = styled(NavLink)`
   background-color: #a0e00d;
   color: #0d0f10;
   border: none;
@@ -75,6 +73,7 @@ const ChatBotButton = styled.button`
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
+  text-decoration: none;
   &:hover {
     background-color: #ffffff; /* Change color on hover */
   }
@@ -88,14 +87,14 @@ function Header({ children }) {
         <LogoText>UNIGPT</LogoText>
       </LogoContainer>
       <NavContainer>
-        <NavItem href="#inicio">Inicio</NavItem>
-        <NavItem href="#universidades">Universidades</NavItem>
-        <NavItem href="#carreras">Carreras</NavItem>
-        <NavItem href="#contacto">Contacto</NavItem>
+        <NavItem to="/inicio">Inicio</NavItem>
+        <NavItem to="/Universidades">Universidades</NavItem>
+        <NavItem to="/carreras">Carreras</NavItem>
+        <NavItem to="/contacto">Contacto</NavItem>
       </NavContainer>
       <ButtonContainer>
-        <LoginButton to="/login">Iniciar Sesión</LoginButton>
-        <ChatBotButton>Chatbot</ChatBotButton>
+        <LoginButton to="/usuario">Iniciar Sesión</LoginButton>
+        <ChatBotButton to="/chatbot2">Chatbot</ChatBotButton>
       </ButtonContainer>
     </HeaderContainer>
   );
