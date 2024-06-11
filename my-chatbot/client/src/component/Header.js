@@ -88,7 +88,7 @@ function Header({ children }) {
       </LogoContainer>
       <NavContainer>
         <NavItem to="/inicio">Inicio</NavItem>
-        <NavItem to="/Universidades">Universidades</NavItem>
+        <NavItem to="/universidades">Universidades</NavItem>
         <NavItem to="/carreras">Carreras</NavItem>
         <NavItem to="/contacto">Contacto</NavItem>
       </NavContainer>

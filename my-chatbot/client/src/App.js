@@ -7,7 +7,9 @@ import RegistrationForm from './component/RegistrationForm';
 import Usuario from './component/usuario'; 
 import Contacto from './component/Contacto';
 import Universidad from './component/Universidad'
-import Home from './Home';
+import Home from './component/Home';
+import Footer from './component/Footer';
+
 
 function App() {
   return (
@@ -21,9 +23,10 @@ function App() {
           <Route path="/chatbot2" element={<Chatbot />} />
           <Route path="/Usuario" element={<Usuario />} />
           <Route path="/contacto" element={<Contacto />} />
-          <Route path="/Universidad" element={<Universidad />} />
+          <Route path="/universidades" element={<Universidad />} />
           {/* Otras rutas pueden agregarse aquí */}
         </Routes>
+        <Footer />
       </div>
     </Router>
   );

@@ -91,10 +91,10 @@ app.post('/chatbot', async (req, res) => {
         messages: [
           { role: 'system', content: 'You are a helpful assistant specialized in providing career advice based on personal interests, skills, and available data.' },
           ...userSummaries[userId].importantDetails.map(detail => ({ role: 'system', content: detail })),
-          ...userContexts[userId].slice(-5) // Send only the last 5 messages to minimize token usage
+          ...userContexts[userId].slice(-7) // Send only the last 7 messages to minimize token usage
         ],
-        max_tokens: 200,
-        temperature: 0.5,
+        max_tokens: 300,
+        temperature: 0.7,
         top_p: 1,
         frequency_penalty: 0,
         presence_penalty: 0
