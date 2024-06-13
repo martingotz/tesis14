@@ -1,3 +1,32 @@
+.home-section h1 {
+  font-size: 3em;
+  font-weight: bold;
+  color: white; /* Asegura que el color del texto sea blanco */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Añade un sombreado para mejorar la visibilidad */
+  margin: 0;
+  padding: 0 20px;
+}
+
+.home-section .highlight {
+  color: #A5FF00; /* Color verde utilizado en tu prototipo */
+}
+
+.chatbot-button {
+  margin-top: 20px;
+  padding: 15px 30px;
+  font-size: 1.5em;
+  color: white;
+  background-color: #A5FF00; /* Color verde utilizado en tu prototipo */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.chatbot-button:hover {
+  background-color: #8CCC00; /* Un verde un poco más oscuro para el hover */
+}
+
 .card-client {
     background: #2cb5a0;
     width: 13rem;

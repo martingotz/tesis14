@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import './Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+
+
+
 
 const CardClient = styled.div`
   background: #2cb5a0;
@@ -114,82 +118,20 @@ const TooltipSocial = styled.span`
     transform: translate(-50%, 100%);
   }
 `;
-
-function Home() {
+const Home = () => {
   return (
-    <div>
-      <CardClient>
-        <UserPicture>
-          <FontAwesomeIcon icon={faUser} />
-        </UserPicture>
-        <NameClient>
-          Martín Ignacio Götz
-          <span>Co-Founder</span>
-        </NameClient>
-        <SocialMedia>
-          <a href="#">
-            <FontAwesomeIcon icon={faEnvelope} />
-            <TooltipSocial className="tooltip-social">Gmail</TooltipSocial>
-          </a>
-          <a href="#">
-            <FontAwesomeIcon icon={faInstagram} />
-            <TooltipSocial className="tooltip-social">Instagram</TooltipSocial>
-          </a>
-          <a href="#">
-            <FontAwesomeIcon icon={faLinkedin} />
-            <TooltipSocial className="tooltip-social">LinkedIn</TooltipSocial>
-          </a>
-        </SocialMedia>
-      </CardClient>
-      <CardClient>
-        <UserPicture>
-          <FontAwesomeIcon icon={faUser} />
-        </UserPicture>
-        <NameClient>
-          Federico Miguel Bornico
-          <span>Co-Founder</span>
-        </NameClient>
-        <SocialMedia>
-          <a href="#">
-            <FontAwesomeIcon icon={faEnvelope} />
-            <TooltipSocial className="tooltip-social">Gmail</TooltipSocial>
-          </a>
-          <a href="#">
-            <FontAwesomeIcon icon={faInstagram} />
-            <TooltipSocial className="tooltip-social">Instagram</TooltipSocial>
-          </a>
-          <a href="#">
-            <FontAwesomeIcon icon={faLinkedin} />
-            <TooltipSocial className="tooltip-social">LinkedIn</TooltipSocial>
-          </a>
-        </SocialMedia>
-      </CardClient>
-      <CardClient>
-        <UserPicture>
-          <FontAwesomeIcon icon={faUser} />
-        </UserPicture>
-        <NameClient>
-          Nicolas Serena Olivera
-          <span>Co-Founder</span>
-        </NameClient>
-        <SocialMedia>
-          <a href="#">
-            <FontAwesomeIcon icon={faEnvelope} />
-            <TooltipSocial className="tooltip-social">Gmail</TooltipSocial>
-          </a>
-          <a href="#">
-            <FontAwesomeIcon icon={faInstagram} />
-            <TooltipSocial className="tooltip-social">Instagram</TooltipSocial>
-          </a>
-          <a href="#">
-            <FontAwesomeIcon icon={faLinkedin} />
-            <TooltipSocial className="tooltip-social">LinkedIn</TooltipSocial>
-          </a>
-        </SocialMedia>
-      </CardClient>
+    <div className="home-section">
+      <div className="text-container">
+        <h1>
+          Elegí tu <span className="highlight">camino</span><br />con <span className="highlight">UniGPT</span>
+        </h1>
+      </div>
+      <button className="chatbot-button" onClick={() => window.location.href='#chatbot-section'}>Chatbot</button>
     </div>
   );
-}
+};
+ 
+
 
 export default Home;
 
