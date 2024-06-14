@@ -24,6 +24,11 @@
     font-size: 1.5rem;
     margin-bottom: 10px;
   }
+  .footer-title-right{
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
   
   .footer-left p {
     margin: 10px 0;
@@ -53,12 +58,13 @@
   }
   
   .footer-list a {
-    color: #A0E00D;
+    color: white;
     text-decoration: none;
   }
   
   .footer-list a:hover {
     text-decoration: underline;
+    color:#A0E00D;
   }
   
   .footer-bottom {
@@ -85,15 +91,16 @@
   }
   
   .footer-bottom-list a {
-    color: #A0E00D;
+    color: white;
     text-decoration: none;
   }
   
   .footer-bottom-list a:hover {
     text-decoration: underline;
+    color:#A0E00D;
   }
 
-  .card {
+  .tarjeta {
     width: fit-content;
     height: fit-content;
     display: flex;
