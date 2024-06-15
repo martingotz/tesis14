@@ -1,4 +1,4 @@
-.form {
+/*.form {
     display: flex;
     flex-direction: column;
     align-self: center;
@@ -84,4 +84,142 @@
     transform: scale(0.98);
     border-radius: 20px;
   }
+  */
+
+  .contact-section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 50px 20px;
+    background-color: #000;
+    color: white;
+    min-height: 400px;
+  }
   
+  .contact-content {
+    width: 50%;
+    padding-right: 20px;
+    padding-left: 100px;
+  }
+  
+  .contact-content h2 {
+    font-size: 3em;
+    color: #A5FF00;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .contact-content p {
+    font-size: 1.5em;
+    text-align: justify;
+  }
+  
+  .contact-form {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .contact-form form {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    margin-bottom: 20px;
+    padding: 15px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .contact-form input {
+    height: 50px;
+  }
+  
+  .contact-form textarea {
+    height: 150px;
+    resize: none;
+  }
+  
+  .contact-form button {
+    padding: 15px;
+    font-size: 1.5em;
+    color: black;
+    background-color: #A5FF00;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .contact-form button:hover {
+    background-color: #8CCC00;
+  }
+  
+  .additional-contact-section {
+    background-color: #000;
+    color: white;
+    padding: 50px 20px;
+  }
+  
+  .additional-contact-content {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+  }
+  
+  .contact-item {
+    max-width: 300px;
+  }
+  
+  .contact-item h3 {
+    font-size: 2em;
+    color: #A5FF00;
+    margin-bottom: 20px;
+  }
+
+  .contact-item p {
+    text-align: justify;
+  }
+  
+  .faq-section {
+    background-color: #000;
+    color: white;
+    padding: 50px 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+
+  .faq-section h2{
+    color: white;
+    font-size: xx-large;
+    padding-bottom: 50px;
+  }
+
+  .faq-item {
+    border: 1px solid #444;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    cursor: pointer;
+  }
+  
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .faq-answer {
+    margin-top: 20px;
+  }
+  
+  .faq-answer p{
+    color: #818181d8;
+    text-align: left;
+
+  }
