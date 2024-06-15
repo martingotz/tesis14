@@ -6,10 +6,12 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faGlobe, faPhone, faClock } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faGlobe, faPhone } from '@fortawesome/free-solid-svg-icons';
 
 function PruebitaC() {
     const [data, setData] = useState([]);
+    const [selectedUniversity, setSelectedUniversity] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,10 +34,36 @@ function PruebitaC() {
         return acc;
     }, {});
 
+    const handleUniversityClick = (university) => {
+        setSelectedUniversity(university === selectedUniversity ? '' : university);
+    };
+
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
+
+    const handleClearFilter = () => {
+        setSelectedUniversity('');
+        setSearchTerm('');
+    };
+
+    const filteredData = Object.entries(groupedData).reduce((acc, [university, items]) => {
+        if (selectedUniversity && university !== selectedUniversity) return acc;
+        const filteredItems = items.filter(item =>
+            (item.Corto && item.Corto.toLowerCase().includes(searchTerm.toLowerCase())) ||
+            (item.Duracion && item.Duracion.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
+        if (filteredItems.length) acc[university] = filteredItems;
+        return acc;
+    }, {});
+
     const sliderSettings = {
         dots: true,
-        infinite: false,
-        speed: 500,
+        infinite: true,
+        speed: 800,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        pauseOnHover: true,
         slidesToShow: 4,
         slidesToScroll: 1,
         responsive: [
@@ -68,7 +96,32 @@ function PruebitaC() {
 
     return (
         <div className="pruebita-container">
-            {Object.entries(groupedData).map(([university, items], index) => (
+            <input
+                type="text"
+                placeholder="Buscar por universidad o carrera..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+                className="pruebita-search-input"
+            />
+            <div className='flexi'>
+            <button
+                className="pruebita-clear-button"
+                onClick={handleClearFilter}
+            >
+               Todas las Carreras
+            </button>
+            
+                {Object.keys(groupedData).map((university, index) => (
+                    <button
+                        key={index}
+                        className={`pruebita-university-button ${selectedUniversity === university ? 'selected' : ''}`}
+                        onClick={() => handleUniversityClick(university)}
+                    >
+                        {university}
+                    </button>
+                ))}
+            </div>
+            {Object.entries(filteredData).map(([university, items], index) => (
                 <div key={index} className="pruebita-university-section">
                     <h2>{university}</h2>
                     <Slider {...sliderSettings} className="pruebita-card-container">
@@ -122,5 +175,8 @@ function PruebitaC() {
 }
 
 export default PruebitaC;
+
+
+
 
 
