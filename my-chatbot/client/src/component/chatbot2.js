@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import axios from 'axios';
-import Header from "./Header";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVolumeUp, faCopy, faSyncAlt, faThumbsDown, faThumbsUp, faStar, faChevronDown, faPencilAlt, faMicrophone,faPaperPlane, faSliders } from '@fortawesome/free-solid-svg-icons';
+import { faVolumeUp, faCopy, faSyncAlt, faThumbsDown, faThumbsUp, faPencilAlt, faMicrophone, faPaperPlane, faSliders, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const PageContainer = styled.div`
   display: flex;
@@ -24,7 +23,7 @@ const LeftColumn = styled.div`
   background-color: #2c2c2c;
   color: #ffffff;
   padding: 20px;
-  overflow: hidden;
+  overflow-y: auto;
   display: ${(props) => (props.visible ? 'block' : 'none')};
 `;
 
@@ -40,6 +39,7 @@ const ChatContainer = styled.div`
   width: ${(props) => (props.fullWidth ? '100%' : '70%')};
   height: 100%;
   background-color: #070806;
+  position: relative;
 `;
 
 const MessagesContainer = styled.div`
@@ -56,7 +56,7 @@ const Message = styled.div`
   padding: 10px 15px;
   border-radius: 20px;
   margin-bottom: 10px;
-  align-self: ${(props) => (props.user === "Juan" ? "flex-start" : "flex-end")};
+  align-self: ${(props) => (props.user === "Chatbot" ? "flex-start" : "flex-end")};
   max-width: 80%;
   font-size: 18px;
   position: relative;
@@ -68,8 +68,8 @@ const InputContainer = styled.div`
   padding: 10px;
   background: #070806;
   width: 100%;
-  margin: 10px 0;
-  padding: 10px;
+  position: absolute;
+  bottom: 0;
 `;
 
 const Input = styled.input`
@@ -121,6 +121,7 @@ const UserIcon = styled.img`
   width: 36px;
   height: 36px;
   margin-right: 10px;
+  border-radius: 50%;
 `;
 
 const SearchHistoryContainer = styled.div`
@@ -141,6 +142,7 @@ const SearchItem = styled.div`
   margin-bottom: 10px;
   font-size: 20px;
   border: 1px solid #a0e00d;
+  cursor: pointer;
 `;
 
 const IconContainer = styled.div`
@@ -175,7 +177,7 @@ const Plane = styled.button`
   cursor: pointer;
   color: #a0e00d;
   font-size: 24px;
-  padding: 10px
+  padding: 10px;
 `;
 
 const Spinner = styled.div`
@@ -190,41 +192,38 @@ const Spinner = styled.div`
 
 const ToggleButtonContainer = styled.div`
   display: flex;
-  justify-content: flex-start;  // Align to the left
+  justify-content: flex-start;
   margin-bottom: 10px;
 `;
 
+const NewChatButton = styled.button`
+  background: none;
+  border: 1px solid #a0e00d;
+  color: #a0e00d;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+`;
+
+const PromptOptions = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+`;
+
+const PromptOption = styled.button`
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid #a0e00d;
+  margin-bottom: 10px;
+  cursor: pointer;
+`;
+
 function ChatBot() {
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      text: "¿Cuáles son las opciones de carreras universitarias o técnicaturas disponibles?",
-      user: "Juan",
-      name: "Juan",
-      icon: "/usuario.png",
-    },
-    {
-      id: 2,
-      text: "Hola Juan, tenemos un ranking de universidades y carreras más solicitadas disponibles en Argentina.",
-      user: "Chatbot",
-      name: "Chatbot",
-      icon: "/uni.png",
-    },
-    {
-      id: 3,
-      text: "Estoy buscando una carrera que esté en Buenos Aires.",
-      user: "Juan",
-      name: "Juan",
-      icon: "/usuario.png",
-    },
-    {
-      id: 4,
-      text: "Perfecto, Buenos Aires es una gran ciudad! Las carreras más solicitadas son: Negocios Digitales, Economía Empresarial, Abogacía.",
-      user: "Chatbot",
-      name: "Chatbot",
-      icon: "/uni.png",
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
   const [editingMessage, setEditingMessage] = useState(null);
   const [editText, setEditText] = useState("");
@@ -232,26 +231,50 @@ function ChatBot() {
   const [thumbsUpColor, setThumbsUpColor] = useState({});
   const [chatbotResponse, setChatbotResponse] = useState('');
   const [loading, setLoading] = useState(false);
+  const [chatHistory, setChatHistory] = useState([]);
+  const [isLeftColumnVisible, setIsLeftColumnVisible] = useState(true);
+  const [showPromptOptions, setShowPromptOptions] = useState(true);
+  const messagesEndRef = useRef(null);
 
-  const sendMessage = async (event) => {
+  const userEmail = localStorage.getItem('userEmail');
+  const userName = userEmail ? userEmail.split('@')[0] : `user${Math.floor(Math.random() * 10000)}`;
+
+  const promptOptions = [
+    "¿Cuáles son las opciones de carreras universitarias o técnicaturas disponibles?",
+    "Estoy buscando una carrera que esté en Buenos Aires.",
+    "¿Qué carreras tienen mayor demanda laboral?",
+    "¿Cuáles son las mejores universidades en Argentina?"
+  ];
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, loading]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const sendMessage = async (event, text) => {
     event.preventDefault();
-    if (inputText.trim()) {
+    const messageText = text || inputText;
+    if (messageText.trim()) {
       const newMessage = {
         id: messages.length + 1,
-        text: inputText,
-        user: "Juan",
-        name: "Juan",
+        text: messageText,
+        user: userName,
+        name: userName,
         icon: "/usuario.png",
       };
       setMessages([...messages, newMessage]);
       setInputText("");
+      setShowPromptOptions(false);
 
       // Set loading to true before sending the message
       setLoading(true);
 
       // Send the message to the backend
       try {
-        const response = await axios.post('/chatbot', { userInput: inputText });
+        const response = await axios.post('/chatbot', { userInput: messageText });
         setChatbotResponse(response.data.chatbotResponse);
 
         // Add the chatbot response to the messages
@@ -327,7 +350,6 @@ function ChatBot() {
       }));
     }
   };
-  const [isLeftColumnVisible, setIsLeftColumnVisible] = useState(true);
 
   const toggleLeftColumn = () => {
     setIsLeftColumnVisible(!isLeftColumnVisible);
@@ -348,37 +370,69 @@ function ChatBot() {
     };
   };
 
-  const searchHistory = [
-    { id: 1, text: ["Diseño", "Bariloche", "Matemáticas"] },
-    { id: 2, text: ["Diseño", "Bariloche", "Matemáticas"] },
-    { id: 3, text: ["Diseño", "Bariloche", "Matemáticas"] },
-    { id: 4, text: ["Diseño", "Bariloche", "Matemáticas"] },
-    { id: 5, text: ["Diseño", "Bariloche", "Matemáticas"] },
-  ];
+  const startNewChat = () => {
+    const currentChat = [...messages];
+    if (currentChat.length > 0) {
+      setChatHistory([
+        ...chatHistory,
+        {
+          id: chatHistory.length + 1,
+          messages: currentChat,
+          firstMessage: currentChat[0].text
+        }
+      ]);
+    }
+    setMessages([]);
+    setShowPromptOptions(true);
+  };
+
+  const selectChat = (chatId) => {
+    const selectedChat = chatHistory.find(chat => chat.id === chatId);
+    if (selectedChat) {
+      setChatHistory(chatHistory.filter(chat => chat.id !== chatId));
+      setChatHistory(prevHistory => [
+        ...prevHistory,
+        {
+          id: chatHistory.length + 1,
+          messages: messages,
+          firstMessage: messages[0]?.text || ''
+        }
+      ]);
+      setMessages(selectedChat.messages);
+    }
+  };
 
   return (
     <PageContainer>
       <MainContent>
         <LeftColumn visible={isLeftColumnVisible}>
+          <NewChatButton onClick={startNewChat}>Nuevo Chat</NewChatButton>
           <SearchHistoryContainer>
-            <SearchHistoryTitle>Historial de Búsqueda</SearchHistoryTitle>
-            {searchHistory.map((item) => (
-              <SearchItem key={item.id}>
-                {item.text.map((line, index) => (
-                  <div key={index}>{line}</div>
-                ))}
+            <SearchHistoryTitle>Historial de Chats</SearchHistoryTitle>
+            {chatHistory.map((chat) => (
+              <SearchItem key={chat.id} onClick={() => selectChat(chat.id)}>
+                {chat.firstMessage}
               </SearchItem>
             ))}
           </SearchHistoryContainer>
         </LeftColumn>
         <Divider visible={isLeftColumnVisible} />
         <ToggleButtonContainer>
-            <button onClick={toggleLeftColumn}>
-              <FontAwesomeIcon icon={faSliders} />
-            </button>
-      </ToggleButtonContainer>
+          <button onClick={toggleLeftColumn}>
+            <FontAwesomeIcon icon={faSliders} />
+          </button>
+        </ToggleButtonContainer>
         <ChatContainer fullWidth={!isLeftColumnVisible}>
           <MessagesContainer>
+            {showPromptOptions && (
+              <PromptOptions>
+                {promptOptions.map((option, index) => (
+                  <PromptOption key={index} onClick={(e) => sendMessage(e, option)}>
+                    {option}
+                  </PromptOption>
+                ))}
+              </PromptOptions>
+            )}
             {messages.map((msg) => (
               <Message key={msg.id} user={msg.user}>
                 <MessageHeader>
@@ -399,7 +453,7 @@ function ChatBot() {
                 ) : (
                   <>
                     {msg.text}
-                    {msg.user === "Juan" && (
+                    {msg.user === userName && (
                       <EditButton onClick={() => startEditing(msg)}>
                         <FontAwesomeIcon icon={faPencilAlt} />
                       </EditButton>
@@ -410,16 +464,16 @@ function ChatBot() {
                         <Icon onClick={() => copyToClipboard(msg.text)}><FontAwesomeIcon icon={faCopy} /></Icon>
                         <Icon><FontAwesomeIcon icon={faSyncAlt} /></Icon>
                         <Icon 
-                          onClick={() => toggleThumbsUpColor(msg.id)}
-                          style={{ color: thumbsUpColor[msg.id] || "inherit" }}
-                        >
-                          <FontAwesomeIcon icon={faThumbsUp} />
-                        </Icon>
-                        <Icon 
                           onClick={() => toggleThumbsDownColor(msg.id)}
                           style={{ color: thumbsDownColor[msg.id] || "inherit" }}
                         >
                           <FontAwesomeIcon icon={faThumbsDown} />
+                        </Icon>
+                        <Icon 
+                          onClick={() => toggleThumbsUpColor(msg.id)}
+                          style={{ color: thumbsUpColor[msg.id] || "inherit" }}
+                        >
+                          <FontAwesomeIcon icon={faThumbsUp} />
                         </Icon>
                       </IconContainer>
                     )}
@@ -427,42 +481,8 @@ function ChatBot() {
                 )}
               </Message>
             ))}
-            {loading && 
-            <div class="loader">
-                  <div>
-                    <ul>
-                      <li>
-                        <svg fill="currentColor" viewBox="0 0 90 120">
-                          <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
-                        </svg>
-                      </li>
-                      <li>
-                        <svg fill="currentColor" viewBox="0 0 90 120">
-                          <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
-                        </svg>
-                      </li>
-                      <li>
-                        <svg fill="currentColor" viewBox="0 0 90 120">
-                          <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
-                        </svg>
-                      </li>
-                      <li>
-                        <svg fill="currentColor" viewBox="0 0 90 120">
-                          <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
-                        </svg>
-                      </li>
-                      <li>
-                        <svg fill="currentColor" viewBox="0 0 90 120">
-                          <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
-                        </svg>
-                      </li>
-                      <li>
-                        <svg fill="currentColor" viewBox="0 0 90 120">
-                          <path d="M90,0 L90,120 L11,120 C4.92486775,120 0,115.075132 0,109 L0,11 C0,4.92486775 4.92486775,0 11,0 L90,0 Z M71.5,81 L18.5,81 C17.1192881,81 16,82.1192881 16,83.5 C16,84.8254834 17.0315359,85.9100387 18.3356243,85.9946823 L18.5,86 L71.5,86 C72.8807119,86 74,84.8807119 74,83.5 C74,82.1745166 72.9684641,81.0899613 71.6643757,81.0053177 L71.5,81 Z M71.5,57 L18.5,57 C17.1192881,57 16,58.1192881 16,59.5 C16,60.8254834 17.0315359,61.9100387 18.3356243,61.9946823 L18.5,62 L71.5,62 C72.8807119,62 74,60.8807119 74,59.5 C74,58.1192881 72.8807119,57 71.5,57 Z M71.5,33 L18.5,33 C17.1192881,33 16,34.1192881 16,35.5 C16,36.8254834 17.0315359,37.9100387 18.3356243,37.9946823 L18.5,38 L71.5,38 C72.8807119,38 74,36.8807119 74,35.5 C74,34.1192881 72.8807119,33 71.5,33 Z"></path>
-                        </svg>
-                      </li>
-                    </ul>
-                  </div><span>Loading</span></div>}
+            {loading && <Spinner />}
+            <div ref={messagesEndRef} />
           </MessagesContainer>
           <InputContainer>
             <MicButton onClick={handleMicClick}>
@@ -487,4 +507,3 @@ function ChatBot() {
 }
 
 export default ChatBot;
-

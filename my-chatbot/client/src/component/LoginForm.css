@@ -4,29 +4,29 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
   }
+
   
-  /* Wrapper del login para centrar el formulario */
-  .login-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    position: relative;
-    z-index: 1;
-  }
   
-  /* Contenedor del formulario */
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    width: 100%;
-    max-width: 400px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+  /* LoginForm.css */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ensure the form takes the full viewport height */
+  background-color: rgba(0, 0, 0, 0.5); /* Optional: Add a background color with opacity */
+}
+
+.container {
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.banner {
+  display: none; /* Hide the banner if it's not necessary */
+}
   
   .input {
     height: 48px;

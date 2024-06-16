@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom'; // Importa Link desde react-router-dom
+import { Link, useNavigate } from 'react-router-dom'; // Importa useNavigate desde react-router-dom
 import { faGoogle, faFacebook, faApple } from '@fortawesome/free-brands-svg-icons';
 import './RegistrationForm.css';
 
@@ -14,12 +14,14 @@ function RegistrationForm() {
   const [facebookToken, setFacebookToken] = useState('');
   const [appleToken, setAppleToken] = useState('');
 
+  const navigate = useNavigate(); // Instancia useNavigate
+
   const handleGoogleLogin = () => {
     const clientId = 'YOUR_GOOGLE_CLIENT_ID';
     const redirectUri = 'YOUR_REDIRECT_URI';
     const scope = 'openid email profile';
 
-    const authUrl = "https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}";
+    const authUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
 
     window.location.href = authUrl;
   };
@@ -29,7 +31,7 @@ function RegistrationForm() {
     const redirectUri = 'YOUR_REDIRECT_URI';
     const scope = 'email';
 
-    const authUrl = "https://www.facebook.com/v3.3/dialog/oauth?client_id=${appId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}";
+    const authUrl = `https://www.facebook.com/v3.3/dialog/oauth?client_id=${appId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
 
     window.location.href = authUrl;
   };
@@ -39,7 +41,7 @@ function RegistrationForm() {
     const redirectUri = 'YOUR_REDIRECT_URI';
     const scope = 'email';
 
-    const authUrl = "https://appleid.apple.com/auth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}";
+    const authUrl = `https://appleid.apple.com/auth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
 
     window.location.href = authUrl;
   };
@@ -93,9 +95,10 @@ function RegistrationForm() {
     }
   }, []);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     // Lógica para el envío del formulario
+    navigate('/login'); // Redirige al login después de registrarse
   };
 
   return (
@@ -131,11 +134,11 @@ function RegistrationForm() {
             onChange={(e) => setContrasena(e.target.value)}
             className="form-input"
           />
-          <p> Ya tienes cuenta? <Link to="/login">Iniciar Sesion</Link></p>
+          <p>Ya tienes cuenta? <Link to="/login">Iniciar Sesión</Link></p>
           <button type="submit" className="form-button">
             Registrarse
           </button>
-          <p> O continuar con</p>
+          <p>O continuar con</p>
           <button type="button" onClick={handleGoogleLogin} className="button google">
             <FontAwesomeIcon icon={faGoogle} />
           </button>
