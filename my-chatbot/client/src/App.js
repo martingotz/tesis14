@@ -6,10 +6,10 @@ import LoginForm from './component/LoginForm';
 import RegistrationForm from './component/RegistrationForm';
 import Usuario from './component/usuario'; 
 import Contacto from './component/Contacto';
-import Universidad from './component/Universidad'
+//import Universidad from './component/Universidad'
 import Home from './component/Home';
 import Footer from './component/Footer';
-import Carreras from './component/Carreras';
+//import Carreras from './component/Carreras';
 import Pruebita from './component/Pruebita';
 import PruebitaC from './component/PruebitaC';
 function App() {
@@ -18,16 +18,15 @@ function App() {
       <div className="App">
         <Header />
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/inicio" element={<Home />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegistrationForm />} />
           <Route path="/chatbot2" element={<Chatbot />} />
           <Route path="/Usuario" element={<Usuario />} />
           <Route path="/contacto" element={<Contacto />} />
-          <Route path="/universidades" element={<Universidad />} />
-          <Route path="/carreras" element={<Carreras />} />
-          <Route path="/pruebita" element={<Pruebita />} />
-          <Route path="/c" element={<PruebitaC />} />
+          <Route path="/universidades" element={<Pruebita />} />
+          <Route path="/carreras" element={<PruebitaC />} />
           {/* Otras rutas pueden agregarse aquí */}
         </Routes>
         <Footer />
