@@ -3,15 +3,17 @@ import * as XLSX from 'xlsx';
 import './Pruebita.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faGlobe, faPhone, faSchool, faGraduationCap, faPeopleGroup, faRankingStar } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faGlobe, faPhone, faSchool, faGraduationCap, faPeopleGroup, faRankingStar, faArrowAltCircleRight, faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 function Pruebita() {
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [flipped, setFlipped] = useState({});
+  const [hoveredEmail, setHoveredEmail] = useState(null);
+  const [hoveredPhone, setHoveredPhone] = useState(null);
 
   useEffect(() => {
-    fetch('/Universidades1.xlsx') // Cambia esta ruta al archivo Excel en la carpeta 'public'
+    fetch('/Universidades1.xlsx') // Adjust this path to your Excel file in the 'public' folder
       .then(response => response.arrayBuffer())
       .then(buffer => {
         const workbook = XLSX.read(buffer, { type: 'array' });
@@ -25,10 +27,11 @@ function Pruebita() {
     if (!url) {
       return '#'; // return a placeholder if the URL is undefined or empty
     }
+    url = url.trim(); // Trim any spaces
     if (!url.startsWith('http://') && !url.startsWith('https://')) {
       url = 'http://' + url;
     }
-    return url.replace(/%20/g, ''); // remove all instances of %20
+    return url;
   };
 
   const handleCardClick = (index) => {
@@ -39,8 +42,10 @@ function Pruebita() {
   };
 
   const filteredData = data.filter(item =>
-    item.Universidad.toLowerCase().includes(searchTerm.toLowerCase())
+    (item.Universidad && item.Universidad.toLowerCase().includes(searchTerm.toLowerCase())) ||
+    (item.Incial && item.Incial.toLowerCase().includes(searchTerm.toLowerCase()))
   );
+  
 
   return (
     <div className="container">
@@ -61,6 +66,7 @@ function Pruebita() {
             <div className="profile-pic">
               <img src={item.Image} alt={`${item.Universidad} logo`} />
             </div>
+            <FontAwesomeIcon icon={faArrowRight} size='2x' className="arrow-right" />
             <div className="profile-info">
               <div className="profile-content">
                 <span className="profile-name">{item.Universidad}</span>
@@ -102,19 +108,34 @@ function Pruebita() {
                   </a>
                 )}
                 {item.Mail && (
-                  <a href={`mailto:${item.Mail}`} target='_blank' rel='noopener norefferer'>
-                    <FontAwesomeIcon icon={faEnvelope} size='2x' />
-                  </a>
+                  <div
+                    onMouseEnter={() => setHoveredEmail(index)}
+                    onMouseLeave={() => setHoveredEmail(null)}
+                    className="icon-container"
+                  >
+                    <a href={`mailto:${item.Mail}`} target='_blank' rel='noopener noreferrer'>
+                      <FontAwesomeIcon icon={faEnvelope} size='2x' />
+                    </a>
+                    {hoveredEmail === index && <span className="hover-info">{item.Mail}</span>}
+                  </div>
                 )}
                 {item.Telefono && (
-                  <a href={`tel:${item.Telefono}`} target='_blank' rel='noopener norefferer'>
-                    <FontAwesomeIcon icon={faPhone} size='2x' />
-                  </a>
+                  <div
+                    onMouseEnter={() => setHoveredPhone(index)}
+                    onMouseLeave={() => setHoveredPhone(null)}
+                    className="icon-container"
+                  >
+                    <a href={`tel:${item.Telefono}`} target='_blank' rel='noopener noreferrer'>
+                      <FontAwesomeIcon icon={faPhone} size='2x' />
+                    </a>
+                    {hoveredPhone === index && <span className="hover-info">{item.Telefono}</span>}
+                  </div>
                 )}
               </div>
             </div>
           </div>
           <div className="profile-back">
+            <FontAwesomeIcon icon={faArrowLeft} size='2x' className="arrow-left" />
             <div className="profile-description">
               <strong>Descripción:</strong> {item.Descripcion}
             </div>
@@ -126,6 +147,12 @@ function Pruebita() {
 }
 
 export default Pruebita;
+
+
+
+
+
+
 
 
 
