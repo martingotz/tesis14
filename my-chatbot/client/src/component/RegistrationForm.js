@@ -84,9 +84,6 @@ function RegistrationForm() {
           client_id: 'YOUR_APPLE_CLIENT_ID',
           client_secret: 'YOUR_APPLE_CLIENT_SECRET',
         })
-        .then(response => {
-          {console.log(response);}
-        })
         .catch(error => {
           console.error(error);
         });
