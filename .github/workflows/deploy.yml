@@ -19,15 +19,18 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        working-directory: ./my_chatbot/client
-        run: npm install
+        run: |
+          cd my_chatbot/client
+          npm install
 
       - name: Build project
-        working-directory: ./my_chatbot/client
-        run: npm run build
+        run: |
+          cd my_chatbot/client
+          npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./my_chatbot/client/build
+          publish_dir: my_chatbot/client/build
+
