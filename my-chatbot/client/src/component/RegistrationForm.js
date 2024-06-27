@@ -85,7 +85,7 @@ function RegistrationForm() {
           client_secret: 'YOUR_APPLE_CLIENT_SECRET',
         })
         .then(response => {
-          setAppleToken(response.data.access_token);
+          {console.log(response);}
         })
         .catch(error => {
           console.error(error);
