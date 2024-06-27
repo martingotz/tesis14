@@ -12,7 +12,6 @@ function RegistrationForm() {
   const [contrasena, setContrasena] = useState('');
   const [googleToken, setGoogleToken] = useState('');
   const [facebookToken, setFacebookToken] = useState('');
-  const [appleToken, setAppleToken] = useState('');
 
   const navigate = useNavigate(); // Instancia useNavigate
 

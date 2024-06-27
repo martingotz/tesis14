@@ -98,7 +98,7 @@ const Usuario = () => {
           </button>
         </div>
       </div>
-      <span class="agreement"><a href="#">Acepta nuestra politica de privacidad</a></span>
+      <span class="agreement"><a href="/inicio">Acepta nuestra politica de privacidad</a></span>
       <button className="flip-card__btn" type="submit">Confirmar!</button>
               </form>
             </div>
@@ -142,7 +142,7 @@ const Usuario = () => {
           </button>
         </div>
       </div>
-      <span class="agreement"><a href="#">Acepta nuestra politica de privacidad</a></span>
+      <span class="agreement"><a href="/inicio">Acepta nuestra politica de privacidad</a></span>
       <button className="flip-card__btn">Confirmar!</button>
               </form>
             </div>

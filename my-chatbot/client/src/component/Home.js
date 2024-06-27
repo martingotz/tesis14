@@ -4,8 +4,8 @@ import Slider from 'react-slick';
 import './Home.css';
 import RotatingText from './RotatingText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faUser, faChalkboardTeacher, faShareAlt, faBookReader } from '@fortawesome/free-solid-svg-icons';
-import { faInstagram, faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope, faChalkboardTeacher, faShareAlt, faBookReader } from '@fortawesome/free-solid-svg-icons';
+import {  faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 const teamMembers = [
   {

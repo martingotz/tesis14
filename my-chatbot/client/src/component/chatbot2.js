@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVolumeUp, faCopy, faSyncAlt, faThumbsDown, faThumbsUp, faPencilAlt, faMicrophone, faPaperPlane, faSliders, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faVolumeUp, faCopy, faSyncAlt, faThumbsDown, faThumbsUp, faPencilAlt, faMicrophone, faPaperPlane, faSliders } from '@fortawesome/free-solid-svg-icons';
 
 const PageContainer = styled.div`
   display: flex;
@@ -89,11 +89,11 @@ const SendButton = styled.button`
   align-items: center;
 `;
 
-const SendIcon = styled.img`
+/* const SendIcon = styled.img`
   width: 36px;
   height: 36px;
   padding: 10px;
-`;
+`; */
 
 const EditButton = styled.button`
   background: none;
@@ -452,6 +452,7 @@ function ChatBot() {
                   </form>
                 ) : (
                   <>
+                    {chatbotResponse}
                     {msg.text}
                     {msg.user === userName && (
                       <EditButton onClick={() => startEditing(msg)}>

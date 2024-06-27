@@ -3,7 +3,7 @@ import * as XLSX from 'xlsx';
 import './Pruebita.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faGlobe, faPhone, faSchool, faGraduationCap, faPeopleGroup, faRankingStar, faArrowAltCircleRight, faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faGlobe, faPhone, faSchool, faGraduationCap, faPeopleGroup, faRankingStar, faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 function Pruebita() {
   const [data, setData] = useState([]);
