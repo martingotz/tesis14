@@ -30,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://federico-creator.github.io/tesis14",
+  "homepage": "https://martingotz.github.io/tesis14",
   "proxy": "http://localhost:3000",
   "eslintConfig": {
     "extends": [
