@@ -5,14 +5,14 @@ import './Home.css';
 import RotatingText from './RotatingText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faChalkboardTeacher, faShareAlt, faBookReader } from '@fortawesome/free-solid-svg-icons';
-import {  faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 const teamMembers = [
   {
     name: 'Martín Götz',
     title: 'Co-Founder',
     degree: 'Licenciado en Negocios Digitales',
-    image: '/Martin.png',
+    image: `${process.env.PUBLIC_URL}/Martin.png`,
     links: [
       { icon: faLinkedin, url: '#' },
       { icon: faEnvelope, url: '#' },
@@ -23,7 +23,7 @@ const teamMembers = [
     name: 'Federico Bornico',
     title: 'Co-Founder',
     degree: 'Licenciado en Negocios Digitales',
-    image: '/Fede.jpeg',
+    image: `${process.env.PUBLIC_URL}/Fede.jpeg`,
     links: [
       { icon: faLinkedin, url: '#' },
       { icon: faEnvelope, url: '#' },
@@ -34,7 +34,7 @@ const teamMembers = [
     name: 'Nicolas Serena Olivera',
     title: 'Co-founder',
     degree: 'Licenciado en Negocios Digitales',
-    image: '/Martin.png',
+    image: `${process.env.PUBLIC_URL}/Martin.png`,
     links: [
       { icon: faLinkedin, url: '#' },
       { icon: faEnvelope, url: '#' },
@@ -178,7 +178,6 @@ const Home = () => {
     dots: false,
     pauseOnHover: true,
   };
-  
 
   return (
     <div>
@@ -191,7 +190,7 @@ const Home = () => {
         <button className="chatbot-button" onClick={() => window.location.href='/chatbot2'}>Chatbot</button>
       </div>
       <div className="register-section">
-        <img src="/register.png" alt="Registrarse" className="register-image" />
+        <img src={`${process.env.PUBLIC_URL}/register.png`} alt="Registrarse" className="register-image" />
         <div className="register-content">
           <h2>Crea tu cuenta</h2>
           <p>Regístrate o inicia sesión<br />para interactuar con el chatbot.</p>
@@ -209,10 +208,10 @@ const Home = () => {
         </div>
         <Slider {...settings} className="chatbot-example-slider">
           <div>
-            <img src="/juan1.png" alt="Chatbot Example 1" className="chatbot-example-image" />
+            <img src={`${process.env.PUBLIC_URL}/juan1.png`} alt="Chatbot Example 1" className="chatbot-example-image" />
           </div>
           <div>
-            <img src="/juan2.png" alt="Chatbot Example 2" className="chatbot-example-image" />
+            <img src={`${process.env.PUBLIC_URL}/juan2.png`} alt="Chatbot Example 2" className="chatbot-example-image" />
           </div>
         </Slider>
       </div>
@@ -220,7 +219,7 @@ const Home = () => {
         <div className="about-content">
           <h2> <span className='revolucion'>Revolucionamos</span><br/>la forma de <br />encontrar la carrera <br />de tus sueños</h2>
           <button className="contact-button" onClick={() => window.location.href='/contacto'}>Contactanos</button>
-        <img src="/robot.jpg" alt="Robot" className="about-image" />
+        <img src={`${process.env.PUBLIC_URL}/robot.jpg`} alt="Robot" className="about-image" />
         </div>
         <div className="about-description">
           <p className='descripcion-about'>Nuestra iniciativa resuelve la falta de orientación y acceso a información sobre opciones educativas en Argentina. Proponemos una plataforma web interactiva con un chatbot de inteligencia artificial que ofrece asesoramiento personalizado sobre carreras, universidades y centros terciarios. Nos dirigimos a estudiantes secundarios próximos a graduarse, universitarios en sus primeros años y aquellos que consideran un cambio de carrera. Con nuestra herramienta, facilitamos decisiones informadas y reducimos la tasa de indecisión y abandono universitario.</p>
@@ -230,19 +229,19 @@ const Home = () => {
         <h2>Nuestros Clientes</h2>
         <Slider {...clientSettings} className="clients-slider">
           <div>
-            <img src="/uca.png" alt="UCA" className="client-logo" />
+            <img src={`${process.env.PUBLIC_URL}/uca.png`} alt="UCA" className="client-logo" />
           </div>
           <div>
-            <img src="/itba.png" alt="ITBA" className="client-logo" />
+            <img src={`${process.env.PUBLIC_URL}/itba.png`} alt="ITBA" className="client-logo" />
           </div>
           <div>
-            <img src="/uade.png" alt="UADE" className="client-logo" />
+            <img src={`${process.env.PUBLIC_URL}/uade.png`} alt="UADE" className="client-logo" />
           </div>
           <div>
-            <img src="/sanandres.png" alt="San Andrés" className="client-logo" />
+            <img src={`${process.env.PUBLIC_URL}/sanandres.png`} alt="San Andrés" className="client-logo" />
           </div>
           <div>
-            <img src="/ditella1.jpeg" alt="Di Tella" className="client-logo" />
+            <img src={`${process.env.PUBLIC_URL}/ditella1.jpeg`} alt="Di Tella" className="client-logo" />
           </div>
         </Slider>
       </div>
@@ -379,6 +378,6 @@ const Home = () => {
   );
 };
 
-
 export default Home;
+
 

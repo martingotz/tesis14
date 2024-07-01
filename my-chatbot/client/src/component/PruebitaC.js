@@ -15,13 +15,17 @@ function PruebitaC() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get(`${process.env.PUBLIC_URL}/Prueba2.xlsx`, { responseType: 'arraybuffer' });
-            const arrayBuffer = response.data;
-            const workbook = XLSX.read(arrayBuffer, { type: 'array' });
-            const sheetName = workbook.SheetNames[0];
-            const worksheet = workbook.Sheets[sheetName];
-            const jsonData = XLSX.utils.sheet_to_json(worksheet);
-            setData(jsonData);
+            try {
+                const response = await axios.get(`${process.env.PUBLIC_URL}/Prueba2.xlsx`, { responseType: 'arraybuffer' });
+                const arrayBuffer = response.data;
+                const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+                const jsonData = XLSX.utils.sheet_to_json(worksheet);
+                setData(jsonData);
+            } catch (error) {
+                console.error("Error fetching the Excel file:", error);
+            }
         };
         fetchData();
     }, []);
@@ -134,12 +138,9 @@ function PruebitaC() {
                             <div key={idx} className="pruebita-parent">
                                 <div className="pruebita-card">
                                     <div className="pruebita-logo">
-                                        <span className="pruebita-circle pruebita-circle1"></span>
-                                        <span className="pruebita-circle pruebita-circle2"></span>
-                                        <span className="pruebita-circle pruebita-circle3"></span>
                                         <span className="pruebita-circle pruebita-circle4"></span>
                                         <span className="pruebita-circle pruebita-circle5">
-                                            <img src={`${process.env.PUBLIC_URL}/images/${item.Imagen}`} alt={item.name} className="pruebita-svg" />
+                                            <img src={`${process.env.PUBLIC_URL}/Prueba2.xlsx/${item.Imagen}`} alt={item.name} className="pruebita-svg" />
                                         </span>
                                     </div>
                                     <div className="pruebita-glass"></div>
@@ -176,3 +177,4 @@ function PruebitaC() {
 }
 
 export default PruebitaC;
+

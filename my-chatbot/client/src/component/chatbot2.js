@@ -263,7 +263,7 @@ function ChatBot() {
         text: messageText,
         user: userName,
         name: userName,
-        icon: "/usuario.png",
+        icon: `${process.env.PUBLIC_URL}}`,
       };
       setMessages([...messages, newMessage]);
       setInputText("");

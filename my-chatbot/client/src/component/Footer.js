@@ -30,6 +30,8 @@ const Footer = () => {
             <li><a href="/inicio">Inicio</a></li>
             <li><a href="/chatbot2">Chatbot</a></li>
             <li><a href="/contacto">Contacto</a></li>
+            <li><a href="/carreras">Carreras</a></li>
+            <li><a href="/universidades">Universidad</a></li>
             <li><a href="/usuario">Iniciar Sesison</a></li>
             <li><a href="/inicio">404 Error</a></li>
           </ul>

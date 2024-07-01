@@ -306,10 +306,10 @@
 .pruebita-card {
     height: 100%;
     border-radius: 50px;
-    background: linear-gradient(135deg, rgb(0, 204, 172) 0%, rgb(6, 180, 84) 100%); /* Slightly darker green */
+    background: linear-gradient(135deg, rgba(17, 77, 167, 0.803) 0%, #0d41a7d2 50%);
     transition: all 0.5s ease-in-out;
     transform-style: preserve-3d;
-    box-shadow: rgba(5, 71, 17, 0) 40px 50px 25px -40px, rgba(5, 71, 17, 0.2) 0px 25px 25px -5px;
+    box-shadow: rgba(5, 71, 17, 0) 40px 50px 25px -40px, rgba(8, 114, 28, 0.2) 0px 25px 25px -5px;
 }
 
 
@@ -319,7 +319,7 @@
     inset: 8px;
     border-radius: 55px;
     border-top-right-radius: 100%;
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.349) 0%, rgba(255, 255, 255, 0.815) 100%);
+    background: linear-gradient(0deg, #fff 0%, #ececeeda 100%);
     transform: translate3d(0px, 0px, 25px);
     border-left: 1px solid white;
     border-bottom: 1px solid white;

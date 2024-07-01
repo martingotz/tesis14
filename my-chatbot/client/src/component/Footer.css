@@ -172,4 +172,33 @@
   }
   
   
-  
+  /* Media Queries */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-left, .footer-center, .footer-right {
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-title, .footer-title-right {
+    font-size: 1.2rem;
+  }
+  .footer-icons img {
+    width: 20px;
+    height: 20px;
+  }
+  .footer-list li {
+    margin-bottom: 5px;
+  }
+  .footer-bottom-list {
+    flex-direction: column;
+  }
+  .footer-bottom-list li {
+    margin: 5px 0;
+  }
+}

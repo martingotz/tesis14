@@ -83,7 +83,7 @@ function Header({ children }) {
   return (
     <HeaderContainer>
       <LogoContainer>
-        <Logo src="/uni.png" alt="Logo" />
+        <Logo src={`${process.env.PUBLIC_URL}/uni.jpeg`} alt="Logo" />
         <LogoText>UNIGPT</LogoText>
       </LogoContainer>
       <NavContainer>
