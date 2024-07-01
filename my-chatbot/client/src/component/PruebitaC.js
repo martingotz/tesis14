@@ -15,7 +15,7 @@ function PruebitaC() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get('/Prueba2.xlsx', { responseType: 'arraybuffer' });
+            const response = await axios.get(`${process.env.PUBLIC_URL}/Prueba2.xlsx`, { responseType: 'arraybuffer' });
             const arrayBuffer = response.data;
             const workbook = XLSX.read(arrayBuffer, { type: 'array' });
             const sheetName = workbook.SheetNames[0];
@@ -96,27 +96,26 @@ function PruebitaC() {
 
     return (
         <div className="pruebita-container">
-      <div className="buscar-container">
-        <input
-        type="text"
-        placeholder="Buscar por universidad o carrera..."
-        value={searchTerm}
-        onChange={handleSearchChange}
-        className="pruebita-search-input"
-            />
-        <div className="buscar">
-        <FontAwesomeIcon icon={faMagnifyingGlass} />
-         </div>
-        </div>
+            <div className="buscar-container">
+                <input
+                    type="text"
+                    placeholder="Buscar por universidad o carrera..."
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    className="pruebita-search-input"
+                />
+                <div className="buscar">
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </div>
+            </div>
 
             <div className='flexi'>
-            <button
-                className="pruebita-clear-button"
-                onClick={handleClearFilter}
-            >
-               Todas las Carreras
-            </button>
-            
+                <button
+                    className="pruebita-clear-button"
+                    onClick={handleClearFilter}
+                >
+                    Todas las Carreras
+                </button>
                 {Object.keys(groupedData).map((university, index) => (
                     <button
                         key={index}
@@ -140,7 +139,7 @@ function PruebitaC() {
                                         <span className="pruebita-circle pruebita-circle3"></span>
                                         <span className="pruebita-circle pruebita-circle4"></span>
                                         <span className="pruebita-circle pruebita-circle5">
-                                           <img src={item.Imagen} alt={item.name} className="pruebita-svg" />
+                                            <img src={`${process.env.PUBLIC_URL}/images/${item.Imagen}`} alt={item.name} className="pruebita-svg" />
                                         </span>
                                     </div>
                                     <div className="pruebita-glass"></div>
@@ -177,8 +176,3 @@ function PruebitaC() {
 }
 
 export default PruebitaC;
-
-
-
-
-
