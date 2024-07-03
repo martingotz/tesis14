@@ -5,7 +5,7 @@ import './Home.css';
 import RotatingText from './RotatingText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faChalkboardTeacher, faShareAlt, faBookReader } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const teamMembers = [
   {
@@ -14,9 +14,9 @@ const teamMembers = [
     degree: 'Licenciado en Negocios Digitales',
     image: `${process.env.PUBLIC_URL}/Martin.png`,
     links: [
-      { icon: faLinkedin, url: '#' },
-      { icon: faEnvelope, url: '#' },
-      { icon: faFacebook, url: '#' },
+      { icon: faLinkedin, url: 'https://www.linkedin.com/in/martin-ignacio-gotz-905374253/' },
+      { icon: faEnvelope, url: 'gotzm@udesa.edu.ar' },
+      { icon: faInstagram, url: 'https://www.instagram.com/martingotz_/' },
     ],
   },
   {
@@ -25,20 +25,20 @@ const teamMembers = [
     degree: 'Licenciado en Negocios Digitales',
     image: `${process.env.PUBLIC_URL}/Fede.jpeg`,
     links: [
-      { icon: faLinkedin, url: '#' },
-      { icon: faEnvelope, url: '#' },
-      { icon: faFacebook, url: '#' },
+      { icon: faLinkedin, url: 'https://www.linkedin.com/in/federico-miguel-bornico-852b00264/' },
+      { icon: faEnvelope, url: 'Fbornico@udesa.edu.ar' },
+      { icon: faInstagram, url: 'https://www.instagram.com/fede_borni/' }, 
     ],
   },
   {
     name: 'Nicolas Serena Olivera',
     title: 'Co-founder',
     degree: 'Licenciado en Negocios Digitales',
-    image: `${process.env.PUBLIC_URL}/Martin.png`,
+    image: `${process.env.PUBLIC_URL}/nico.png`,
     links: [
-      { icon: faLinkedin, url: '#' },
-      { icon: faEnvelope, url: '#' },
-      { icon: faFacebook, url: '#' },
+      { icon: faLinkedin, url: 'https://www.linkedin.com/in/nicol%C3%A1s-serena-32730a187/' },
+      { icon: faEnvelope, url: 'nserenaolivera@udesa.edu.ar' },
+      { icon: faInstagram, url: 'https://www.instagram.com/nicoserena_/' },
     ],
   },
 ];
