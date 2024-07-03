@@ -1,0 +1,225 @@
+/*.form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    font-family: inherit;
+    gap: 10px;
+    padding-inline: 2px;
+    padding-bottom: 4px;
+    background-color: #171717;
+    background-color: #070806;
+    border-radius: 20px;
+  }
+  
+  .form-heading {
+    text-align: center;
+    margin: 2em;
+    color: #A0E00D;
+    font-size: 1.2em;
+    background-color: transparent;
+    align-self: center;
+  }
+  
+  .form-field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 10px;
+    padding: 0.6em;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: #171717;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  }
+  
+  .input-field {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: #ccd6f6;
+    padding-inline: 1em;
+  }
+  
+  .sendMessage-btn {
+    cursor: pointer;
+    margin-bottom: 3em;
+    padding: 1em;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #A0E00D;
+    font-weight: bold;
+    outline: 1px solid #A0E00D;
+    transition: all ease-in-out 0.3s;
+  }
+  
+  .sendMessage-btn:hover {
+    transition: all ease-in-out 0.3s;
+    background-color: #A0E00D;
+    color: #000;
+    cursor: pointer;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  }
+  
+  .form-card1 {
+    background-image: linear-gradient(163deg, #A0E00D 0%, #A0E00D 100%);
+    border-radius: 22px;
+    transition: all 0.3s;
+  }
+  
+  .form-card1:hover {
+    box-shadow: 0px 0px 30px 1px rgba(100, 255, 218, 0.3);
+  }
+  
+  .form-card2 {
+    border-radius: 0;
+    transition: all 0.2s;
+  }
+  
+  .form-card2:hover {
+    transform: scale(0.98);
+    border-radius: 20px;
+  }
+  */
+
+  .contact-section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 50px 20px;
+    background-color: #000;
+    color: white;
+    min-height: 400px;
+  }
+  
+  .contact-content {
+    width: 50%;
+    padding-right: 20px;
+    padding-left: 100px;
+  }
+  
+  .contact-content h2 {
+    font-size: 3em;
+    color: #A5FF00;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .contact-content p {
+    font-size: 1.5em;
+    text-align: justify;
+  }
+  
+  .contact-form {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .contact-form form {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    margin-bottom: 20px;
+    padding: 15px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .contact-form input {
+    height: 50px;
+  }
+  
+  .contact-form textarea {
+    height: 150px;
+    resize: none;
+  }
+  
+  .contact-form button {
+    padding: 15px;
+    font-size: 1.5em;
+    color: black;
+    background-color: #A5FF00;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .contact-form button:hover {
+    background-color: #8CCC00;
+  }
+  
+  .additional-contact-section {
+    background-color: #000;
+    color: white;
+    padding: 50px 20px;
+  }
+  
+  .additional-contact-content {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+  }
+  
+  .contact-item {
+    max-width: 300px;
+  }
+  
+  .contact-item h3 {
+    font-size: 2em;
+    color: #A5FF00;
+    margin-bottom: 20px;
+  }
+
+  .contact-item p {
+    text-align: justify;
+  }
+  
+  .faq-section {
+    background-color: #000;
+    color: white;
+    padding: 50px 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+
+  .faq-section h2{
+    color: white;
+    font-size: xx-large;
+    padding-bottom: 50px;
+  }
+
+  .faq-item {
+    border: 1px solid #444;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    cursor: pointer;
+  }
+  
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .faq-answer {
+    margin-top: 20px;
+  }
+  
+  .faq-answer p{
+    color: #818181d8;
+    text-align: left;
+
+  }

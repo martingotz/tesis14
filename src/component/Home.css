@@ -1,0 +1,527 @@
+.home-section {
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  padding: 100px 20px;
+  color: white;
+  min-height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-container {
+  max-width: 800px; /* Limita el ancho del contenedor del texto */
+  text-align: center; /* Asegura que el texto esté centrado */
+}
+
+.home-section h1 {
+  font-size: 6em;
+  font-weight: bold;
+  color: white; /* Asegura que el color del texto sea blanco */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Añade un sombreado para mejorar la visibilidad */
+  margin: 0;
+  padding: 0 20px;
+}
+
+.home-section .highlight {
+  color: #A5FF00; /* Color verde utilizado en tu prototipo */
+}
+
+.chatbot-button, .wide-chatbot-button {
+  margin-top: 20px;
+  padding: 15px 30px;
+  font-size: 1.5em;
+  color: black;
+  background-color: #A5FF00; /* Color verde utilizado en tu prototipo */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.chatbot-button:hover, .wide-chatbot-button:hover {
+  background-color: #8CCC00; /* Un verde un poco más oscuro para el hover */
+}
+
+.wide-chatbot-button {
+  width: 100%; /* Hace el botón ancho */
+  max-width: 300px; /* Limita el ancho máximo del botón */
+}
+
+.register-section, .find-path-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  background-color: #000; /* Fondo negro */
+  min-height: 400px; /* Asegura que las secciones tengan la misma altura */
+  width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+  box-sizing: border-box; /* Incluye padding y border en el tamaño total del contenedor */
+}
+
+.register-image, .chatbot-example-image {
+  width: 30%; /* Ajusta el ancho de las imágenes para que sean iguales */
+  object-fit: cover; /* Asegura que las imágenes cubran el contenedor sin distorsionarse */
+}
+
+.register-content {
+  width: 50%;
+  color: white;
+  text-align: center; /* Asegura que el contenido esté centrado */
+}
+
+.register-content h2, .find-path-content h2 {
+  font-size: 4.5em; /* Aumenta el tamaño del título */
+  color: #A5FF00; /* Color verde */
+  margin-bottom: 20px; /* Añade margen inferior para separación */
+}
+
+.register-content p, .find-path-content p {
+  font-size: 1.5em; /* Aumenta el tamaño de la descripción */
+  margin-bottom: 30px; /* Añade margen inferior para separación */
+}
+
+.register-buttons, .find-path-buttons {
+  display: flex;
+  justify-content: center; /* Centra los botones horizontalmente */
+  gap: 30px; /* Aumenta la separación entre los botones */
+}
+
+.register-button, .login-button, .find-path-button {
+  padding: 15px 30px; /* Aumenta el tamaño de los botones */
+  font-size: 1.5em; /* Aumenta el tamaño del texto de los botones */
+  color: black;
+  background-color: #A5FF00; /* Color verde */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-button:hover, .login-button:hover, .find-path-button:hover {
+  background-color: #8CCC00; /* Un verde un poco más oscuro para el hover */
+}
+
+.chatbot-example-slider {
+  width: 50%;
+  margin: 0; /* Elimina márgenes */
+  padding: 0; /* Elimina relleno */
+  box-sizing: border-box; /* Incluye padding y border en el tamaño total del contenedor */
+}
+
+.chatbot-example-image {
+  width: 80%; /* Asegura que las imágenes ocupen todo el ancho del contenedor */
+  object-fit: cover; /* Asegura que las imágenes cubran el contenedor sin distorsionarse */
+}
+
+.find-path-content{
+  text-align: center;
+  width: 50%;
+  color: white;
+  
+}
+
+.find-path-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px 20px;
+  background-color: #000; /* Fondo negro */
+  min-height: 400px; /* Asegura que las secciones tengan la misma altura */
+  width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+  box-sizing: border-box; /* Incluye padding y border en el tamaño total del contenedor */
+}
+
+.about-section {
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: center;
+  padding: 80px 190px;
+  background-color: #000; /* Fondo negro */
+  color: white;
+  text-align: center; /* Asegura que el contenido esté centrado */
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: center; /* Asegura que el texto esté centrado */
+  margin-bottom: 20px; /* Añade margen inferior */
+}
+
+.about-content h2 {
+  font-size: 3em; /* Tamaño del título */
+  color: white; /* Color verde */
+  margin: 20px 0; /* Añade márgenes superior e inferior */
+  text-align: left;
+}
+
+.about-description {
+  max-width: 600px; /* Limita el ancho de la descripción */
+  font-size: 1.2em; /* Tamaño de la descripción */
+  margin: 20px 0; /* Añade márgenes superior e inferior */
+  text-align: center; /* Alinea el texto a la izquierda */
+}
+
+.about-image {
+  margin-top: 30px;
+  max-width: 50%; /* Asegura que la imagen ocupe todo el ancho disponible */
+  height: auto; /* Mantiene la proporción de la imagen */
+}
+
+.contact-button {
+  margin-top: 20px;
+  padding: 15px 30px;
+  font-size: 1.5em;
+  color: black;
+  background-color: #A5FF00; /* Color verde utilizado en tu prototipo */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-items: left;
+}
+
+.about-button:hover, .contact-button:hover {
+  background-color: #8CCC00; /* Un verde un poco más oscuro para el hover */
+}
+
+.descripcion-about{
+  text-align: justify;
+}
+
+.revolucion{
+  color: #A5FF00;
+}
+
+.clients-section {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #000; /* Fondo negro */
+  color: #A5FF00; /* Color verde del texto */
+}
+
+.clients-section h2 {
+  font-size: 3em; /* Tamaño del título */
+  margin-bottom: 20px; /* Añade margen inferior */
+}
+
+.clients-slider {
+  width: 80%;
+  margin: 0 auto; /* Centra el carrusel horizontalmente */
+}
+
+.client-logo {
+  max-width: 100%; /* Asegura que las imágenes ocupen todo el ancho del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  padding: 10px; /* Añade relleno para que las imágenes no estén pegadas */
+}
+
+.achievement-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 20px;
+  background-color: #000;
+  min-height: 400px;
+}
+
+.achievement-content {
+  width: 50%;
+  color: white;
+  text-align: left;
+  padding: 10%;
+}
+
+.achievement-content h2 {
+  font-size: 3em;
+  color: #A5FF00;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.achievement-content p {
+  font-size: 1.5em;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.stats div {
+  width: 45%;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.stats div span {
+  display: block;
+  font-size: 0.5em;
+  font-weight: normal;
+}
+
+.map-container {
+  width: 45%;
+  height: 400px;
+  margin-right: 10%;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.team-section {
+  background-color: #000;
+  color: white;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.team-title {
+  font-size: 4em;
+  color: #A5FF00;
+  margin-bottom: 10px;
+}
+
+.team-subtitle {
+  font-size: 1.5em;
+  margin-bottom: 50px;
+}
+
+.team-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.team-member {
+  text-align: center;
+  width: 20%;
+}
+
+.team-member img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.team-member h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.team-member p {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.team-member-degree {
+  font-size: 1em;
+  margin-bottom: 20px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.social-link {
+  color: inherit;
+  text-decoration: none;
+  font-size: 1.5em;
+}
+
+.testimonial-section {
+  background-color: #000;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.section-title {
+  color: #A5FF00;
+  font-size: 4em;
+  margin-bottom: 20px;
+}
+
+.testimonial-slider .slick-track {
+  display: flex;
+  align-items: center;
+}
+
+.testimonial {
+  background: #333;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  text-align: left;
+}
+
+.testimonial h4 {
+  margin: 10px 0 5px;
+}
+
+.testimonial span {
+  color: #A5FF00;
+  font-weight: bold;
+}
+
+.cta-section {
+  background-color: #000;
+  color: white;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.cta-section h2 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.cta-section p {
+  font-size: 1.5em;
+  margin-bottom: 30px;
+}
+
+.cta-button {
+  padding: 15px 30px;
+  font-size: 1.5em;
+  color: black;
+  background-color: #A5FF00; /* Color verde */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #8CCC00; /* Un verde un poco más oscuro para el hover */
+}
+
+.card-client {
+    background: #2cb5a0;
+    width: 13rem;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 4px solid #7cdacc;
+    box-shadow: 0 6px 10px rgba(207, 212, 222, 1);
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    transition: all 0.3s ease;
+  }
+  
+  .card-client:hover {
+    transform: translateY(-10px);
+  }
+  
+  .user-picture {
+    overflow: hidden;
+    object-fit: cover;
+    width: 5rem;
+    height: 5rem;
+    border: 4px solid #7cdacc;
+    border-radius: 999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+  
+  .user-picture svg {
+    width: 2.5rem;
+    fill: currentColor;
+  }
+  
+  .name-client {
+    margin: 0;
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 18px;
+  }
+  
+  .name-client span {
+    display: block;
+    font-weight: 200;
+    font-size: 16px;
+  }
+  
+  .social-media:before {
+    content: " ";
+    display: block;
+    width: 100%;
+    height: 2px;
+    margin: 20px 0;
+    background: #7cdacc;
+  }
+  
+  .social-media a {
+    position: relative;
+    margin-right: 15px;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .social-media a:last-child {
+    margin-right: 0;
+  }
+  
+  .social-media a svg {
+    width: 1.1rem;
+    fill: currentColor;
+  }
+  
+  /*-- Tooltip Social Media --*/
+  .tooltip-social {
+    background: #262626;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    padding: 0.5rem 0.4rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -90%);
+    transition: all 0.2s ease;
+    z-index: 1;
+  }
+  
+  .tooltip-social:after {
+    content: " ";
+    position: absolute;
+    bottom: 1px;
+    left: 50%;
+    border: solid;
+    border-width: 10px 10px 0 10px;
+    border-color: transparent;
+    transform: translate(-50%, 100%);
+  }
+  
+  .social-media a .tooltip-social:after {
+    border-top-color: #262626;
+  }
+  
+  .social-media a:hover .tooltip-social {
+    opacity: 1;
+    transform: translate(-50%, -130%);
+  }
