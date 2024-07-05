@@ -95,14 +95,14 @@ function Pruebita() {
                 </div>
               </div>
               <div className="social-links">
-                {item.Instagram && (
-                  <a href={ensureUrl(item.Instagram)} target="_blank" rel="noopener noreferrer">
-                    <FontAwesomeIcon icon={faInstagram} size="2x" />
-                  </a>
-                )}
                 {item.Twitter && (
                   <a href={ensureUrl(item.Twitter)} target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon icon={faTwitter} size="2x" />
+                  </a>
+                )}
+                 {item.Instagram && (
+                  <a href={ensureUrl(item.Instagram)} target="_blank" rel="noopener noreferrer">
+                    <FontAwesomeIcon icon={faInstagram} size="2x" />
                   </a>
                 )}
                 {item.Web && (

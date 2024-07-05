@@ -6,6 +6,7 @@ import RotatingText from './RotatingText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faChalkboardTeacher, faShareAlt, faBookReader } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'; // Importar los íconos de flecha
 
 const teamMembers = [
   {
@@ -63,8 +64,13 @@ const TeamSubtitle = styled.p`
 
 const TeamContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const TeamMember = styled.div`
@@ -121,9 +127,15 @@ const ValuesTitle = styled.h2`
 
 const ValuesContainer = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: 30px;
   margin-top: 20px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+  }
 `;
 
 const ValueCard = styled.div`
@@ -154,7 +166,10 @@ const Home = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000
+    autoplaySpeed: 3000,
+    arrows: true, // Habilitar flechas
+    prevArrow: <div className="slick-prev" />,
+    nextArrow: <div className="slick-next" />
   };
   const clientSettings = {
     dots: false,
@@ -163,7 +178,11 @@ const Home = () => {
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000
+    autoplaySpeed: 2000,
+    arrows: true, // Habilitar flechas
+    prevArrow: <div className="slick-prev" />,
+    nextArrow: <div className="slick-next" />
+
   };
   const testimonialSettings = {
     speed: 5000,
@@ -218,7 +237,6 @@ const Home = () => {
       <div className="about-section">
         <div className="about-content">
           <h2> <span className='revolucion'>Revolucionamos</span><br/>la forma de <br />encontrar la carrera <br />de tus sueños</h2>
-          <button className="contact-button" onClick={() => window.location.href='/contacto'}>Contactanos</button>
         <img src={`${process.env.PUBLIC_URL}/robot.jpg`} alt="Robot" className="about-image" />
         </div>
         <div className="about-description">
@@ -283,7 +301,7 @@ const Home = () => {
         <TeamSubtitle>Conoce a los desarrolladores de UniGPT</TeamSubtitle>
         <TeamContainer>
           {teamMembers.map((member, index) => (
-            <TeamMember key={index}>
+            <TeamMember className='team-member'key={index}>
               <TeamMemberImage src={member.image} alt={member.name} />
               <TeamMemberName>{member.name}</TeamMemberName>
               <TeamMemberTitle>{member.title}</TeamMemberTitle>
