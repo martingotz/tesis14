@@ -8,6 +8,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "axios": "^1.7.2",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.19.2",
     "react-slick": "^0.30.2",
@@ -19,7 +20,8 @@
     "start": "node app.js",
     "server": "node app.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "echo 'No build step needed for this backend'"
   },
   "devDependencies": {
     "concurrently": "^6.0.0"

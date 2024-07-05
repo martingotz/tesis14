@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeUp, faCopy, faSyncAlt, faThumbsDown, faThumbsUp, faPencilAlt, faMicrophone, faPaperPlane, faSliders } from '@fortawesome/free-solid-svg-icons';
-
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -261,13 +261,13 @@ function ChatBot() {
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       setInputText("");
       setShowPromptOptions(false);
-
+  
       // Set loading to true before sending the message
       setLoading(true);
-
+  
       // Send the message to the backend
       try {
-        const response = await axios.post('/chatbot', { userInput: messageText });
+        const response = await axios.post(`${API_BASE_URL}/chatbot`, { userInput: messageText });
         const botMessage = {
           id: messages.length + 2,
           text: response.data.chatbotResponse,

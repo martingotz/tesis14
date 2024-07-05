@@ -4,12 +4,31 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 const { v4: uuidv4 } = require('uuid');
+const cors = require('cors'); // Add this line to import cors
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
+
+const allowedOrigins = [
+  'http://localhost:3001',  // Add your frontend development URL
+  'https://federico-creator.github.io/Tesisunigpt/',  // Add your production frontend URL
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
+
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -63,7 +82,7 @@ app.post('/chatbot', async (req, res) => {
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
       {
-        model: 'gpt-4o',
+        model: 'gpt-4',
         messages: [
           { role: 'system', content: 'Eres un asistente útil especializado en proporcionar información sobre las carreras y programas de la Universidad de San Andrés en Buenos Aires, Argentina. Solo debes responder en español y ser conciso.' },
           ...userSummaries[userId].importantDetails.map(detail => ({ role: 'system', content: detail })),
