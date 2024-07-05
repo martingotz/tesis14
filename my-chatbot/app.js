@@ -3,36 +3,19 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const axios = require('axios');
-const xlsx = require('xlsx');
 const { v4: uuidv4 } = require('uuid');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
-
-// Function to read data from XLSX file
-function readXlsxData(filePath) {
-  const workbook = xlsx.readFile(filePath);
-  const sheetName = workbook.SheetNames[0]; // Read the first sheet
-  const sheet = workbook.Sheets[sheetName];
-  const data = xlsx.utils.sheet_to_json(sheet);
-  return data;
-}
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 
 let userContexts = {};
 let userSummaries = {};
-let xlsxData = null;
-
-// Load XLSX data once at startup
-function loadXlsxData() {
-  xlsxData = readXlsxData(path.join(__dirname, 'Prueba_2_actualizada_final.xlsx'));
-}
-loadXlsxData();
 
 // Function to update user summary with important information
 function updateUserSummary(userId, userInput, assistantResponse) {
@@ -70,30 +53,23 @@ app.post('/chatbot', async (req, res) => {
   // Add the user's input to the conversation context
   userContexts[userId].push({ role: 'user', content: userInput });
 
-  // Check if the user is asking for career recommendations
-  const isAskingForRecommendations = userInput.toLowerCase().includes('recomienda') && userInput.toLowerCase().includes('estudiar');
-
-  if (isAskingForRecommendations) {
-    // Format the XLSX data into a string or JSON
-    const xlsxDataString = JSON.stringify(xlsxData);
-
-    userContexts[userId].push({
-      role: 'system',
-      content: `Here is some data that might help you choose a career: ${xlsxDataString}`
-    });
-  }
+  // Add a system message to restrict responses to Universidad de San Andrés and in Spanish
+  userContexts[userId].push({
+    role: 'system',
+    content: `Solo debes recomendar carreras y programas de la Universidad de San Andrés en Buenos Aires, Argentina. No recomiendes otras universidades o carreras y solo responde en español.`
+  });
 
   try {
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
       {
-        model: 'ft:gpt-3.5-turbo-0125:unigpt:tesis-14-2:9Xb9bOFc',
+        model: 'gpt-4o',
         messages: [
-          { role: 'system', content: 'You are a helpful assistant specialized in providing career advice based on personal interests, skills, and available data.' },
+          { role: 'system', content: 'Eres un asistente útil especializado en proporcionar información sobre las carreras y programas de la Universidad de San Andrés en Buenos Aires, Argentina. Solo debes responder en español y ser conciso.' },
           ...userSummaries[userId].importantDetails.map(detail => ({ role: 'system', content: detail })),
           ...userContexts[userId].slice(-7) // Send only the last 7 messages to minimize token usage
         ],
-        max_tokens: 300,
+        max_tokens: 150, // Reduce max_tokens to make responses shorter
         temperature: 0.7,
         top_p: 1,
         frequency_penalty: 0,
@@ -121,7 +97,7 @@ app.post('/chatbot', async (req, res) => {
       console.error('Error response status:', error.response.status);
       console.error('Error response headers:', error.response.headers);
     }
-    res.status(500).json({ error: 'Something went wrong with the OpenAI API request.' });
+    res.status(500).json({ error: 'Something went wrong with the OpenAI API request.', details: error.message });
   }
 });
 
