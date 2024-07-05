@@ -163,7 +163,7 @@ function Header() {
   return (
     <HeaderContainer>
       <LogoContainer>
-      <Logo src={`${process.env.PUBLIC_URL}/unigpt1.png`} alt="Logo" />
+        <Logo src={`${process.env.PUBLIC_URL}/unigpt1.png`} alt="Logo" />
         <LogoText>UNIGPT</LogoText>
       </LogoContainer>
       <MenuIcon icon={faBars} onClick={toggleMenu} />

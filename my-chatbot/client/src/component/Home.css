@@ -203,8 +203,46 @@
   padding: 50px 20px;
   background-color: #000; /* Fondo negro */
   color: #A5FF00; /* Color verde del texto */
+  position: relative;
 }
 
+.slick-prev, .slick-next {
+  position: none;
+  top: 13%; /* Centra las flechas verticalmente */
+  transform: translateY(-50%); /* Ajusta el posicionamiento vertical */
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para las flechas */
+  color: white; /* Color de las flechas */
+  border: none;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 120px;
+}
+
+.slick-prev {
+  left: -40px; /* Ajusta según sea necesario */
+}
+
+.slick-next {
+  right: -40px; /* Ajusta según sea necesario */
+}
+
+.slick-prev:hover, .slick-next:hover {
+  background: rgba(0, 0, 0, 0.8); /* Fondo más oscuro al pasar el mouse */
+}
+
+.slick-prev:before, .slick-next:before {
+  font-size: 20px; /* Tamaño del icono */
+  line-height: 1;
+  opacity: 1; /* Asegúrate de que los iconos sean visibles */
+  color: white; /* Color de los iconos */
+}
 .clients-section h2 {
   font-size: 3em; /* Tamaño del título */
   margin-bottom: 20px; /* Añade margen inferior */
@@ -213,6 +251,7 @@
 .clients-slider {
   width: 80%;
   margin: 0 auto; /* Centra el carrusel horizontalmente */
+  position: relative;
 }
 
 .client-logo {
@@ -525,3 +564,191 @@
     opacity: 1;
     transform: translate(-50%, -130%);
   }
+
+  /* Media queries para tablet y móvil */
+
+@media (max-width: 1024px) {
+  .home-section h1 {
+    font-size: 4em;
+  }
+
+  .chatbot-button, .wide-chatbot-button {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+
+  .register-content, .find-path-content {
+    width: 100%;
+  }
+
+  .register-image, .chatbot-example-image {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .about-content h2 {
+    font-size: 2.5em;
+  }
+
+  .about-description {
+    font-size: 1em;
+  }
+
+  .about-image {
+    width: 100%;
+  }
+
+  .achievement-content h2 {
+    font-size: 2.5em;
+  }
+
+  .achievement-content p, .cta-section p {
+    font-size: 1em;
+  }
+
+  .stats div {
+    width: 100%;
+    font-size: 1.5em;
+  }
+
+  .team-member {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .team-member img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .values-container {
+    flex-direction: column;
+  }
+
+  .value-card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .testimonial-slider .testimonial {
+    max-width: 100%;
+  }
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 767px) {
+  .home-section h1 {
+    font-size: 2.5em;
+    padding: 0 10px;
+  }
+
+  .chatbot-button, .wide-chatbot-button {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+
+  .register-section, .find-path-section {
+    flex-direction: column;
+    padding: 30px 10px;
+  }
+
+  .register-content, .find-path-content {
+    width: 100%;
+  }
+
+  .register-image, .chatbot-example-image {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .about-section {
+    flex-direction: column;
+    padding: 30px 10px;
+  }
+
+  .about-content, .about-description {
+    width: 100%;
+    text-align: center;
+  }
+
+  .about-image {
+    max-width: 80%;
+  }
+
+  .clients-slider, .achievement-section, .team-container, .values-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .achievement-content, .map-container {
+    width: 100%;
+    text-align: center;
+  }
+
+  .team-member, .value-card {
+    width: 100%;
+  }
+
+  .testimonial {
+    max-width: 100%;
+  }
+}
+
+/* Estilos para tabletas */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .home-section h1 {
+    font-size: 4em;
+    padding: 0 20px;
+  }
+
+  .chatbot-button, .wide-chatbot-button {
+    font-size: 1.2em;
+    padding: 15px 25px;
+  }
+
+  .register-section, .find-path-section {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+
+  .register-content, .find-path-content {
+    width: 80%;
+  }
+
+  .register-image, .chatbot-example-image {
+    width: 60%;
+    margin-bottom: 20px;
+  }
+
+  .about-section {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+
+  .about-content, .about-description {
+    width: 100%;
+    text-align: center;
+  }
+
+  .about-image {
+    max-width: 70%;
+  }
+
+  .clients-slider, .achievement-section, .team-container, .values-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .achievement-content, .map-container {
+    width: 80%;
+    text-align: center;
+  }
+
+  .team-member, .value-card {
+    width: 80%;
+  }
+
+  .testimonial {
+    max-width: 100%;
+  }
+}
