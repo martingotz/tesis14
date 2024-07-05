@@ -24,7 +24,7 @@ const LogoContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 50px; /* Adjust the width as needed */
+  width: 35%; /* Adjust the width as needed */
   height: auto; /* Maintain aspect ratio */
   margin-right: 10px;
 `;

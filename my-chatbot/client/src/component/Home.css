@@ -207,14 +207,14 @@
 }
 
 .slick-prev, .slick-next {
-  position: none;
+  position: absolute; /* Corregido de 'none' a 'absolute' */
   top: 13%; /* Centra las flechas verticalmente */
   transform: translateY(-50%); /* Ajusta el posicionamiento vertical */
   z-index: 1;
   background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para las flechas */
   color: white; /* Color de las flechas */
   border: none;
-  width: 50%;
+  width: 60%;
   height: 50%;
   border-radius: 50%;
   display: flex;
@@ -222,7 +222,8 @@
   justify-content: center;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-right: 120px;
+  margin-right: 130px;
+  margin-left: -10px;
 }
 
 .slick-prev {
@@ -243,6 +244,7 @@
   opacity: 1; /* Asegúrate de que los iconos sean visibles */
   color: white; /* Color de los iconos */
 }
+
 .clients-section h2 {
   font-size: 3em; /* Tamaño del título */
   margin-bottom: 20px; /* Añade margen inferior */
@@ -752,3 +754,21 @@
     max-width: 100%;
   }
 }
+
+@media (max-width: 767px) {
+  .team-container { /* Asumiendo que los .team-member están dentro de este contenedor */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .team-member {
+    width: 100%; /* O ajusta este valor según necesites para el diseño */
+    margin: 0 auto; /* Esto ayuda a centrar si flexbox no se comporta como esperas */
+  }
+}
+
+
+
+
+
