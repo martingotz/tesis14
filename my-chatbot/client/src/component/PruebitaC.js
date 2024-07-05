@@ -30,11 +30,13 @@ function PruebitaC() {
         fetchData();
     }, []);
 
-    // Agrupa los datos por universidad
+    // Agrupa los datos por universidad y asigna la imagen de cada universidad
     const groupedData = data.reduce((acc, item) => {
-        const { Universidad } = item;
-        if (!acc[Universidad]) acc[Universidad] = [];
-        acc[Universidad].push(item);
+        const { Universidad, Imagen } = item;
+        if (!acc[Universidad]) {
+            acc[Universidad] = { items: [], image: Imagen };
+        }
+        acc[Universidad].items.push(item);
         return acc;
     }, {});
 
@@ -51,13 +53,13 @@ function PruebitaC() {
         setSearchTerm('');
     };
 
-    const filteredData = Object.entries(groupedData).reduce((acc, [university, items]) => {
+    const filteredData = Object.entries(groupedData).reduce((acc, [university, value]) => {
         if (selectedUniversity && university !== selectedUniversity) return acc;
-        const filteredItems = items.filter(item =>
+        const filteredItems = value.items.filter(item =>
             (item.Corto && item.Corto.toLowerCase().includes(searchTerm.toLowerCase())) ||
             (item.Duracion && item.Duracion.toLowerCase().includes(searchTerm.toLowerCase()))
         );
-        if (filteredItems.length) acc[university] = filteredItems;
+        if (filteredItems.length) acc[university] = { ...value, items: filteredItems };
         return acc;
     }, {});
 
@@ -130,17 +132,18 @@ function PruebitaC() {
                     </button>
                 ))}
             </div>
-            {Object.entries(filteredData).map(([university, items], index) => (
+            {Object.entries(filteredData).map(([university, value], index) => (
                 <div key={index} className="pruebita-university-section">
-                    <h2>{university}</h2>
+                    <h2 className='h2'>{university}</h2>
                     <Slider {...sliderSettings} className="pruebita-card-container">
-                        {items.map((item, idx) => (
+                        {value.items.map((item, idx) => (
+                            console.log(item.Imagen),
                             <div key={idx} className="pruebita-parent">
                                 <div className="pruebita-card">
                                     <div className="pruebita-logo">
                                         <span className="pruebita-circle pruebita-circle4"></span>
                                         <span className="pruebita-circle pruebita-circle5">
-                                            <img src={`${process.env.PUBLIC_URL}/Prueba2.xlsx/${item.Imagen}`} alt={item.name} className="pruebita-svg" />
+                                            <img src={`${item.Imagen}`} alt={university} className="pruebita-svg" onError={(e) => console.error("Image not found:", e.target.src)} />
                                         </span>
                                     </div>
                                     <div className="pruebita-glass"></div>
