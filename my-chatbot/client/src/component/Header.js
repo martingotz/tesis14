@@ -18,9 +18,10 @@ const HeaderContainer = styled.div`
   }
 `;
 
-const LogoContainer = styled.div`
+const LogoContainer = styled(NavLink)`
   display: flex;
   align-items: center;
+  text-decoration: none; /* Remove underline from link */
 `;
 
 const Logo = styled.img`
@@ -162,7 +163,7 @@ function Header() {
 
   return (
     <HeaderContainer>
-      <LogoContainer>
+      <LogoContainer to="/inicio">
         <Logo src={`${process.env.PUBLIC_URL}/unigpt1.png`} alt="Logo" />
         <LogoText>UNIGPT</LogoText>
       </LogoContainer>

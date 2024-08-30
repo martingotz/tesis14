@@ -6,7 +6,8 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faGlobe, faMagnifyingGlass, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faGlobe, faPhone } from '@fortawesome/free-solid-svg-icons';
+import Buscador from './Buscador';
 
 function PruebitaC() {
     const [data, setData] = useState([]);
@@ -30,7 +31,6 @@ function PruebitaC() {
         fetchData();
     }, []);
 
-    // Agrupa los datos por universidad y asigna la imagen de cada universidad
     const groupedData = data.reduce((acc, item) => {
         const { Universidad, Imagen } = item;
         if (!acc[Universidad]) {
@@ -44,8 +44,8 @@ function PruebitaC() {
         setSelectedUniversity(university === selectedUniversity ? '' : university);
     };
 
-    const handleSearchChange = (e) => {
-        setSearchTerm(e.target.value);
+    const handleSearchChange = (term) => {
+        setSearchTerm(term);
     };
 
     const handleClearFilter = () => {
@@ -102,18 +102,12 @@ function PruebitaC() {
 
     return (
         <div className="pruebita-container">
-            <div className="buscar-container">
-                <input
-                    type="text"
-                    placeholder="Buscar por universidad o carrera..."
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                    className="pruebita-search-input"
-                />
-                <div className="buscar">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </div>
-            </div>
+            <Buscador
+                data={data}
+                searchTerm={searchTerm}
+                onSearchResults={() => {}}
+                onSearchChange={handleSearchChange}
+            />
 
             <div className='flexi'>
                 <button
@@ -132,12 +126,12 @@ function PruebitaC() {
                     </button>
                 ))}
             </div>
+
             {Object.entries(filteredData).map(([university, value], index) => (
                 <div key={index} className="pruebita-university-section">
                     <h2 className='h2'>{university}</h2>
                     <Slider {...sliderSettings} className="pruebita-card-container">
                         {value.items.map((item, idx) => (
-                            console.log(item.Imagen),
                             <div key={idx} className="pruebita-parent">
                                 <div className="pruebita-card">
                                     <div className="pruebita-logo">
@@ -166,7 +160,7 @@ function PruebitaC() {
                                         </div>
                                         <div className="pruebita-view-more">
                                             <button className="pruebita-view-more-button">View more</button>
-                                            <svg className="pruebita-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+                                            <svg className="pruebita-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
                                         </div>
                                     </div>
                                 </div>
@@ -180,4 +174,6 @@ function PruebitaC() {
 }
 
 export default PruebitaC;
+
+
 

@@ -1,0 +1,45 @@
+.retro-grid-container {
+    background-color: black;
+    position: relative;
+    overflow: hidden;
+    height: 700px; /* Aumenta la altura para más visibilidad */
+  }
+  
+  .retro-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at bottom, transparent, transparent 70%, rgba(255, 255, 255, 0.1) 71%), 
+                repeating-linear-gradient(to right, transparent 0%, transparent 9%, rgba(255, 255, 255, 0.1) 10%), 
+                repeating-linear-gradient(to left, transparent 0%, transparent 9%, rgba(255, 255, 255, 0.1) 10%), 
+                repeating-linear-gradient(to bottom, transparent 0%, transparent 9%, rgba(255, 255, 255, 0.1) 10%), 
+                repeating-linear-gradient(to top, transparent 0%, transparent 9%, rgba(255, 255, 255, 0.1) 10%);
+    background-size: 100% 100%, 10% 100%, 10% 100%, 100% 10%, 100% 10%;
+    transform: perspective(1000px) rotateX(60deg);
+    z-index: 10;
+  }
+  
+  .rotating-text {
+    display: inline-block;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .chatbot-button {
+    margin-top: 20px;
+    padding: 20px 40px; /* Aumenta el padding para agrandar el botón */
+    font-size: 2em; /* Aumenta el tamaño de la fuente */
+    color: black;
+    background-color: #A5FF00; /* Color verde */
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 30; /* Asegura que el botón esté encima de todo */
+  }
+  
+  .chatbot-button:hover {
+    background-color: #8CCC00; /* Un verde un poco más oscuro para el hover */
+  }
+  

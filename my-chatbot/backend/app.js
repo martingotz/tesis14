@@ -82,7 +82,7 @@ app.post('/chatbot', async (req, res) => {
     const response = await axios.post(
       'https://api.openai.com/v1/chat/completions',
       {
-        model: 'gpt-4',
+        model: 'gpt-4o',
         messages: [
           { role: 'system', content: 'Eres un asistente útil especializado en proporcionar información sobre las carreras y programas de la Universidad de San Andrés en Buenos Aires, Argentina. Solo debes responder en español y ser conciso.' },
           ...userSummaries[userId].importantDetails.map(detail => ({ role: 'system', content: detail })),

@@ -42,7 +42,7 @@ const Usuario = () => {
 
   return (
     <>
-      <div className='estructura'>
+      <div className>
       <div className="wrapper">
         <div className={`card-switch ${isFlipped ? 'is-flipped' : ''}`}>
           <label className="switch">
@@ -96,7 +96,7 @@ const Usuario = () => {
                       </button>
                     </div>
                   </div>
-                  <span className="agreement"><a href="/inicio">Acepta nuestra politica de privacidad</a></span>
+                  <span className="agreement"><a href="/Condiciones">Acepta nuestra politica de privacidad</a></span>
                   <button className="flip-card__btn" type="submit">Confirmar!</button>
                 </form>
               </div>

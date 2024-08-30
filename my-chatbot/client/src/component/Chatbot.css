@@ -5,6 +5,15 @@
     background-color: #121212;
     color: white;
   }
+
+  .fasliders{
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #a0e00d;
+      font-size: 24px;
+      padding: 10px;
+  }
   
   .header {
     display: flex;

@@ -1,3 +1,5 @@
+/* Pruebita.css */
+
 .container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -7,10 +9,16 @@
   width: 100%;
 }
 
-.search-bar {
+.buscador-wrapper {
   grid-column: span 4;
-  padding: 10px;
+  display: flex;
+  justify-content: center;
   margin-bottom: 20px;
+}
+
+.search-bar {
+  width: 80%;
+  padding: 10px;
   font-size: 1rem;
 }
 
@@ -301,3 +309,4 @@
     margin-bottom: 20px;
   }
 }
+

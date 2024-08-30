@@ -96,7 +96,7 @@
     --curve-size: 0.5em;
     --blur: 30px;
     --bg: #080312;
-    --color: #afffff;
+    --color: #FFFFFF;
     color: var(--color);
     cursor: pointer;
     position: relative;
@@ -193,7 +193,7 @@
     --curve-size: 0.5em;
     --blur: 30px;
     --bg: #080312;
-    --color: #afffff;
+    --color: #ffffff;
     color: var(--color);
     cursor: pointer;
     position: relative;
@@ -541,7 +541,9 @@
     justify-content: center;
     gap: 10px;
 }
-
+.h2{
+    padding: 15px;
+    }
 .pruebita-university-section .h2 {
     color: white;
 }

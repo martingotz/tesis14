@@ -4,13 +4,15 @@ import './Pruebita.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faGlobe, faPhone, faSchool, faGraduationCap, faPeopleGroup, faRankingStar, faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import Buscador from './Buscador';
 
 function Pruebita() {
   const [data, setData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
   const [flipped, setFlipped] = useState({});
   const [hoveredEmail, setHoveredEmail] = useState(null);
   const [hoveredPhone, setHoveredPhone] = useState(null);
+  const [filteredResults, setFilteredResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/Universidades1.xlsx`)
@@ -21,22 +23,12 @@ function Pruebita() {
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
         console.log(jsonData); // Verifica los datos leídos del archivo Excel
         setData(jsonData);
+        setFilteredResults(jsonData); // Inicializa los resultados filtrados con todos los datos
       })
       .catch(error => {
         console.error('Error reading Excel file:', error);
       });
   }, []);
-
-  const ensureUrl = (url) => {
-    if (!url) {
-      return '#';
-    }
-    url = url.trim();
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      url = 'http://' + url;
-    }
-    return url;
-  };
 
   const handleCardClick = (index) => {
     setFlipped(prevState => ({
@@ -45,21 +37,26 @@ function Pruebita() {
     }));
   };
 
-  const filteredData = data.filter(item =>
-    (item.Universidad && item.Universidad.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    (item.Incial && item.Incial.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  const handleSearchResults = (results) => {
+    setFilteredResults(results);
+  };
+
+  const handleSearchChange = (term) => {
+    setSearchTerm(term); // Actualiza el término de búsqueda
+  };
 
   return (
     <div className="container">
-      <input
-        type="text"
-        placeholder="Buscar universidad..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="search-bar"
-      />
-      {filteredData.map((item, index) => (
+      <div className="buscador-wrapper">
+        <Buscador 
+          data={data} 
+          searchTerm={searchTerm} 
+          onSearchResults={handleSearchResults} 
+          onSearchChange={handleSearchChange} 
+        />
+      </div>
+
+      {filteredResults.map((item, index) => (
         <div 
           className={`profile-item ${flipped[index] ? 'flipped' : ''}`} 
           key={index} 
@@ -96,17 +93,17 @@ function Pruebita() {
               </div>
               <div className="social-links">
                 {item.Twitter && (
-                  <a href={ensureUrl(item.Twitter)} target="_blank" rel="noopener noreferrer">
+                  <a href={item.Twitter} target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon icon={faTwitter} size="2x" />
                   </a>
                 )}
-                 {item.Instagram && (
-                  <a href={ensureUrl(item.Instagram)} target="_blank" rel="noopener noreferrer">
+                {item.Instagram && (
+                  <a href={item.Instagram} target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon icon={faInstagram} size="2x" />
                   </a>
                 )}
                 {item.Web && (
-                  <a href={ensureUrl(item.Web)} target="_blank" rel="noopener noreferrer">
+                  <a href={item.Web} target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon icon={faGlobe} size="2x" />
                   </a>
                 )}
@@ -150,3 +147,8 @@ function Pruebita() {
 }
 
 export default Pruebita;
+
+
+
+
+

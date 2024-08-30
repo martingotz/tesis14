@@ -3,19 +3,23 @@ import styled, { keyframes } from "styled-components";
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeUp, faCopy, faSyncAlt, faThumbsDown, faThumbsUp, faPencilAlt, faMicrophone, faPaperPlane, faSliders } from '@fortawesome/free-solid-svg-icons';
+
 const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 88%;
   width: 100%;
   overflow: hidden;
+  background-color: black;
 `;
 
 const MainContent = styled.div`
   display: flex;
   flex-grow: 1;
   height: calc(100% - 60px);
+  position: relative; /* Added to enable absolute positioning inside MainContent */
 `;
 
 const LeftColumn = styled.div`
@@ -30,7 +34,7 @@ const LeftColumn = styled.div`
 const Divider = styled.div`
   width: 5px;
   background-color: #a0e00d;
-   display: ${(props) => (props.visible ? 'block' : 'none')};
+  display: ${(props) => (props.visible ? 'block' : 'none')};
 `;
 
 const ChatContainer = styled.div`
@@ -43,11 +47,12 @@ const ChatContainer = styled.div`
 `;
 
 const MessagesContainer = styled.div`
-  flex-grow: 1;
+  flex: auto;
   overflow-y: auto;
-  padding: 20px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 60px;
 `;
 
 const Message = styled.div`
@@ -68,8 +73,6 @@ const InputContainer = styled.div`
   padding: 10px;
   background: #070806;
   width: 100%;
-  position: absolute;
-  bottom: 0;
 `;
 
 const Input = styled.input`
@@ -81,12 +84,25 @@ const Input = styled.input`
   margin-left: 10px;
 `;
 
-const SendButton = styled.button`
+const iconButtonStyle = `
   background: none;
   border: none;
   cursor: pointer;
-  display: flex;
-  align-items: center;
+  color: #a0e00d;
+  font-size: 24px;
+  padding: 10px;
+`;
+
+const Plane = styled.button`
+  ${iconButtonStyle}
+`;
+
+const ToggleButtonContainer = styled.button`
+  ${iconButtonStyle}
+  position: absolute;
+  top: 10px; /* Adjust the top value as needed */
+  left: 10px; /* Adjust the left value to place it outside the LeftColumn */
+  z-index: 10;
 `;
 
 const EditButton = styled.button`
@@ -143,35 +159,23 @@ const IconContainer = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 10px;
-  color: #d1d1d1;
+  color: #a0e00d;
 `;
 
 const Icon = styled.div`
   cursor: pointer;
   font-size: 18px;
   margin: 0 5px;
+  color: #a0e00d;
 `;
 
 const MicButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #a0e00d;
-  font-size: 24px;
+  ${iconButtonStyle}
 `;
 
 const spinnerAnimation = keyframes`
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-`;
-
-const Plane = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #a0e00d;
-  font-size: 24px;
-  padding: 10px;
 `;
 
 const Spinner = styled.div`
@@ -182,12 +186,6 @@ const Spinner = styled.div`
   height: 60px;
   animation: ${spinnerAnimation} 1s linear infinite;
   margin: auto;
-`;
-
-const ToggleButtonContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 10px;
 `;
 
 const NewChatButton = styled.button`
@@ -240,12 +238,8 @@ function ChatBot() {
   ];
 
   useEffect(() => {
-    scrollToBottom();
+    ;
   }, [messages, loading]);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
 
   const sendMessage = async (event, text) => {
     event.preventDefault();
@@ -261,10 +255,10 @@ function ChatBot() {
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       setInputText("");
       setShowPromptOptions(false);
-  
+
       // Set loading to true before sending the message
       setLoading(true);
-  
+
       // Send the message to the backend
       try {
         const response = await axios.post(`${API_BASE_URL}/chatbot`, { userInput: messageText });
@@ -292,7 +286,7 @@ function ChatBot() {
 
   const saveEdit = (event) => {
     event.preventDefault();
-    setMessages(messages.map(msg => 
+    setMessages(messages.map(msg =>
       msg.id === editingMessage.id ? { ...msg, text: editText } : msg
     ));
     setEditingMessage(null);
@@ -349,7 +343,7 @@ function ChatBot() {
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = 'es-ES';
     recognition.start();
-    
+
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
       setInputText(transcript);
@@ -395,6 +389,9 @@ function ChatBot() {
   return (
     <PageContainer>
       <MainContent>
+        <ToggleButtonContainer onClick={toggleLeftColumn}>
+          <FontAwesomeIcon icon={faSliders} />
+        </ToggleButtonContainer>
         <LeftColumn visible={isLeftColumnVisible}>
           <NewChatButton onClick={startNewChat}>Nuevo Chat</NewChatButton>
           <SearchHistoryContainer>
@@ -407,11 +404,6 @@ function ChatBot() {
           </SearchHistoryContainer>
         </LeftColumn>
         <Divider visible={isLeftColumnVisible} />
-        <ToggleButtonContainer>
-          <button onClick={toggleLeftColumn}>
-            <FontAwesomeIcon icon={faSliders} />
-          </button>
-        </ToggleButtonContainer>
         <ChatContainer fullWidth={!isLeftColumnVisible}>
           <MessagesContainer>
             {showPromptOptions && (
@@ -436,9 +428,9 @@ function ChatBot() {
                       value={editText}
                       onChange={(e) => setEditText(e.target.value)}
                     />
-                    <SendButton type="submit">
+                    <Plane type="submit">
                       <FontAwesomeIcon icon={faPaperPlane} color="white" />
-                    </SendButton>
+                    </Plane>
                   </form>
                 ) : (
                   <>
@@ -497,3 +489,4 @@ function ChatBot() {
 }
 
 export default ChatBot;
+

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import './Home.css';
@@ -6,7 +6,10 @@ import RotatingText from './RotatingText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faChalkboardTeacher, faShareAlt, faBookReader } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'; // Importar los íconos de flecha
+import HeroScroller from './HeroScroller';
+import Usuario from './usuario';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const teamMembers = [
   {
@@ -33,7 +36,7 @@ const teamMembers = [
   },
   {
     name: 'Nicolas Serena Olivera',
-    title: 'Co-founder',
+    title: 'Co-Founder',
     degree: 'Licenciado en Negocios Digitales',
     image: `${process.env.PUBLIC_URL}/nico.png`,
     links: [
@@ -159,6 +162,14 @@ const ValueDescription = styled.p`
 `;
 
 const Home = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1200,
+      once: true,
+      anchorPlacement: 'top-center',
+    });
+  }, []);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -167,10 +178,11 @@ const Home = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    arrows: true, // Habilitar flechas
+    arrows: true,
     prevArrow: <div className="slick-prev" />,
     nextArrow: <div className="slick-next" />
   };
+
   const clientSettings = {
     dots: false,
     infinite: true,
@@ -179,11 +191,11 @@ const Home = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
-    arrows: true, // Habilitar flechas
+    arrows: true,
     prevArrow: <div className="slick-prev" />,
     nextArrow: <div className="slick-next" />
-
   };
+
   const testimonialSettings = {
     speed: 5000,
     autoplay: true,
@@ -200,7 +212,7 @@ const Home = () => {
 
   return (
     <div>
-      <div className="home-section">
+      <div className="home-section" data-aos="fade-up">
         <div className="text-container">
           <h1>
             Elegí tu <RotatingText /> <br />con <span className="highlight">UniGPT</span>
@@ -208,42 +220,60 @@ const Home = () => {
         </div>
         <button className="chatbot-button" onClick={() => window.location.href='/chatbot2'}>Chatbot</button>
       </div>
-      <div className="register-section">
-        <img src={`${process.env.PUBLIC_URL}/register.png`} alt="Registrarse" className="register-image" />
+
+      <div className="register-section" data-aos="fade-right">
+        <div className="usuario-container">
+          <Usuario />
+        </div>
         <div className="register-content">
           <h2>Crea tu cuenta</h2>
           <p>Regístrate o inicia sesión<br />para interactuar con el chatbot.</p>
           <div className="register-buttons">
-            <button className="register-button" onClick={() => window.location.href='/register'}>Registrarse</button>
-            <button className="login-button" onClick={() => window.location.href='/login'}>Iniciar Sesión</button>
+            <button className="register-button" onClick={() => window.location.href='/Usuario'}>Registrarse</button>
+            <button className="login-button" onClick={() => window.location.href='/Usuario'}>Iniciar Sesión</button>
           </div>
         </div>
       </div>
-      <div className="find-path-section">
-        <div className="find-path-content">
-          <h2 className="a1">¡Encontrá tu <br />camino!</h2>
-          <p >Conversa con el chatbot <br />y elegí la mejor opción para tu futuro.</p>
-          <button className="wide-chatbot-button" onClick={() => window.location.href='/chatbot2'}>Chatbot</button>
+
+      <div className="section-hero" data-aos="zoom-in">
+        <HeroScroller />
+        <div className="find-path-section">
+          <div className="find-path-content">
+            <h2 className="a1">¡Encontrá tu <br />camino!</h2>
+            <p>Conversa con el chatbot <br />y elegí la mejor opción para tu futuro.</p>
+            <button className="wide-chatbot-button" onClick={() => window.location.href='/chatbot2'}>Chatbot</button>
+          </div>
         </div>
-        <Slider {...settings} className="chatbot-example-slider">
-          <div>
-            <img src={`${process.env.PUBLIC_URL}/juan1.png`} alt="Chatbot Example 1" className="chatbot-example-image" />
-          </div>
-          <div>
-            <img src={`${process.env.PUBLIC_URL}/juan2.png`} alt="Chatbot Example 2" className="chatbot-example-image" />
-          </div>
-        </Slider>
       </div>
-      <div className="about-section">
+
+      <div className="about-section" data-aos="fade-left">
         <div className="about-content">
-          <h2> <span className='revolucion'>Revolucionamos</span><br/>la forma de <br />encontrar la carrera <br />de tus sueños</h2>
-        <img src={`${process.env.PUBLIC_URL}/robot.jpg`} alt="Robot" className="about-image" />
+          <img
+            src={`${process.env.PUBLIC_URL}/hor.png`}
+            alt="Robot"
+            className="about-image"
+          />
         </div>
         <div className="about-description">
-          <p className='descripcion-about'>Nuestra iniciativa resuelve la falta de orientación y acceso a información sobre opciones educativas en Argentina. Proponemos una plataforma web interactiva con un chatbot de inteligencia artificial que ofrece asesoramiento personalizado sobre carreras, universidades y centros terciarios. Nos dirigimos a estudiantes secundarios próximos a graduarse, universitarios en sus primeros años y aquellos que consideran un cambio de carrera. Con nuestra herramienta, facilitamos decisiones informadas y reducimos la tasa de indecisión y abandono universitario.</p>
+          <h2>
+            <span className="revolucion">Revolucionamos</span>
+            <br />
+            la forma de encontrar la carrera de tus sueños
+          </h2>
+          <p className="descripcion-about">
+            Nuestra iniciativa resuelve la falta de orientación y acceso a información
+            sobre opciones educativas en Argentina. Proponemos una plataforma web
+            interactiva con un chatbot de inteligencia artificial que ofrece
+            asesoramiento personalizado sobre carreras, universidades y centros
+            terciarios. Nos dirigimos a estudiantes secundarios próximos a graduarse,
+            universitarios en sus primeros años y aquellos que consideran un cambio
+            de carrera. Con nuestra herramienta, facilitamos decisiones informadas y
+            reducimos la tasa de indecisión y abandono universitario.
+          </p>
         </div>
       </div>
-      <div className="clients-section">
+
+      <div className="clients-section" data-aos="fade-up">
         <h2>Nuestros Clientes</h2>
         <Slider {...clientSettings} className="clients-slider">
           <div>
@@ -263,11 +293,11 @@ const Home = () => {
           </div>
         </Slider>
       </div>
-      <div className="achievement-section">
+
+      <div className="achievement-section" data-aos="fade-right">
         <div className="achievement-content">
-          <span className="badge">ACHIEVEMENT</span>
           <h2>Contamos</h2>
-          <p>Contamos con una gran variedad de carreras y universidades de toda la Argentina.</p>
+          <p>Contamos con carreras y universidades de toda la Argentina</p>
           <div className="stats">
             <div>
               800
@@ -289,19 +319,23 @@ const Home = () => {
         </div>
         <div className="map-container">
           <iframe
-            title="Google Map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.337423012615!2d2.292292315674564!3d48.85884417928765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fdf2dfc5b03%3A0x4209a4b66b5f8c01!2sTour%20Eiffel!5e0!3m2!1sen!2sfr!4v1636567054902!5m2!1sen!2sfr"
+            src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d152471.75403701185!2d-58.56031062355942!3d-34.49703804060932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1suniversidad!5e0!3m2!1ses!2sar!4v1724072415633!5m2!1ses!2sar"
+            width="600"
+            height="450"
+            style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"
-          ></iframe>
+            referrerPolicy="no-referrer-when-downgrade"
+          />
         </div>
       </div>
-      <TeamSection>
+
+      <TeamSection data-aos="fade-up">
         <TeamTitle>Nuestro equipo</TeamTitle>
         <TeamSubtitle>Conoce a los desarrolladores de UniGPT</TeamSubtitle>
         <TeamContainer>
           {teamMembers.map((member, index) => (
-            <TeamMember className='team-member'key={index}>
+            <TeamMember className='team-member' key={index}>
               <TeamMemberImage src={member.image} alt={member.name} />
               <TeamMemberName>{member.name}</TeamMemberName>
               <TeamMemberTitle>{member.title}</TeamMemberTitle>
@@ -317,37 +351,38 @@ const Home = () => {
           ))}
         </TeamContainer>
       </TeamSection>
-      <ValuesSection>
+
+      <ValuesSection data-aos="fade-left">
         <ValuesTitle>Nuestro Chatbot</ValuesTitle>
-        <ValuesContainer>
-          <ValueCard>
+        <ValuesContainer className='valueContainer'>
+          <ValueCard className='valueCard'>
             <ValueIcon icon={faChalkboardTeacher} />
-            <ValueTitle>Interfaz Intuitiva</ValueTitle>
+            <ValueTitle className='valueTitle'>Interfaz Intuitiva</ValueTitle>
             <ValueDescription>
               La sencilla y amigable interfaz de UniGPT permite a los usuarios realizar consultas,
               obteniendo una rápida respuesta que ayuda a esclarecer su elección académica.
             </ValueDescription>
           </ValueCard>
-          <ValueCard>
+          <ValueCard className='valueCard'>
             <ValueIcon icon={faShareAlt} />
-            <ValueTitle>Integración ChatGPT</ValueTitle>
+            <ValueTitle className='valueTitle'>Integración ChatGPT</ValueTitle>
             <ValueDescription>
               La implementación de ChatGPT en una app puede aumentar la participación del usuario
               estimulando interacciones genuinas y sin dificultades.
             </ValueDescription>
           </ValueCard>
-          <ValueCard>
+          <ValueCard className='valueCard'>
             <ValueIcon icon={faBookReader} />
-            <ValueTitle>Aprendizaje continuo</ValueTitle>
+            <ValueTitle className='valueTitle'>Aprendizaje continuo</ValueTitle>
             <ValueDescription>
               El chatbot aprende y mejora con el tiempo analizando las interacciones y los comentarios
-              de los usuarios. Puede identificar patrones en el comportamiento del usuario, refinar sus
-              respuestas y adaptarse a nuevas situaciones.
+              de los usuarios. Puede identificar patrones en el comportamiento del usuario.
             </ValueDescription>
           </ValueCard>
         </ValuesContainer>
       </ValuesSection>
-      <div className="testimonial-section">
+
+      <div className="testimonial-section" data-aos="fade-up">
         <h2 className="section-title">Testimonios</h2>
         <Slider {...testimonialSettings} className="testimonial-slider">
           <div className="testimonial">
@@ -387,15 +422,19 @@ const Home = () => {
           </div>
         </Slider>
       </div>
-      <div className="cta-section">
-        <h2>¿Estás listo para empezar a definir tu futuro?</h2>
-        <p>Súmate a la creciente cantidad de personas que aprovechan nuestra página web para aclarar su futuro de manera simple, rápida y en un mismo lugar.</p>
-        <button className="cta-button" onClick={() => window.location.href='/chatbot2'}>Chatear</button>
+
+      <div className="cta-section" data-aos="zoom-in">
+        <div className="cta-background">
+          <h2>¿Estás listo para empezar a definir tu futuro?</h2>
+          <p>Súmate a la creciente cantidad de personas que aprovechan nuestra página web para aclarar su futuro de manera simple, rápida y en un mismo lugar.</p>
+          <button className="cta-button" onClick={() => window.location.href='/chatbot2'}>Chatear</button>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Home;
+
 
 
