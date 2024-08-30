@@ -162,7 +162,7 @@ body {
   width: 100%;
   padding: 12px;
   border-radius: 4px;
-  background-color: #007bff;
+  background-color: #8CCC00;
   color: white;
   border: none;
   cursor: pointer;
@@ -170,7 +170,5 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.more-info-button:hover {
-  background-color: #0056b3;
-}
+
 

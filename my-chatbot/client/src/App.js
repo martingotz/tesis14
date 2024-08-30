@@ -29,7 +29,7 @@ function App() {
         <div className="App">
           <Header />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/tesis14" element={<Home />} />
             <Route path="/inicio" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegistrationForm />} />
