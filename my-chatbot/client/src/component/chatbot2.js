@@ -216,6 +216,13 @@ const PromptOption = styled.button`
   margin-bottom: 10px;
   cursor: pointer;
 `;
+const SendButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+`;
 
 function ChatBot() {
   const [messages, setMessages] = useState([
@@ -287,139 +294,227 @@ function ChatBot() {
 
   
 
-  const handleSendMessage = async () => {
-    if (inputText.trim()) {
+  const sendMessage = async (event, text) => {
+    event.preventDefault();
+    const messageText = text || inputText;
+    if (messageText.trim()) {
       const newMessage = {
         id: messages.length + 1,
-        text: inputText,
-        user: "User",
+        text: messageText,
+        user: userName,
         name: userName,
-        icon: userPhotoUrl,
+        icon: `${process.env.PUBLIC_URL}/user.png`,
       };
-      setMessages([...messages, newMessage]);
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
       setInputText("");
+      setShowPromptOptions(false);
+  
+      // Set loading to true before sending the message
       setLoading(true);
-
+  
+      // Send the message to the backend
       try {
-        const response = await axios.post(`${API_BASE_URL}/openai/chat`, { userName, message: inputText });
+        const response = await axios.post(`${API_BASE_URL}/chatbot`, { userInput: messageText });
         const botMessage = {
           id: messages.length + 2,
-          text: response.data,
+          text: response.data.chatbotResponse,
           user: "Chatbot",
-          name: "UniGPT",
-          icon: botPhotoUrl,
+          name: "Chatbot",
+          icon: `${process.env.PUBLIC_URL}/uni.png`,
         };
-        setMessages([...messages, newMessage, botMessage]);
+        setMessages((prevMessages) => [...prevMessages, botMessage]);
       } catch (error) {
-        console.error("Error fetching bot response:", error);
+        console.error('Error sending message to chatbot:', error);
+      } finally {
+        // Set loading to false after receiving the response
+        setLoading(false);
       }
-      setLoading(false);
     }
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleSendMessage();
-    }
+  const startEditing = (message) => {
+    setEditingMessage(message);
+    setEditText(message.text);
   };
 
-  const toggleLeftColumnVisibility = () => {
-    setIsLeftColumnVisible(!isLeftColumnVisible);
-  };
-
-  const handleEditMessage = (id) => {
-    const messageToEdit = messages.find((message) => message.id === id);
-    setEditingMessage(id);
-    setEditText(messageToEdit.text);
-  };
-
-  const handleSaveEdit = (id) => {
-    const updatedMessages = messages.map((message) =>
-      message.id === id ? { ...message, text: editText } : message
-    );
-    setMessages(updatedMessages);
+  const saveEdit = (event) => {
+    event.preventDefault();
+    setMessages(messages.map(msg => 
+      msg.id === editingMessage.id ? { ...msg, text: editText } : msg
+    ));
     setEditingMessage(null);
     setEditText("");
   };
 
-  const handleCopy = (messageText) => {
-    navigator.clipboard.writeText(messageText).then(() => {
-      console.log("Text copied to clipboard:", messageText);
-    }).catch((error) => {
-      console.error("Error copying text:", error);
-    });
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        alert('Text copied to clipboard');
+      })
+      .catch(err => {
+        console.error('Could not copy text: ', err);
+      });
   };
 
-  const handleRating = (id, rating) => {
-    if (rating === "thumbsUp") {
-      setThumbsUpColor((prevState) => ({
-        ...prevState,
-        [id]: !prevState[id] ? "#a0e00d" : null,
+  const speakText = (text) => {
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = 'es-ES';
+    window.speechSynthesis.speak(speech);
+  };
+
+  const toggleThumbsDownColor = (id) => {
+    setThumbsDownColor(prev => ({
+      ...prev,
+      [id]: prev[id] ? "" : "#FF0000"
+    }));
+    if (thumbsUpColor[id]) {
+      setThumbsUpColor(prev => ({
+        ...prev,
+        [id]: ""
       }));
-    } else {
-      setThumbsDownColor((prevState) => ({
-        ...prevState,
-        [id]: !prevState[id] ? "#a0e00d" : null,
+    }
+  };
+
+  const toggleThumbsUpColor = (id) => {
+    setThumbsUpColor(prev => ({
+      ...prev,
+      [id]: prev[id] ? "" : "#00FF00"
+    }));
+    if (thumbsDownColor[id]) {
+      setThumbsDownColor(prev => ({
+        ...prev,
+        [id]: ""
       }));
+    }
+  };
+
+  const toggleLeftColumn = () => {
+    setIsLeftColumnVisible(!isLeftColumnVisible);
+  };
+
+  const handleMicClick = () => {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'es-ES';
+    recognition.start();
+    
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setInputText(transcript);
+    };
+
+    recognition.onerror = (event) => {
+      console.error('Speech recognition error detected: ' + event.error);
+    };
+  };
+
+  const startNewChat = () => {
+    const currentChat = [...messages];
+    if (currentChat.length > 0) {
+      setChatHistory([
+        ...chatHistory,
+        {
+          id: chatHistory.length + 1,
+          messages: currentChat,
+          firstMessage: currentChat[0].text
+        }
+      ]);
+    }
+    setMessages([]);
+    setShowPromptOptions(true);
+  };
+
+  const selectChat = (chatId) => {
+    const selectedChat = chatHistory.find(chat => chat.id === chatId);
+    if (selectedChat) {
+      setChatHistory(chatHistory.filter(chat => chat.id !== chatId));
+      setChatHistory(prevHistory => [
+        ...prevHistory,
+        {
+          id: chatHistory.length + 1,
+          messages: messages,
+          firstMessage: messages[0]?.text || ''
+        }
+      ]);
+      setMessages(selectedChat.messages);
     }
   };
 
   return (
     <PageContainer>
       <MainContent>
-        <ToggleButtonContainer onClick={toggleLeftColumnVisibility}>
-          <FontAwesomeIcon icon={faSliders} />
-        </ToggleButtonContainer>
         <LeftColumn visible={isLeftColumnVisible}>
-          <NewChatButton onClick={() => setMessages([])}>Nuevo chat</NewChatButton>
+          <NewChatButton onClick={startNewChat}>Nuevo Chat</NewChatButton>
           <SearchHistoryContainer>
-            <SearchHistoryTitle>Historial de Búsqueda</SearchHistoryTitle>
-            {chatHistory.map((search, index) => (
-              <SearchItem key={index}>{search}</SearchItem>
+            <SearchHistoryTitle>Historial de Chats</SearchHistoryTitle>
+            {chatHistory.map((chat) => (
+              <SearchItem key={chat.id} onClick={() => selectChat(chat.id)}>
+                {chat.firstMessage}
+              </SearchItem>
             ))}
           </SearchHistoryContainer>
         </LeftColumn>
         <Divider visible={isLeftColumnVisible} />
+        <ToggleButtonContainer>
+          <button onClick={toggleLeftColumn}>
+            <FontAwesomeIcon icon={faSliders} />
+          </button>
+        </ToggleButtonContainer>
         <ChatContainer fullWidth={!isLeftColumnVisible}>
           <MessagesContainer>
-            {messages.map((message) => (
-              <Message key={message.id} user={message.user}>
+            {showPromptOptions && (
+              <PromptOptions>
+                {promptOptions.map((option, index) => (
+                  <PromptOption key={index} onClick={(e) => sendMessage(e, option)}>
+                    {option}
+                  </PromptOption>
+                ))}
+              </PromptOptions>
+            )}
+            {messages.map((msg) => (
+              <Message key={msg.id} user={msg.user}>
                 <MessageHeader>
-                  <UserIcon src={message.icon} alt={`${message.user} Icon`} />
-                  <Username>{message.name}</Username>
-                  <IconContainer>
-                    <Icon onClick={() => handleCopy(message.text)}>
-                      <FontAwesomeIcon icon={faCopy} />
-                    </Icon>
-                    <Icon onClick={() => handleRating(message.id, "thumbsUp")}>
-                      <FontAwesomeIcon
-                        icon={faThumbsUp}
-                        style={{ color: thumbsUpColor[message.id] }}
-                      />
-                    </Icon>
-                    <Icon onClick={() => handleRating(message.id, "thumbsDown")}>
-                      <FontAwesomeIcon
-                        icon={faThumbsDown}
-                        style={{ color: thumbsDownColor[message.id] }}
-                      />
-                    </Icon>
-                    <EditButton onClick={() => handleEditMessage(message.id)}>
-                      <FontAwesomeIcon icon={faPencilAlt} />
-                    </EditButton>
-                  </IconContainer>
+                  <UserIcon src={msg.icon} />
+                  <Username>{msg.name}</Username>
                 </MessageHeader>
-                {editingMessage === message.id ? (
-                  <>
+                {editingMessage?.id === msg.id ? (
+                  <form onSubmit={saveEdit} style={{ display: 'flex', width: '100%' }}>
                     <Input
                       type="text"
                       value={editText}
                       onChange={(e) => setEditText(e.target.value)}
-                      onKeyDown={handleKeyDown}
                     />
-                    <button onClick={() => handleSaveEdit(message.id)}>Guardar</button>
-                  </>
+                    <SendButton type="submit">
+                      <FontAwesomeIcon icon={faPaperPlane} color="white" />
+                    </SendButton>
+                  </form>
                 ) : (
-                  <div>{message.text}</div>
+                  <>
+                    {msg.text}
+                    {msg.user === userName && (
+                      <EditButton onClick={() => startEditing(msg)}>
+                        <FontAwesomeIcon icon={faPencilAlt} />
+                      </EditButton>
+                    )}
+                    {msg.user === "Chatbot" && (
+                      <IconContainer>
+                        <Icon onClick={() => speakText(msg.text)}><FontAwesomeIcon icon={faVolumeUp} /></Icon>
+                        <Icon onClick={() => copyToClipboard(msg.text)}><FontAwesomeIcon icon={faCopy} /></Icon>
+                        <Icon><FontAwesomeIcon icon={faSyncAlt} /></Icon>
+                        <Icon 
+                          onClick={() => toggleThumbsDownColor(msg.id)}
+                          style={{ color: thumbsDownColor[msg.id] || "inherit" }}
+                        >
+                          <FontAwesomeIcon icon={faThumbsDown} />
+                        </Icon>
+                        <Icon 
+                          onClick={() => toggleThumbsUpColor(msg.id)}
+                          style={{ color: thumbsUpColor[msg.id] || "inherit" }}
+                        >
+                          <FontAwesomeIcon icon={faThumbsUp} />
+                        </Icon>
+                      </IconContainer>
+                    )}
+                  </>
                 )}
               </Message>
             ))}
@@ -427,30 +522,23 @@ function ChatBot() {
             <div ref={messagesEndRef} />
           </MessagesContainer>
           <InputContainer>
-            <MicButton>
+            <MicButton onClick={handleMicClick}>
               <FontAwesomeIcon icon={faMicrophone} />
             </MicButton>
-            <Input
-              type="text"
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              onKeyDown={handleKeyDown}
-            />
-            <Plane onClick={handleSendMessage}>
-              <FontAwesomeIcon icon={faPaperPlane} />
-            </Plane>
+            <form onSubmit={sendMessage} style={{ display: 'flex', width: '100%' }}>
+              <Input
+                type="text"
+                placeholder="Escribe aquí tu pregunta"
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+              />
+              <Plane onClick={sendMessage}>
+                <FontAwesomeIcon icon={faPaperPlane} />
+              </Plane>
+            </form>
           </InputContainer>
         </ChatContainer>
       </MainContent>
-      {showPromptOptions && (
-        <PromptOptions>
-          {promptOptions.map((option, index) => (
-            <PromptOption key={index} onClick={() => handleOptionClick(option)}>
-              {option}
-            </PromptOption>
-          ))}
-        </PromptOptions>
-      )}
     </PageContainer>
   );
 }
