@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVolumeUp, faCopy, faSyncAlt, faThumbsDown, faThumbsUp, faPencilAlt, faMicrophone, faPaperPlane, faSliders } from '@fortawesome/free-solid-svg-icons';
+import { faVolumeUp, faCopy, faSyncAlt, faThumbsDown, faThumbsUp, faPencilAlt, faMicrophone, faPaperPlane, faSliders, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -32,12 +32,16 @@ const LeftColumn = styled.div`
   padding: 20px;
   overflow-y: auto;
   display: ${(props) => (props.visible ? 'block' : 'none')};
+    @media (max-width: 768px) {  // En pantallas menores a 768px (tablet y móvil)
+    display: none;  // Oculta la columna
 `;
 
 const Divider = styled.div`
   width: 5px;
   background-color: #a0e00d;
   display: ${(props) => (props.visible ? 'block' : 'none')};
+    @media (max-width: 768px) {  // En pantallas menores a 768px
+    display: none;  // Elimina el divisor también en móviles
 `;
 
 const ChatContainer = styled.div`
@@ -47,6 +51,8 @@ const ChatContainer = styled.div`
   height: 100%;
   background-color: #070806;
   position: relative;
+  @media (max-width: 768px) {  // En pantallas menores a 768px
+    width: 100%;  // El chat ocupa el 100% del ancho
 `;
 
 const MessagesContainer = styled.div`
@@ -101,13 +107,15 @@ const Plane = styled.button`
 `;
 
 const ToggleButtonContainer = styled.button`
-  ${iconButtonStyle}
+  ${iconButtonStyle} /* Asegura que el estilo sea consistente con otros íconos */
   position: absolute;
-  top: 10px; /* Adjust the top value as needed */
-  left: 10px; /* Adjust the left value to place it outside the LeftColumn */
+  top: 10px; /* Ajusta la posición superior según sea necesario */
+  left: 10px; /* Ajusta la posición izquierda para colocarlo fuera de la columna izquierda */
   z-index: 10;
-`;
 
+  @media (max-width: 768px) {  // En pantallas menores a 768px
+    display: block;  // Asegura que el botón "Nuevo Chat" siga visible
+`;
 const EditButton = styled.button`
   background: none;
   border: none;
@@ -248,7 +256,7 @@ function ChatBot() {
   const [isLeftColumnVisible, setIsLeftColumnVisible] = useState(true);
   const [showPromptOptions, setShowPromptOptions] = useState(false);
   const messagesEndRef = useRef(null);
-
+  const { width } = useWindowSize();
   const userEmail = localStorage.getItem('userEmail');
   const userName = userEmail ? userEmail.split('@')[0] : `user${Math.floor(Math.random() * 10000)}`;
 
@@ -303,7 +311,7 @@ function ChatBot() {
         text: messageText,
         user: userName,
         name: userName,
-        icon: `${process.env.PUBLIC_URL}/user.png`,
+        icon: `${process.env.PUBLIC_URL}/usuario.png`,
       };
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       setInputText("");
@@ -439,6 +447,28 @@ function ChatBot() {
     }
   };
 
+  function useWindowSize() {
+    const [windowSize, setWindowSize] = useState({
+      width: undefined,
+    });
+  
+    useEffect(() => {
+      function handleResize() {
+        setWindowSize({
+          width: window.innerWidth,
+        });
+      }
+  
+      window.addEventListener('resize', handleResize);
+      
+      handleResize(); // Call at mount to set the initial width
+  
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+  
+    return windowSize;
+  }
+
   return (
     <PageContainer>
       <MainContent>
@@ -455,10 +485,10 @@ function ChatBot() {
         </LeftColumn>
         <Divider visible={isLeftColumnVisible} />
         <ToggleButtonContainer>
-          <button onClick={toggleLeftColumn}>
-            <FontAwesomeIcon icon={faSliders} />
-          </button>
-        </ToggleButtonContainer>
+        <button  onClick={() => width <= 768 ? startNewChat() : toggleLeftColumn()} style={{backgroundColor:'#2c2c2c'}}>
+           <FontAwesomeIcon icon={width <= 768 ? faPlus : faSliders} style={{ color: '#a0e00d', fontSize: '24px' }} />
+            </button>
+         </ToggleButtonContainer>
         <ChatContainer fullWidth={!isLeftColumnVisible}>
           <MessagesContainer>
             {showPromptOptions && (

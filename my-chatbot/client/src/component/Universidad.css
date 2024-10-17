@@ -169,6 +169,60 @@ body {
   font-size: 16px;
   transition: background-color 0.3s ease;
 }
+/* Estilos base que ya tienes */
+
+/* Para tablets (pantallas entre 768px y 1024px) */
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en lugar de 4 */
+    gap: 16px; /* Reduce el espacio entre las tarjetas */
+  }
+
+  .card {
+    padding: 16px; /* Reduce el padding en las tarjetas */
+    min-height: 300px; /* Ajusta la altura mínima */
+  }
+
+  .card-title {
+    font-size: 1.1rem; /* Reduce el tamaño del título */
+  }
+
+  .icon-group {
+    gap: 12px; /* Ajusta el espacio entre los iconos */
+  }
+}
+
+/* Para celulares (pantallas menores a 768px) */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr; /* 1 columna para tarjetas */
+    gap: 12px; /* Reduce aún más el espacio entre las tarjetas */
+  }
+
+  .card {
+    padding: 12px; /* Reduce el padding para móviles */
+    min-height: 250px; /* Ajusta la altura mínima */
+  }
+
+  .card-title {
+    font-size: 1rem; /* Reduce el tamaño del título en móviles */
+  }
+
+  .card-info-item {
+    flex-direction: column; /* Apila la información en lugar de mostrarla en fila */
+    align-items: flex-start; /* Alinea el texto a la izquierda */
+    margin-bottom: 8px;
+  }
+
+  .icon-group {
+    justify-content: space-between; /* Ajusta la distribución de los iconos */
+  }
+
+  .more-info-button {
+    font-size: 14px; /* Reduce el tamaño del botón */
+    padding: 10px; /* Reduce el padding del botón */
+  }
+}
 
 
 

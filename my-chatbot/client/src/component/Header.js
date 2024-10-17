@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,34 +6,40 @@ import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const HeaderContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: center; /* Asegura que todos los elementos estén centrados verticalmente */
   justify-content: space-between;
   background-color: #0d0f10; /* Dark background color */
   padding: 10px 20px;
   position: relative;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
+`;
+
+const MenuIcon = styled(FontAwesomeIcon)`
+  display: none; /* Ocultar por defecto en pantallas grandes */
+  color: #ffffff;
+  font-size: 24px; /* Ajusta el tamaño según sea necesario */
+  cursor: pointer;
+
+  @media (max-width:1024px) {
+    display: block; /* Mostrar el ícono en pantallas hasta 1024px */
   }
 `;
-
 const LogoContainer = styled(NavLink)`
   display: flex;
-  align-items: center;
-  text-decoration: none; /* Remove underline from link */
-`;
-
-const Logo = styled.img`
-  width: 35%; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
-  margin-right: 10px;
+  align-items: center; /* Alineación vertical centrada */
+  text-decoration: none;
 `;
 
 const LogoText = styled.span`
   color: #a0e00d; /* Green text color */
-  font-size: 24px; /* Adjust the font size as needed */
+  font-size: 24px; /* Ajusta el tamaño de fuente */
   font-weight: bold;
+  align-self: center; /* Alinea el texto verticalmente en el centro */
+`;
+const Logo = styled.img`
+  width: 35%; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px;
 `;
 
 const NavContainer = styled.div`
@@ -42,13 +48,13 @@ const NavContainer = styled.div`
   flex-grow: 1;
   justify-content: space-evenly; /* Distribute items evenly */
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     flex-direction: column;
     width: 100%;
     display: ${({ open }) => (open ? 'flex' : 'none')};
     background-color: #0d0f10;
     position: absolute;
-    top: 60px;
+    top: 90px;
     left: 0;
     padding: 10px 0;
     z-index: 1;
@@ -73,7 +79,7 @@ const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     width: 100%;
     justify-content: space-evenly;
   }
@@ -83,6 +89,7 @@ const ButtonContainer = styled.div`
     align-items: flex-start;
     width: 100%;
     display: ${({ open }) => (open ? 'flex' : 'none')};
+    padding: 10px;
   }
 `;
 
@@ -129,16 +136,6 @@ const ChatBotButton = styled(NavLink)`
   }
 `;
 
-const MenuIcon = styled(FontAwesomeIcon)`
-  display: none;
-  color: #ffffff;
-  font-size: 24px;
-  cursor: pointer;
-
-  @media (max-width: 768px) {
-    display: block;
-  }
-`;
 
 const CloseButton = styled(FontAwesomeIcon)`
   display: none;
@@ -149,41 +146,55 @@ const CloseButton = styled(FontAwesomeIcon)`
   top: 10px;
   right: 10px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     display: ${({ open }) => (open ? 'block' : 'none')};
   }
 `;
-
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const menuRef = useRef(null);
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+  
+  // Close the menu if clicking outside of it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuRef]);
 
   return (
-    <HeaderContainer>
-      <LogoContainer to="/inicio">
-        <Logo src={`${process.env.PUBLIC_URL}/unigpt1.png`} alt="Logo" />
-        <LogoText>UNIGPT</LogoText>
-      </LogoContainer>
-      <MenuIcon icon={faBars} onClick={toggleMenu} />
-      <CloseButton icon={faTimes} open={menuOpen} onClick={toggleMenu} />
-      <NavContainer open={menuOpen}>
-        <NavItem to="/inicio">Inicio</NavItem>
-        <NavItem to="/universidades">Universidades</NavItem>
-        <NavItem to="/carreras">Carreras</NavItem>
-        <NavItem to="/contacto">Contacto</NavItem>
-        <ButtonContainer open={menuOpen}>
-          <LoginButton to="/usuario">Iniciar Sesión</LoginButton>
-          <ChatBotButton to="/chatbot2">Chatbot</ChatBotButton>
-        </ButtonContainer>
-      </NavContainer>
-    </HeaderContainer>
+    <HeaderContainer ref={menuRef}>
+    <MenuIcon icon={faBars} onClick={toggleMenu} />
+    <LogoContainer to="/inicio">
+      <Logo src={`${process.env.PUBLIC_URL}/unigpt1.png`} alt="Logo" />
+      <LogoText>UNIGPT</LogoText>
+    </LogoContainer>
+    <CloseButton icon={faTimes} open={menuOpen} onClick={toggleMenu} />
+    <NavContainer open={menuOpen}>
+      <NavItem to="/inicio">Inicio</NavItem>
+      <NavItem to="/universidades">Universidades</NavItem>
+      <NavItem to="/carreras">Carreras</NavItem>
+      <NavItem to="/contacto">Contacto</NavItem>
+      <ButtonContainer open={menuOpen}>
+        <LoginButton to="/usuario">Iniciar Sesión</LoginButton>
+        <ChatBotButton to="/chatbot2">Chatbot</ChatBotButton>
+      </ButtonContainer>
+    </NavContainer>
+  </HeaderContainer>
   );
 }
 
 export default Header;
+
 
 
 

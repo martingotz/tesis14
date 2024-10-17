@@ -182,8 +182,7 @@
     }
   }
   
-  
-  /* Media Queries */
+/* Media Queries */
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
@@ -202,6 +201,10 @@
   .footer-icons img {
     width: 20px;
     height: 20px;
+  }
+  .footer-list {
+    flex-direction: column;
+    padding: 0;
   }
   .footer-list li {
     margin-bottom: 5px;
