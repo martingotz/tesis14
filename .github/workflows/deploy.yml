@@ -1,9 +1,9 @@
-name: Deploy React App to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Change this to your default branch
+      - main
 
 jobs:
   build-and-deploy:
@@ -19,26 +19,14 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        run: |
-          cd my-chatbot/client
-          npm install
+        run: cd .mychtabot/Client && npm install
 
-      - name: Build project
-        run: |
-          cd my-chatbot/client
-          npm run build
+      - name: Build Client
+        run: cd .mychtabot/Client && npm run build
 
       - name: Deploy to GitHub Pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.MARTIN }}
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          cd my-chatbot/client
-          git init
-          git remote add origin https://x-access-token:${{ secrets.MARTIN }}@github.com/${{ github.repository }}.git
-          git checkout -b gh-pages
-          cp -r build/* .
-          git add .
-          git commit -m "Deploy to GitHub Pages"
-          git push origin gh-pages --force
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.MARTIN }}
+          publish_dir: .mychtabot/Client/build # Cambia según el directorio de tu build
+          publish_branch: gh-pages
