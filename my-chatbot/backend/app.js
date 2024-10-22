@@ -49,6 +49,10 @@ function updateUserSummary(userId, userInput, assistantResponse) {
   }
 }
 
+app.get('/test', (req, res) => {
+  res.send("Backend is working!");
+});
+
 app.post('/chatbot', async (req, res) => {
   let { userInput, userId } = req.body;
 
