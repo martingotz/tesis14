@@ -273,7 +273,7 @@ function ChatBot() {
     "Me gustaría saber sobre las opciones de posgrado disponibles."
   ];
 
-  const handleOptionClick = async (option) => {
+  /* const handleOptionClick = async (option) => {
     setLoading(true);
     const newMessage = {
       id: messages.length + 1,
@@ -298,7 +298,7 @@ function ChatBot() {
       console.error("Error fetching bot response:", error);
     }
     setLoading(false);
-  };
+  }; */
 
   
 
