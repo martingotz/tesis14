@@ -4,7 +4,6 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeUp, faCopy, faSyncAlt, faThumbsDown, faThumbsUp, faPencilAlt, faMicrophone, faPaperPlane, faSliders, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const API_BASE_URL = "https://tesis14-backend.onrender.com";
 
 const userPhotoUrl = `${process.env.PUBLIC_URL}/usuario.png`;  
 const botPhotoUrl = `${process.env.PUBLIC_URL}/uni.png`;    
@@ -322,7 +321,7 @@ function ChatBot() {
   
       // Send the message to the backend
       try {
-        const response = await axios.post(`${API_BASE_URL}/chatbot`, { userInput: messageText });
+        const response = await axios.post(`https://tesis14-backend.onrender.com/chatbot`, { userInput: messageText });
         const botMessage = {
           id: messages.length + 2,
           text: response.data.chatbotResponse,
