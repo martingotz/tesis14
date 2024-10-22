@@ -170,18 +170,7 @@ const Home = () => {
     });
   }, []);
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    arrows: true,
-    prevArrow: <div className="slick-prev" />,
-    nextArrow: <div className="slick-next" />
-  };
+  
 
   const clientSettings = {
     dots: false,
@@ -326,6 +315,7 @@ const Home = () => {
             allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
+            title="Mapa de ubicación de la universidad"
           />
         </div>
       </div>

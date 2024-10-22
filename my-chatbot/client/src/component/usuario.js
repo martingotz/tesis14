@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Usuario.css';
 import { useNavigate } from 'react-router-dom';
-import Footer from './Footer'; // Asegúrate de importar tu componente Footer
 
 const Usuario = () => {
   const [isFlipped, setIsFlipped] = useState(false);
