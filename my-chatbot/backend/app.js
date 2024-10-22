@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 const allowedOrigins = [
   'http://localhost:3001',
   'https://federico-creator.github.io/Tesisunigpt/',
-  'https://martingotz.github.io'
+  'https://martingotz.github.io/chatbot2'
 ];
 
 app.use(cors({
