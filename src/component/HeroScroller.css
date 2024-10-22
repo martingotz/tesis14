@@ -1,0 +1,49 @@
+/* Container for the laptop frame and scrolling content */
+.laptop-frame {
+    position: relative;
+    width: 80%; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the laptop on the page */
+}
+
+/* Laptop frame image */
+.laptop-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    pointer-events: none; /* Ensure the frame doesn't interfere with interaction */
+}
+
+/* Container for the scrolling content */
+.scroll-container {
+    position: absolute;
+    top: 11.5%; /* Adjust to fit the screen area of your laptop image */
+    left: 7.5%; /* Adjust to fit the screen area of your laptop image */
+    width: 85%; /* Adjust to fit the screen area of your laptop image */
+    height: 77%; /* Adjust to fit the screen area of your laptop image */
+    perspective: 1000px; /* Adds 3D perspective */
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* Content inside the scrolling container */
+.content {
+    transform-style: preserve-3d;
+    transition: transform 1s ease-out; /* Smooth transition for the transform */
+    transform: rotateX(15deg); /* Initial position (adjusted for inversion) */
+}
+
+/* The image or content inside the .content div */
+.hero-image {
+    width: 80%; /* Adjust the width to fit inside the screen */
+    height: 88%; /* Maintain the aspect ratio */
+    object-fit: fill; /* Ensure the image covers the content area */
+    border-radius: 32px;
+}
+
+/* Additional styling to make sure the page is scrollable if needed */
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: black; /* Ensure the body has a black background */
+}

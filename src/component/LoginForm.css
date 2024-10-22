@@ -1,0 +1,168 @@
+/* Aplicar a todo el cuerpo del documento */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  
+  
+  /* LoginForm.css */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ensure the form takes the full viewport height */
+  background-color: rgba(0, 0, 0, 0.5); /* Optional: Add a background color with opacity */
+}
+
+.container {
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.banner {
+  display: none; /* Hide the banner if it's not necessary */
+}
+  
+  .input {
+    height: 48px;
+    border-radius: 5px;
+    background-color: #070806;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0 16px;
+    border: 1px solid #A0E00D;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .button {
+    background-color: #070806;
+    height: 48px;
+    border-radius: 5px;
+    color: #A0E00D;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #333;
+  }
+  
+  .button.facebook {
+    background-color: #3b5998;
+    color: white;
+    margin-top: 10px;
+  }
+  
+  .button.facebook:hover {
+    background-color: #2d4373;
+  }
+  
+  .button.google {
+    background-color: #db4437;
+    color: white;
+    margin-top: 10px;
+  }
+  
+  .button.google:hover {
+    background-color: #c33d2d;
+  }
+  
+  .banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./../../public/bannerlogin.jpg'); /* Path to your image in the public folder */
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+  }
+  /* Add this to your existing CSS */
+  
+  /* Flex container for the social buttons */
+  .social-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  /* Style for individual social buttons */
+  .button.facebook,
+  .button.google,
+  .button.apple {
+    flex: 1;
+    margin-right: 10px; /* Adjust spacing as needed */
+  }
+  
+  /* Apple button (if applicable) */
+  .button.apple {
+    background-color: #000;
+    color: white;
+  }
+  
+  /* Hover effect for all buttons */
+  .button:hover {
+    background-color: #333;
+  }
+  /* Style for the Apple button */
+  .button.apple {
+    background-color: #000; /* Apple's color */
+    color: white;
+  }
+  
+  .button.apple:hover {
+    background-color: #333;
+  }
+  /* Add this to your existing CSS */
+  
+  /* Flex container for the social buttons */
+  .social-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px; /* Adjust spacing as needed */
+  }
+  
+  /* Style for individual social buttons */
+  .button {
+    flex: 1;
+    margin-right: 10px; /* Adjust spacing between buttons */
+  }
+  
+  /* Apple button (if applicable) */
+  .button.apple {
+    background-color: #000; /* Apple's color */
+    color: white;
+  }
+  
+  /* Hover effect for all buttons */
+  .button:hover {
+    background-color: #333;
+  }
+  .link {
+    color: #A0E00D;
+    text-decoration: none;
+  }
+  
+  .login-form p a:hover {
+    text-decoration: underline;
+  }
+  
+  p{
+    color: #ffffff;
+    text-align: center;
+  }

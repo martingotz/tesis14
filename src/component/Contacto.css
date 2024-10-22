@@ -1,0 +1,170 @@
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  background-color: #000;
+  color: white;
+}
+
+.contact-content {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.contact-content h2 {
+  font-size: 2em;
+  color: #A5FF00;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.contact-content p {
+  font-size: 1.2em;
+  text-align: justify;
+}
+
+.contact-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-form form {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form input,
+.contact-form textarea {
+  margin-bottom: 20px;
+  padding: 15px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+}
+
+.contact-form input {
+  height: 50px;
+}
+
+.contact-form textarea {
+  height: 150px;
+  resize: none;
+}
+
+.contact-form button {
+  padding: 15px;
+  font-size: 1.2em;
+  color: black;
+  background-color: #A5FF00;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #8CCC00;
+}
+
+.additional-contact-section {
+  background-color: #000;
+  color: white;
+  padding: 50px 20px;
+}
+
+.additional-contact-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.contact-item {
+  max-width: 300px;
+  margin-bottom: 30px;
+}
+
+.contact-item h3 {
+  font-size: 1.5em;
+  color: #A5FF00;
+  margin-bottom: 20px;
+}
+
+.contact-item p {
+  text-align: justify;
+}
+
+.faq-section {
+  background-color: #000;
+  color: white;
+  padding: 50px 20px;
+}
+
+.faq-section h2 {
+  color: white;
+  font-size: 1.5em;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.faq-item {
+  border: 1px solid #444;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-answer {
+  margin-top: 20px;
+}
+
+.faq-answer p {
+  color: #818181d8;
+  text-align: left;
+}
+
+/* Media queries for responsiveness */
+@media (min-width: 768px) {
+  .contact-section {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .contact-content {
+    width: 50%;
+    padding-left: 100px;
+  }
+
+  .contact-content h2 {
+    font-size: 3em;
+    text-align: left;
+  }
+
+  .contact-content p {
+    font-size: 1.5em;
+  }
+
+  .contact-form {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .additional-contact-content {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}

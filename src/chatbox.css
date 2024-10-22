@@ -1,0 +1,39 @@
+.main-content {
+  padding: 20px;
+}
+
+.main-content-left {
+  float: left;
+  width: 40%;
+  margin-right: 20px;
+}
+
+.main-content-left ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.main-content-left li {
+  margin-bottom: 10px;
+}
+
+.main-content-left a {
+  text-decoration: none;
+  color: #333;
+}
+
+.main-content-right {
+  float: right;
+  width: 50%;
+}
+
+.main-content-right article {
+  border: 1px solid #CCC;
+  padding: 10px;
+}
+
+.main-content-right article h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}

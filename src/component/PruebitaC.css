@@ -1,0 +1,557 @@
+.buscar-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 1000px; /* Adjust this value as needed */
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+.pruebita-search-input {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 0 25px 25px 0;
+    border: 1px solid #A0E00D;
+    border-right: none;
+    width: 100%;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.pruebita-search-input:focus {
+    border-color: #A0E00D;
+    box-shadow: 0 0 10px rgba(160, 224, 13, 0.5);
+    outline: none;
+}
+
+.buscar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: #A0E00D;
+    font-size: 20px;
+    width: 10%;
+    height: 75%;
+    border-radius: 0 25px 25px 0;
+    pointer-events: none;
+    border: 1px solid #A0E00D;
+    border-left: none;
+    position: absolute;
+    right: 0;
+    top: 35%;
+    transform: translateY(-50%);
+}
+
+.pruebita-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color:#080312;
+}
+
+.pruebita-search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #A0E00D;
+    margin-bottom: 20px;
+}
+
+.pruebita-button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.pruebita-university-button {
+    flex: 1 0 calc(100% / 5 - 10px); /* Ajuste para 5 botones por fila con espacio entre ellos */
+    margin: 5px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.pruebita-university-button.selected {
+    background-color: #004d26;
+}
+/* Ajuste para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .pruebita-university-button {
+        flex: 1 0 calc(100% / 3 - 10px); /* Ajuste para 3 botones por fila */
+    }
+}
+
+@media (max-width: 480px) {
+    .pruebita-university-button {
+        flex: 1 0 calc(100% / 2 - 10px); /* Ajuste para 2 botones por fila */
+    }
+}
+
+.pruebita-clear-button {
+    --border-color: linear-gradient(-45deg, #A0E00D, #6A9B07, #A0E00D);
+    --border-width: 0.125em;
+    --curve-size: 0.5em;
+    --blur: 30px;
+    --bg: #080312;
+    --color: #FFFFFF;
+    color: var(--color);
+    cursor: pointer;
+    position: relative;
+    isolation: isolate;
+    display: inline-grid;
+    place-content: center;
+    padding: 0.5em 1.5em;
+    font-size: 17px;
+    border: 0;
+    text-transform: uppercase;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
+    clip-path: polygon(
+        0% var(--curve-size),
+        var(--curve-size) 0,
+        100% 0,
+        100% calc(100% - var(--curve-size)),
+        calc(100% - var(--curve-size)) 100%,
+        0 100%
+    );
+    transition: color 250ms;
+    margin: 5px;
+    flex: 1;
+}
+
+
+.pruebita-clear-button::after,
+.pruebita-clear-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.pruebita-clear-button::before {
+    background: var(--border-color);
+    background-size: 300% 300%;
+    animation: move-bg7234 5s ease infinite;
+    z-index: -2;
+}
+
+@keyframes move-bg7234 {
+    0% {
+        background-position: 31% 0%;
+    }
+
+    50% {
+        background-position: 70% 100%;
+    }
+
+    100% {
+        background-position: 31% 0%;
+    }
+}
+
+.pruebita-clear-button::after {
+    background: var(--bg);
+    z-index: -1;
+    clip-path: polygon(
+        var(--border-width)
+        calc(var(--curve-size) + var(--border-width) * 0.5),
+        calc(var(--curve-size) + var(--border-width) * 0.5) var(--border-width),
+        calc(100% - var(--border-width)) var(--border-width),
+        calc(100% - var(--border-width))
+        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+        calc(100% - var(--border-width)),
+        var(--border-width) calc(100% - var(--border-width))
+    );
+    transition: clip-path 500ms;
+}
+
+.pruebita-clear-button:where(:hover, :focus)::after {
+    clip-path: polygon(
+        calc(100% - var(--border-width))
+        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+        calc(100% - var(--border-width)) var(--border-width),
+        calc(100% - var(--border-width)) var(--border-width),
+        calc(100% - var(--border-width))
+        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+        calc(100% - var(--border-width)),
+        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+        calc(100% - var(--border-width))
+    );
+    transition: 200ms;
+}
+
+.pruebita-clear-button:where(:hover, :focus) {
+    color: #fff;
+}
+
+.pruebita-university-button {
+    --border-color: linear-gradient(-45deg, #A0E00D, #6A9B07, #A0E00D);
+    --border-width: 0.125em;
+    --curve-size: 0.5em;
+    --blur: 30px;
+    --bg: #080312;
+    --color: #ffffff;
+    color: var(--color);
+    cursor: pointer;
+    position: relative;
+    isolation: isolate;
+    display: inline-grid;
+    place-content: center;
+    padding: 0.5em 1.5em;
+    font-size: 17px;
+    border: 0;
+    text-transform: uppercase;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
+    clip-path: polygon(
+        0% var(--curve-size),
+        var(--curve-size) 0,
+        100% 0,
+        100% calc(100% - var(--curve-size)),
+        calc(100% - var(--curve-size)) 100%,
+        0 100%
+    );
+    transition: color 250ms;
+    margin: 5px;
+    flex: 1;
+}
+
+
+.pruebita-university-button::after,
+.pruebita-university-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.pruebita-university-button::before {
+    background: var(--border-color);
+    background-size: 300% 300%;
+    animation: move-bg7234 5s ease infinite;
+    z-index: -2;
+}
+
+.pruebita-university-button.selected {
+    background-color: #004d26;
+}
+
+@keyframes move-bg7234 {
+    0% {
+        background-position: 31% 0%;
+    }
+
+    50% {
+        background-position: 70% 100%;
+    }
+
+    100% {
+        background-position: 31% 0%;
+    }
+}
+
+.pruebita-university-button::after {
+    background: var(--bg);
+    z-index: -1;
+    clip-path: polygon(
+        var(--border-width)
+        calc(var(--curve-size) + var(--border-width) * 0.5),
+        calc(var(--curve-size) + var(--border-width) * 0.5) var(--border-width),
+        calc(100% - var(--border-width)) var(--border-width),
+        calc(100% - var(--border-width))
+        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+        calc(100% - var(--border-width)),
+        var(--border-width) calc(100% - var(--border-width))
+    );
+    transition: clip-path 500ms;
+}
+
+.pruebita-university-button:where(:hover, :focus)::after {
+    clip-path: polygon(
+        calc(100% - var(--border-width))
+        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+        calc(100% - var(--border-width)) var(--border-width),
+        calc(100% - var(--border-width)) var(--border-width),
+        calc(100% - var(--border-width))
+        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+        calc(100% - var(--border-width)),
+        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+        calc(100% - var(--border-width))
+    );
+    transition: 200ms;
+}
+
+.pruebita-university-button:where(:hover, :focus) {
+    color: #fff;
+}
+
+.pruebita-university-section {
+    width: 100%;
+    color: white;
+}
+
+.pruebita-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.pruebita-parent {
+    width: 290px;
+    height: 300px;
+    perspective: 1000px;
+}
+
+.pruebita-card {
+    height: 100%;
+    border-radius: 50px;
+    background: linear-gradient(135deg,#A0E00D 0%, rgba(106, 155, 7, 0.8) 50%);
+    transition: all 0.5s ease-in-out;
+    transform-style: preserve-3d;
+    box-shadow: rgba(5, 71, 17, 0) 40px 50px 25px -40px, rgba(8, 114, 28, 0.2) 0px 25px 25px -5px;
+}
+
+.pruebita-glass {
+    transform-style: preserve-3d;
+    position: absolute;
+    inset: 8px;
+    border-radius: 55px;
+    border-top-right-radius: 100%;
+    background: linear-gradient(0deg, #000000 0%, #444 100%);
+    transform: translate3d(0px, 0px, 25px);
+    border-left: 1px solid white;
+    border-bottom: 1px solid white;
+    transition: all 0.5s ease-in-out;
+}
+
+
+.pruebita-content {
+    padding: 100px 60px 0px 30px;
+    transform: translate3d(0, 0, 26px);
+}
+
+.pruebita-content .pruebita-title {
+    display: block;
+    color: white;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.pruebita-content .pruebita-text {
+    display: block;
+    color: white;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+.pruebita-bottom {
+    padding: 10px 12px;
+    transform-style: preserve-3d;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform: translate3d(0, 0, 26px);
+}
+
+.pruebita-bottom .pruebita-view-more {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    justify-content: flex-end;
+    transition: all 0.2s ease-in-out;
+}
+
+.pruebita-bottom .pruebita-view-more:hover {
+    transform: translate3d(0, 0, 10px);
+}
+
+.pruebita-bottom .pruebita-view-more .pruebita-view-more-button {
+    background: none;
+    border: none;
+    color: white;
+    font-weight: bolder;
+    font-size: 12px;
+}
+
+.pruebita-bottom .pruebita-view-more .pruebita-svg {
+    fill: none;
+    stroke: white;
+    stroke-width: 3px;
+    max-height: 15px;
+}
+
+.pruebita-bottom .pruebita-social-buttons-container {
+    display: flex;
+    gap: 10px;
+    transform-style: preserve-3d;
+}
+
+.pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button {
+    width: 30px;
+    aspect-ratio: 1;
+    padding: 5px;
+    background: rgb(255, 255, 255);
+    border-radius: 50%;
+    border: none;
+    display: grid;
+    place-content: center;
+    box-shadow: rgba(5, 71, 17, 0.5) 0px 7px 5px -5px;
+}
+
+.pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button:first-child {
+    transition: transform 0.2s ease-in-out 0.4s, box-shadow 0.2s ease-in-out 0.4s;
+}
+
+.pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button:nth-child(2) {
+    transition: transform 0.2s ease-in-out 0.6s, box-shadow 0.2s ease-in-out 0.6s;
+}
+
+.pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button:nth-child(3) {
+    transition: transform 0.2s ease-in-out 0.8s, box-shadow 0.2s ease-in-out 0.8s;
+}
+
+.pruebita-bottom .pruebita-social-buttons-container .pruebita-svg {
+    width: 15px;
+    fill: #00894d;
+}
+
+.pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button:hover {
+    background: #A0E00D;
+}
+
+.pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button:hover .pruebita-svg {
+    fill: black;
+}
+
+.pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button:active {
+    background: rgb(255, 234, 0);
+}
+
+.pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button:active .pruebita-svg {
+    fill:#A0E00D;
+}
+
+.pruebita-logo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform-style: preserve-3d;
+}
+
+.pruebita-logo .pruebita-circle {
+    display: block;
+    position: absolute;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    top: 0;
+    right: 0;
+    box-shadow: rgba(100, 100, 111, 0.2) -10px 10px 20px 0px;
+    backdrop-filter: blur(5px);
+    background: rgba(0, 249, 203, 0.2);
+    transition: all 0.5s ease-in-out;
+}
+
+.pruebita-logo .pruebita-circle1 {
+    width: 170px;
+    transform: translate3d(0, 0, 20px);
+    top: 8px;
+    right: 8px;
+}
+
+.pruebita-logo .pruebita-circle2 {
+    width: 140px;
+    transform: translate3d(0, 0, 40px);
+    top: 10px;
+    right: 10px;
+    backdrop-filter: blur(1px);
+    transition-delay: 0.4s;
+}
+
+.pruebita-logo .pruebita-circle3 {
+    width: 110px;
+    transform: translate3d(0, 0, 60px);
+    top: 17px;
+    right: 17px;
+    transition-delay: 0.8s;
+}
+
+.pruebita-logo .pruebita-circle4 {
+    width: 80px;
+    transform: translate3d(0, 0, 80px);
+    top: 23px;
+    right: 23px;
+    transition-delay: 1.2s;
+}
+
+.pruebita-logo .pruebita-circle5 {
+    width: 50px;
+    transform: translate3d(0, 0, 100px);
+    top: 30px;
+    right: 30px;
+    display: grid;
+    place-content: center;
+    transition-delay: 1.6s;
+}
+
+.pruebita-logo .pruebita-circle5 .pruebita-svg {
+    width: 100%;
+    align-items: center;
+    height: auto;
+    fill: white;
+    border-radius: 32px;
+}
+
+.pruebita-parent:hover .pruebita-card {
+    transform: rotate3d(1, 1, 0, 30deg);
+    box-shadow: rgba(5, 71, 17, 0.3) 30px 50px 25px -40px, rgba(5, 71, 17, 0.1) 0px 25px 30px 0px;
+}
+
+.pruebita-parent:hover .pruebita-card .pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button {
+    transform: translate3d(0, 0, 50px);
+    box-shadow: rgba(5, 71, 17, 0.2) -5px 20px 10px 0px;
+}
+
+.pruebita-parent:hover .pruebita-card .pruebita-logo .pruebita-circle2 {
+    transform: translate3d(0, 0, 60px);
+}
+
+.pruebita-parent:hover .pruebita-card .pruebita-logo .pruebita-circle3 {
+    transform: translate3d(0, 0, 80px);
+}
+
+.pruebita-parent:hover .pruebita-card .pruebita-logo .pruebita-circle4 {
+    transform: translate3d(0, 0, 100px);
+}
+
+.pruebita-parent:hover .pruebita-card .pruebita-logo .pruebita-circle5 {
+    transform: translate3d(0, 0, 120px);
+}
+
+.flexi {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+.h2{
+    padding: 15px;
+    }
+.pruebita-university-section .h2 {
+    color: white;
+}
+
+/* Ajuste para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .flexi {
+        flex-direction: column;
+        align-items: center;
+    }
+}
