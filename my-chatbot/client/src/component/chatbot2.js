@@ -4,8 +4,6 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeUp, faCopy, faSyncAlt, faThumbsDown, faThumbsUp, faPencilAlt, faMicrophone, faPaperPlane, faSliders, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const API_BASE_URL = "https://tesis14-backend.onrender.com"
-
 const userPhotoUrl = `${process.env.PUBLIC_URL}/usuario.png`;  
 const botPhotoUrl = `${process.env.PUBLIC_URL}/uni.png`;    
 
