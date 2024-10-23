@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
 
@@ -27,6 +27,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.MARTIN }}
-          publish_dir: .mychtabot/Client/build # Cambia según el directorio de tu build
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # Usa el token predeterminado de GitHub Actions
+          publish_dir: .mychtabot/Client/build
           publish_branch: gh-pages
+          force_orphan: true
