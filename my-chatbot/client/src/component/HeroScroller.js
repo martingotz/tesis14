@@ -22,7 +22,7 @@ const HeroScroller = () => {
       <img src={`${process.env.PUBLIC_URL}/frame3.png`} alt="Laptop Frame" className="laptop-image" />
       <div className="scroll-container">
         <div className="content">
-          <img src={`${process.env.PUBLIC_URL}/foto_nuevo_chatbot.png`} alt="Prima Example" className="hero-image" />
+          <img src={`${process.env.PUBLIC_URL}/foto_nuevo_chatbot1.png`} alt="Prima Example" className="hero-image" />
         </div>
       </div>
     </div>

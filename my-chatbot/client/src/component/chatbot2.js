@@ -60,6 +60,7 @@ const MessagesContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 60px;
+  height:73vh;
 `;
 
 const Message = styled.div`
