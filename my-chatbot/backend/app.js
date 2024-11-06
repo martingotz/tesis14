@@ -81,8 +81,8 @@ app.post('/chatbot', async (req, res) => {
           ...userSummaries[userId].importantDetails.map(detail => ({ role: 'system', content: detail })),
           ...userContexts[userId].slice(-7)
         ],
-        max_tokens: 150,
-        temperature: 0.5,
+        max_tokens: 2000,
+        temperature: 0.3,
         top_p: 1,
         frequency_penalty: 0.2,
         presence_penalty: 0.2
