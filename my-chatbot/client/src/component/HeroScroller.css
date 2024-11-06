@@ -34,10 +34,12 @@
 
 /* The image or content inside the .content div */
 .hero-image {
-    width: 80%; /* Adjust the width to fit inside the screen */
+    width: 83%; /* Adjust the width to fit inside the screen */
     height: 88%; /* Maintain the aspect ratio */
     object-fit: fill; /* Ensure the image covers the content area */
-    border-radius: 32px;
+    border-radius: 14px;
+    margin-top: 45px;
+    margin: 25px;
 }
 
 /* Additional styling to make sure the page is scrollable if needed */

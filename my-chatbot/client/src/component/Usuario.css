@@ -216,49 +216,89 @@
   cursor: pointer;
 }
 
-.social-account-container {
-  margin-top: 25px;
-}
 
-.social-account-container .title {
-  display: block;
-  text-align: center;
-  font-size: 10px;
-  color: rgb(170, 170, 170);
-}
-
-.social-account-container .social-accounts {
-  width: 100%;
+/* Estilos para los iconos de redes sociales */
+.social-media-icons-container {
   display: flex;
+  justify-content: space-between;
+  gap: 30px; /* Define el espacio entre cada icono */
+  margin-bottom: 15px; /* Añade margen inferior para separarlo del resto del formulario */
+}
+
+.social-media-icon {
+  color: white; /* Color de los iconos */
+  transition: color 0.3s ease; /* Transición suave para el color cuando se haga hover */
+}
+
+.social-media-icon:hover {
+  color: #A0E00D; /* Color del hover, puedes cambiar este color según el diseño */
+  cursor: pointer; /* Cambia el cursor cuando pasas el ratón sobre los iconos */
+}
+
+/* Estilos para los mensajes de éxito/error */
+.message-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 15px;
-  margin-top: 5px;
+  background: white;
+  z-index: 1000;
+  text-align: center;
 }
 
-.social-account-container .social-accounts .social-button {
-  background: linear-gradient(45deg, rgb(0, 0, 0) 0%, rgb(112, 112, 112) 100%);
-  border: 5px solid white;
-  padding: 5px;
-  border-radius: 50%;
-  width: 40px;
-  aspect-ratio: 1;
-  display: grid;
-  place-content: center;
-  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 12px 10px -8px;
-  transition: all 0.2s ease-in-out;
+.message-container.success {
+  border: 1px solid #4CAF50;
 }
 
-.social-account-container .social-accounts .social-button .svg {
-  fill: white;
-  margin: auto;
+.message-container.error {
+  border: 1px solid #F44336;
 }
 
-.social-account-container .social-accounts .social-button:hover {
-  transform: scale(1.2);
+.message-container p {
+  color: #333;
+  font-size: 16px;
 }
 
-.social-account-container .social-accounts .social-button:active {
-  transform: scale(0.9);
+.message-container button {
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.message-container.success button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.message-container.error button {
+  background-color: #F44336;
+  color: white;
+}
+
+/* Estilos para los iconos en el mensaje de éxito/error */
+.success-icon,
+.error-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.success-icon {
+  color: #4CAF50;
+}
+
+.error-icon {
+  color: #F44336;
 }
 
 .agreement {
@@ -267,11 +307,40 @@
   margin-top: 15px;
 }
 
-.agreement a {
-  text-decoration: none;
-  color: #A0E00D;
-  font-size: 9px;
+.white {
+  text-decoration: underline;
+  color: white;
+  font-size: 16px;
+
 }
+.privacy-policy input[type="checkbox"] {
+  display: none; /* Hide default checkbox */
+  margin: 2px;
+}
+
+.privacy-policy input[type="checkbox"] + span {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: white; /* Customize your color here */
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+}
+
+.privacy-policy input[type="checkbox"]:checked + span::after {
+  content: '✓';
+  color: #A0E00D;
+  background-color: black;
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 0px;
+}
+
 
 /* Media Queries for Responsiveness */
 
