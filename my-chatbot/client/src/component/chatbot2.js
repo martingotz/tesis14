@@ -321,7 +321,7 @@ function ChatBot() {
   
       // Send the message to the backend
       try {
-        const response = await axios.post(`https://tesis14-backend.onrender.com/chatbot`, { userInput: messageText });
+        const response = await axios.post(`https://tesis14-backend1.onrender.com/chatbot`, { userInput: messageText });
         const botMessage = {
           id: messages.length + 2,
           text: response.data.chatbotResponse,
