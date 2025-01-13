@@ -77,6 +77,7 @@
 .pruebita-university-button.selected {
     background-color: #004d26;
 }
+
 /* Ajuste para pantallas más pequeñas */
 @media (max-width: 768px) {
     .pruebita-university-button {
@@ -116,11 +117,9 @@
         calc(100% - var(--curve-size)) 100%,
         0 100%
     );
-    transition: color 250ms;
     margin: 5px;
     flex: 1;
 }
-
 
 .pruebita-clear-button::after,
 .pruebita-clear-button::before {
@@ -164,27 +163,6 @@
         calc(100% - var(--border-width)),
         var(--border-width) calc(100% - var(--border-width))
     );
-    transition: clip-path 500ms;
-}
-
-.pruebita-clear-button:where(:hover, :focus)::after {
-    clip-path: polygon(
-        calc(100% - var(--border-width))
-        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
-        calc(100% - var(--border-width)) var(--border-width),
-        calc(100% - var(--border-width)) var(--border-width),
-        calc(100% - var(--border-width))
-        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
-        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
-        calc(100% - var(--border-width)),
-        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
-        calc(100% - var(--border-width))
-    );
-    transition: 200ms;
-}
-
-.pruebita-clear-button:where(:hover, :focus) {
-    color: #fff;
 }
 
 .pruebita-university-button {
@@ -213,11 +191,9 @@
         calc(100% - var(--curve-size)) 100%,
         0 100%
     );
-    transition: color 250ms;
     margin: 5px;
     flex: 1;
 }
-
 
 .pruebita-university-button::after,
 .pruebita-university-button::before {
@@ -265,27 +241,6 @@
         calc(100% - var(--border-width)),
         var(--border-width) calc(100% - var(--border-width))
     );
-    transition: clip-path 500ms;
-}
-
-.pruebita-university-button:where(:hover, :focus)::after {
-    clip-path: polygon(
-        calc(100% - var(--border-width))
-        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
-        calc(100% - var(--border-width)) var(--border-width),
-        calc(100% - var(--border-width)) var(--border-width),
-        calc(100% - var(--border-width))
-        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
-        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
-        calc(100% - var(--border-width)),
-        calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
-        calc(100% - var(--border-width))
-    );
-    transition: 200ms;
-}
-
-.pruebita-university-button:where(:hover, :focus) {
-    color: #fff;
 }
 
 .pruebita-university-section {
@@ -310,7 +265,6 @@
     height: 100%;
     border-radius: 50px;
     background: linear-gradient(135deg,#A0E00D 0%, rgba(106, 155, 7, 0.8) 50%);
-    transition: all 0.5s ease-in-out;
     transform-style: preserve-3d;
     box-shadow: rgba(5, 71, 17, 0) 40px 50px 25px -40px, rgba(8, 114, 28, 0.2) 0px 25px 25px -5px;
 }
@@ -320,14 +274,12 @@
     position: absolute;
     inset: 8px;
     border-radius: 55px;
-    border-top-right-radius: 100%;
+    border-top-right-radius: 65%;
     background: linear-gradient(0deg, #000000 0%, #444 100%);
     transform: translate3d(0px, 0px, 25px);
     border-left: 1px solid white;
     border-bottom: 1px solid white;
-    transition: all 0.5s ease-in-out;
 }
-
 
 .pruebita-content {
     padding: 100px 60px 0px 30px;
@@ -366,11 +318,6 @@
     align-items: center;
     width: 40%;
     justify-content: flex-end;
-    transition: all 0.2s ease-in-out;
-}
-
-.pruebita-bottom .pruebita-view-more:hover {
-    transform: translate3d(0, 0, 10px);
 }
 
 .pruebita-bottom .pruebita-view-more .pruebita-view-more-button {
@@ -406,29 +353,9 @@
     box-shadow: rgba(5, 71, 17, 0.5) 0px 7px 5px -5px;
 }
 
-.pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button:first-child {
-    transition: transform 0.2s ease-in-out 0.4s, box-shadow 0.2s ease-in-out 0.4s;
-}
-
-.pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button:nth-child(2) {
-    transition: transform 0.2s ease-in-out 0.6s, box-shadow 0.2s ease-in-out 0.6s;
-}
-
-.pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button:nth-child(3) {
-    transition: transform 0.2s ease-in-out 0.8s, box-shadow 0.2s ease-in-out 0.8s;
-}
-
 .pruebita-bottom .pruebita-social-buttons-container .pruebita-svg {
     width: 15px;
     fill: #00894d;
-}
-
-.pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button:hover {
-    background: #A0E00D;
-}
-
-.pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button:hover .pruebita-svg {
-    fill: black;
 }
 
 .pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button:active {
@@ -456,7 +383,6 @@
     box-shadow: rgba(100, 100, 111, 0.2) -10px 10px 20px 0px;
     backdrop-filter: blur(5px);
     background: rgba(0, 249, 203, 0.2);
-    transition: all 0.5s ease-in-out;
 }
 
 .pruebita-logo .pruebita-circle1 {
@@ -472,7 +398,6 @@
     top: 10px;
     right: 10px;
     backdrop-filter: blur(1px);
-    transition-delay: 0.4s;
 }
 
 .pruebita-logo .pruebita-circle3 {
@@ -480,7 +405,6 @@
     transform: translate3d(0, 0, 60px);
     top: 17px;
     right: 17px;
-    transition-delay: 0.8s;
 }
 
 .pruebita-logo .pruebita-circle4 {
@@ -488,7 +412,6 @@
     transform: translate3d(0, 0, 80px);
     top: 23px;
     right: 23px;
-    transition-delay: 1.2s;
 }
 
 .pruebita-logo .pruebita-circle5 {
@@ -498,7 +421,6 @@
     right: 30px;
     display: grid;
     place-content: center;
-    transition-delay: 1.6s;
 }
 
 .pruebita-logo .pruebita-circle5 .pruebita-svg {
@@ -509,41 +431,17 @@
     border-radius: 32px;
 }
 
-.pruebita-parent:hover .pruebita-card {
-    transform: rotate3d(1, 1, 0, 30deg);
-    box-shadow: rgba(5, 71, 17, 0.3) 30px 50px 25px -40px, rgba(5, 71, 17, 0.1) 0px 25px 30px 0px;
-}
-
-.pruebita-parent:hover .pruebita-card .pruebita-bottom .pruebita-social-buttons-container .pruebita-social-button {
-    transform: translate3d(0, 0, 50px);
-    box-shadow: rgba(5, 71, 17, 0.2) -5px 20px 10px 0px;
-}
-
-.pruebita-parent:hover .pruebita-card .pruebita-logo .pruebita-circle2 {
-    transform: translate3d(0, 0, 60px);
-}
-
-.pruebita-parent:hover .pruebita-card .pruebita-logo .pruebita-circle3 {
-    transform: translate3d(0, 0, 80px);
-}
-
-.pruebita-parent:hover .pruebita-card .pruebita-logo .pruebita-circle4 {
-    transform: translate3d(0, 0, 100px);
-}
-
-.pruebita-parent:hover .pruebita-card .pruebita-logo .pruebita-circle5 {
-    transform: translate3d(0, 0, 120px);
-}
-
 .flexi {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
 }
-.h2{
+
+.h2 {
     padding: 15px;
-    }
+}
+
 .pruebita-university-section .h2 {
     color: white;
 }

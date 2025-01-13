@@ -135,7 +135,7 @@ function PruebitaC() {
                             <div key={idx} className="pruebita-parent">
                                 <div className="pruebita-card">
                                     <div className="pruebita-logo">
-                                        <span className="pruebita-circle pruebita-circle4"></span>
+                                        
                                         <span className="pruebita-circle pruebita-circle5">
                                             <img src={`${item.Imagen}`} alt={university} className="pruebita-svg" onError={(e) => console.error("Image not found:", e.target.src)} />
                                         </span>

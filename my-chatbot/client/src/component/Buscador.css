@@ -8,7 +8,7 @@
   .buscador-input-container {
     display: flex;
     align-items: center;
-    width: 70%; /* El contenedor del input y botón ocupa el 70% */
+    width:90%; /* El contenedor del input y botón ocupa el 70% */
   }
   
   .buscador-input {

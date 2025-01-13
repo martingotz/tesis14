@@ -6,6 +6,7 @@
   padding: 100px 20px;
   color: white;
   min-height: 100vh; /* Ensures it covers the full height of the viewport */
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -86,7 +87,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center; /* Center content vertically */
-  align-items: center;
+  align-items: left;
 }
 
 
@@ -853,3 +854,160 @@
   }
 }
 
+
+/* Parent Container for Sticky Scrolling */
+.sticky-container {
+  position: relative;
+  height: 100vh; /* Each section occupies the full viewport */
+  scroll-snap-type: y mandatory; /* Enable snapping */
+  overflow-y: scroll; /* Enable vertical scrolling */
+}
+
+/* Sticky Section */
+.sticky-section {
+  position: sticky;
+  top: 0; /* Sticks to the top */
+  height: 100vh; /* Occupies the full viewport */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start; /* Aligns each section at the start */
+  padding: 20px;
+  background-color: #000; /* Black background */
+  text-align: left !important; /* Ensure alignment for children */
+  z-index: 1;
+}
+
+/* Register Content and Find Path Content */
+.register-content,
+.find-path-content {
+  display: flex; /* Flexbox for two columns */
+  flex-direction: row; /* Horizontal alignment */
+  justify-content: space-between; /* Space between columns */
+  align-items: center; /* Centered vertically */
+  width: 100% !important; /* Full width of container */
+  max-width: 1200px; /* Maximum width */
+  margin: 0 auto; /* Center container horizontally */
+  box-sizing: border-box; /* Include padding and borders */
+  text-align: left; /* Align text properly */
+}
+
+/* Left Column (Usuario or HeroScroller) */
+.usuario-column,
+.HeroScroller {
+  flex: 0.4; /* 40% of the width */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.usuario-column img,
+.HeroScroller img {
+  width: 100%; /* Scale to fit the container */
+  max-width: 300px; /* Limit maximum width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Right Column (Text and Buttons) */
+.text-column {
+  flex: 0.6; /* 60% of the width */
+  padding: 20px;
+  color: white; /* Ensure text visibility */
+  text-align: left; /* Align text to the left */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.text-column h2 {
+  font-size: 2.5rem; /* Adjust title size */
+  color: #A5FF00; /* Fluorescent green */
+  margin-bottom: 15px;
+}
+
+.text-column p {
+  font-size: 1.2rem; /* Adjust paragraph size */
+  margin-bottom: 20px;
+  line-height: 1.5; /* Improve readability */
+}
+
+/* Buttons */
+.button-group {
+  display: flex; /* Flexbox for buttons */
+  gap: 15px; /* Space between buttons */
+}
+
+.register-button,
+.login-button,
+.wide-chatbot-button {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  color: black;
+  background-color: #A5FF00; /* Fluorescent green */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-button:hover,
+.login-button:hover,
+.wide-chatbot-button:hover {
+  background-color: #8CCC00; /* Darker green on hover */
+}
+
+/* Specific Adjustments for "Encontrá tu camino" */
+.find-path-content .text-column h2 {
+  font-size: 2.5rem; /* Title size adjustment */
+  color: #A5FF00; /* Fluorescent green */
+  margin-bottom: 20px;
+}
+
+.find-path-content .wide-chatbot-button {
+  background-color: #A5FF00; /* Button color */
+  color: black;
+}
+
+.find-path-content .wide-chatbot-button:hover {
+  background-color: #8CCC00; /* Button hover color */
+}
+
+/* Secciones individuales */
+.sticky-section {
+  position: sticky;
+  top: 0; /* Hace que la sección se mantenga visible en la parte superior */
+  height: 90vh; /* Cada sección ocupa el 100% del viewport */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  scroll-snap-align: start; /* Snap en el inicio de cada sección */
+  padding: 10%;
+  color: white;
+}
+
+/* Secciones con colores específicos */
+.sticky-section:nth-child(1) {
+  background-color: #2f2e2e; /* Fondo negro */
+  border-radius: 25px;
+  padding: 10%;
+}
+
+.sticky-section:nth-child(2) {
+  background-color: #619207; /* Verde fluorescente */
+  color: black; /* Contraste en texto */
+  border-radius: 25px;
+  padding: 10%;
+}
+
+.sticky-section:nth-child(3) {
+  background-color: #3a5403; /* Verde claro */
+  border-radius: 25px;
+  padding: 10%;
+}
+
+.sticky-section:nth-child(4) {
+  background-color: #a1e00d14; /* Verde neón */
+  border-radius: 25px;
+  padding: 10%;
+}

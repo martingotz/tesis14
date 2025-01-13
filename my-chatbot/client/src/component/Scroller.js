@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { loadParticles, Particles } from './Particles';  // Asegúrate de que la configuración esté correctamente importada
+
 
 const ScrollerContainer = styled.div`
   position: relative;
@@ -70,18 +70,7 @@ const StepIndicator = styled.div`
   cursor: default;
 `;
 
-const ParticlesContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
- background: radial-gradient(circle at center, #004f2a 0%, #00361b 40%, #001f0d 70%, #000a03 100%);
-  z-index: 0;
-  pointer-events: none; /* Asegúrate de que no interfiera con la interacción del usuario */
-  background-size: cover; /* Asegura que el fondo cubra todo el contenedor */
-  background-repeat: no-repeat; /* Evita que el fondo se repita */
-`;
+
 
 
 const sections = [
@@ -146,8 +135,7 @@ const ScrollerSection = () => {
   }, []);
 
   useEffect(() => {
-    // Cargar las partículas cuando el componente se monta
-    loadParticles(Particles);
+
   }, []);
 
   const handleScroll = () => {
@@ -163,9 +151,7 @@ const ScrollerSection = () => {
 
   return (
     <>
-      <ParticlesContainer>
-        <div id="tsparticles" className="particles"></div>
-      </ParticlesContainer>
+      
       <StepIndicator>{`Paso ${activeIndex + 1}`}</StepIndicator>
       <ProgressBarContainer>
         <ProgressBar progress={progress} />

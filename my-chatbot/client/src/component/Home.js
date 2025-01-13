@@ -210,57 +210,43 @@ const Home = () => {
         <button className="chatbot-button" onClick={() => window.location.href='/chatbot2'}>Chatbot</button>
       </div>
 
-      <div className="register-section" data-aos="fade-right">
-        <div className="usuario-container">
-          <Usuario />
-        </div>
-        <div className="register-content">
-          <h2>Crea tu cuenta</h2>
-          <p>Regístrate o inicia sesión<br />para interactuar con el chatbot.</p>
-          <div className="register-buttons">
-            <button className="register-button" onClick={() => window.location.href='/Usuario'}>Registrarse</button>
-            <button className="login-button" onClick={() => window.location.href='/Usuario'}>Iniciar Sesión</button>
-          </div>
-        </div>
+      <div className="sticky-container">
+      <div className="sticky-section">
+  <div className="register-content">
+    <div className="usuario-column">
+      <Usuario />
+    </div>
+    <div className="text-column">
+      <h2>Crea tu cuenta</h2>
+      <p>Regístrate o inicia sesión para interactuar con el chatbot.</p>
+      <div className="button-group">
+        <button className="register-button">Registrarse</button>
+        <button className="login-button">Iniciar Sesión</button>
       </div>
+    </div>
+  </div>
+</div>
+  <div className="sticky-section">
+    <div className="find-path-content">
+      <HeroScroller />
+      <div className="text-content">
+        <h2>¡Encontrá tu camino!</h2>
+        <p>Conversa con el chatbot y elegí la mejor opción para tu futuro.</p>
+        <button className="wide-chatbot-button">Chatbot</button>
+      </div>
+    </div>
+  </div>
 
-      <div className="section-hero" data-aos="zoom-in">
-        <HeroScroller />
-        <div className="find-path-section">
-          <div className="find-path-content">
-            <h2 className="a1">¡Encontrá tu <br />camino!</h2>
-            <p>Conversa con el chatbot <br />y elegí la mejor opción para tu futuro.</p>
-            <button className="wide-chatbot-button" onClick={() => window.location.href='/chatbot2'}>Chatbot</button>
-          </div>
-        </div>
+  <div className="sticky-section">
+    <div className="about-content">
+      <div className="text-content">
+        <h2>Sobre Nosotros</h2>
+        <p>Descubre cómo nuestra plataforma puede ayudarte.</p>
       </div>
+    </div>
+  </div>
+</div>
 
-      <div className="about-section" data-aos="fade-left">
-        <div className="about-content">
-          <img
-            src={`${process.env.PUBLIC_URL}/hor.png`}
-            alt="Robot"
-            className="about-image"
-          />
-        </div>
-        <div className="about-description">
-          <h2>
-            <span className="revolucion">Revolucionamos</span>
-            <br />
-            la forma de encontrar la carrera de tus sueños
-          </h2>
-          <p className="descripcion-about">
-            Nuestra iniciativa resuelve la falta de orientación y acceso a información
-            sobre opciones educativas en Argentina. Proponemos una plataforma web
-            interactiva con un chatbot de inteligencia artificial que ofrece
-            asesoramiento personalizado sobre carreras, universidades y centros
-            terciarios. Nos dirigimos a estudiantes secundarios próximos a graduarse,
-            universitarios en sus primeros años y aquellos que consideran un cambio
-            de carrera. Con nuestra herramienta, facilitamos decisiones informadas y
-            reducimos la tasa de indecisión y abandono universitario.
-          </p>
-        </div>
-      </div>
 
       <div className="clients-section" data-aos="fade-up">
         <h2>Nuestros Clientes</h2>
@@ -425,6 +411,5 @@ const Home = () => {
 };
 
 export default Home;
-
 
 
