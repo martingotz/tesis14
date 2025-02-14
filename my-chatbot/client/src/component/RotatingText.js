@@ -14,7 +14,7 @@ const RotatingText = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  return <span className="highlight">{words[currentWordIndex]}</span>;
+  return <span className="highlight2">{words[currentWordIndex]}</span>;
 };
 
 export default RotatingText;

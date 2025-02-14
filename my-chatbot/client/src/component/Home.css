@@ -83,11 +83,9 @@
 }
 
 .register-content {
-  flex: 1; /* Makes both containers take equal width */
   display: flex;
   flex-direction: column;
   justify-content: center; /* Center content vertically */
-  align-items: left;
 }
 
 
@@ -863,20 +861,7 @@
   overflow-y: scroll; /* Enable vertical scrolling */
 }
 
-/* Sticky Section */
-.sticky-section {
-  position: sticky;
-  top: 0; /* Sticks to the top */
-  height: 100vh; /* Occupies the full viewport */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  scroll-snap-align: start; /* Aligns each section at the start */
-  padding: 20px;
-  background-color: #000; /* Black background */
-  text-align: left !important; /* Ensure alignment for children */
-  z-index: 1;
-}
+
 
 /* Register Content and Find Path Content */
 .register-content,

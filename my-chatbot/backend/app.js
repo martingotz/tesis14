@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const { v4: uuidv4 } = require('uuid');
 const cors = require('cors');
+const { stream } = require('xlsx');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -85,13 +86,16 @@ app.post('/chatbot', async (req, res) => {
         temperature: 0.3,
         top_p: 1,
         frequency_penalty: 0.2,
-        presence_penalty: 0.2
+        presence_penalty: 0.2,
+        stream: true,
+
       },
       {
         headers: {
           'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
           'Content-Type': 'application/json',
         },
+        responseType: 'stream',
       }
     );
 
