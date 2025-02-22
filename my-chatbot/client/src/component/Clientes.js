@@ -10,7 +10,7 @@ const Clientes = () => {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 2000,
-        arrows: true,
+        
         prevArrow: <div className="slick-prev" />,
         nextArrow: <div className="slick-next" />
       };

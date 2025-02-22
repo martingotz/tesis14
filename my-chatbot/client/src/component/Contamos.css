@@ -1,51 +1,59 @@
+.achievement-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 20px;
+  background-color: #000;
+  min-height: 400px;
+}
 
-  
-  .achievement-content {
-    width: 50%;
-    text-align: left;
-    padding: 10%;
-    margin-bottom: 20px;
-  }
-  
-  .achievement-content h2 {
-    font-size: 3em;
-    color: #A5FF00;
-    margin-bottom: 20px;
-    text-align: left;
-  }
-  
-  .achievement-content p {
-    font-size: 1.5em;
-    margin-bottom: 30px;
-    text-align: left;
-  }
-  
-  .stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-  }
-  
-  .stats div {
-    width: 45%;
-    font-size: 2em;
-    font-weight: bold;
-  }
-  
-  .stats div span {
-    display: block;
-    font-size: 0.5em;
-    font-weight: normal;
-  }
-  
-  .map-container {
-    width: 45%;
-    height: 400px;
-    margin-right: 10%;
-  }
-  
-  .map-container iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
+.achievement-content {
+  width: 50%;
+  color: white;
+  text-align: left;
+  padding: 10%;
+  margin-bottom: 20px;
+}
+
+.achievement-content h2 {
+  font-size: 3em;
+  color: #A5FF00;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.achievement-content p {
+  font-size: 1.5em;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.stats div {
+  width: 45%;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.stats div span {
+  display: block;
+  font-size: 0.5em;
+  font-weight: normal;
+}
+
+.map-container {
+  width: 45%;
+  height: 400px;
+  margin-right: 10%;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}

@@ -3,7 +3,6 @@
     position: relative;
     max-width: 90%;
     margin: 0 auto;
-    height: 400vh; /* Ensures enough scroll space */
 }
 
 /* Sticky Sections Wrapper */

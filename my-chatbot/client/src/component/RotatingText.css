@@ -10,4 +10,26 @@
     font-weight: bold;
     color: white; 
   }
-
+  .chatbot-button,
+  .wide-chatbot-button {
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    color: black;
+    background-color: #A5FF00;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .chatbot-button:hover,
+  .wide-chatbot-button:hover {
+    background-color: #8CCC00;
+  }
+  
+  .wide-chatbot-button {
+    width: 100%;
+    max-width: 300px;
+  }
+  
