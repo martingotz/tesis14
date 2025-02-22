@@ -1,4 +1,4 @@
-// RotatingText.js
+import './RotatingText.css';
 import React, { useEffect, useState } from 'react';
 
 const words = ["camino", "carrera", "facultad"];
@@ -14,7 +14,16 @@ const RotatingText = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  return <span className="highlight2">{words[currentWordIndex]}</span>;
+  return (
+    <div className='rotating-text'> 
+    <h1>
+      Elegí tu <span className="highlight2">{words[currentWordIndex]}</span> <br />
+      con <span className="highlight2">UniGPT</span>
+    </h1>
+      <button className="chatbot-button" onClick={() => window.location.href='/chatbot2'}>Chatbot</button>
+    </div>
+  );
 };
 
 export default RotatingText;
+

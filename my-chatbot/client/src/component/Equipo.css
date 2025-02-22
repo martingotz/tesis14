@@ -1,0 +1,84 @@
+/* General team section styling */
+.team-section {
+    text-align: center;
+    background-color: black;
+    padding: 60px 0;
+}
+
+/* Title and subtitle styling */
+.team-title {
+    font-size: 3em;
+    color: #A5FF00;
+    font-weight: bold;
+}
+
+.team-subtitle {
+    font-size: 1.5em;
+    color: white;
+    margin-bottom: 40px;
+}
+
+/* Flex container for the team members */
+.team-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin: auto;
+    flex-wrap: wrap;
+}
+
+/* Individual team member cards */
+.team-member {
+    text-align: center;
+    max-width: 600px;
+    width: 30%;
+    height: 40%;
+}
+
+/* Profile picture styling */
+.team-member-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Name styling */
+.team-member-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    margin-top: 10px;
+}
+
+/* Title styling */
+.team-member-title {
+    font-size: 1.2em;
+    color: white;
+    margin-top: 5px;
+}
+
+/* Degree styling */
+.team-member-degree {
+    font-size: 1em;
+    color: white;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+/* Social links container */
+.social-links {
+    margin-top: 10px;
+}
+
+/* Social link icons */
+.social-link {
+    color: white;
+    font-size: 1.5em;
+    margin: 0 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+.social-link:hover {
+    color: #A5FF00;
+}

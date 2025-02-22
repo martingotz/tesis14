@@ -1,0 +1,43 @@
+.nuestro-section {
+    text-align: center;
+    background-color: black;
+    padding: 60px 0;
+}
+
+.nuestro-section h2 {
+    font-size: 3em;
+    color: #A5FF00;
+    margin-bottom: 40px;
+}
+
+.nuestro-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.nuestro-card {
+    width: 30%;
+    text-align: center;
+}
+
+.nuestro-icon {
+    font-size: 4em;
+    color: #A5FF00;
+    margin-bottom: 15px;
+}
+
+.nuestro-title {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #A5FF00;
+    margin-bottom: 10px;
+}
+
+.nuestro-description {
+    font-size: 1.2em;
+    color: white;
+    line-height: 1.5;
+}

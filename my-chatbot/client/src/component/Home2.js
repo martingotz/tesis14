@@ -1,48 +1,46 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import Slider from 'react-slick';
+
 import './Home2.css';
 import RotatingText from './RotatingText';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faChalkboardTeacher, faShareAlt, faBookReader } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
-import HeroScroller from './HeroScroller';
-import Usuario from './usuario';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import Clientes from './Clientes';
+import Contamos from './Contamos';
+import Nuestro from './Nuestro';
+import Testimonios from './Testimonios';
+import Cta from './Cta';
+import Equipo from './Equipo';
+import StickyScroller from './StickyScroller';
 
 
 function Home2() {
 return (
 <div>
-    <div className="home2-section" datos-aos="fade-up">
-      <div className="text2-container">
-        <h1>
-          Elegí tu <RotatingText /> <br />con <span className="highlight2">UniGPT</span>
-        </h1>
-      </div>
-      
-
-
-
-
-
-
-
-
-
-
- </div>
-
-
-
-
-
-
-
-
+<div className="home2-section" datos-aos="fade-up">
+  <div>
+    <RotatingText />
+  </div>
+   <StickyScroller />
+  <div>
+    <Clientes />
+  </div>
+  <div>
+    <Contamos />
+  </div>
+  <div>
+    <Equipo />
+  </div>
+  <div>
+    <Nuestro />
+  </div>
+  <div>
+    <Testimonios />
+  </div>
+    <div>
+    <Cta />
+    </div>
 
 </div>
+
+</div>
+
 );
 };
 export default Home2;

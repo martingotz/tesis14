@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './PruebitaC.css';
+import './Carreras.css';
 import * as XLSX from 'xlsx';
 import axios from 'axios';
 import Slider from 'react-slick';
@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faGlobe, faPhone} from '@fortawesome/free-solid-svg-icons';
 import Buscador from './Buscador';
 
-function PruebitaC() {
+function Carreras() {
     const [data, setData] = useState([]);
     const [selectedUniversity, setSelectedUniversity] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
@@ -173,7 +173,7 @@ function PruebitaC() {
     );
 }
 
-export default PruebitaC;
+export default Carreras;
 
 
 

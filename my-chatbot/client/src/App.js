@@ -1,14 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from "@material-tailwind/react";
-import Chatbot from './component/chatbot2';
+import Chatbot from './component/Chatbot';
 import Header from './component/Header';
 import Usuario from './component/usuario'; 
 import Contacto from './component/Contacto';
-
 import Home from './component/Home';
 import Footer from './component/Footer';
-import PruebitaC from './component/PruebitaC';
+import Carreras from './component/Carreras';
 import Cookies from './component/Cookies';
 import Privacy from './component/Privacy';
 import Condiciones from './component/Condiciones';
@@ -31,7 +30,7 @@ function App() {
             <Route path="/Usuario" element={<Usuario />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/universidades" element={< Universidad />} />
-            <Route path="/carreras" element={<PruebitaC />} />
+            <Route path="/carreras" element={<Carreras />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/condiciones" element={<Condiciones />} />

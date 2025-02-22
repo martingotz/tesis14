@@ -1,0 +1,39 @@
+
+  
+  .cta-background {
+    background: radial-gradient(circle, #006400, #000);
+    border-radius: 50px;
+    border: 1.5px solid white;
+    padding: 50px 20px;
+  }
+  
+  .cta-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #A0E00D;
+  }
+  
+  .cta-section p {
+    
+    margin-bottom: 30px;
+  }
+  
+  .cta-button {
+    padding: 15px 30px;
+    font-size: 1.5em;
+    color: black;
+    background-color: #A0E00D;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: white;
+  }
+  
+  .cta-button:active {
+    background-color: #A0E00D;
+  }
+  

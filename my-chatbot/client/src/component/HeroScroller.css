@@ -1,51 +1,24 @@
-/* Container for the laptop frame and scrolling content */
-.laptop-frame {
-    position: relative;
-    width: 80%; /* Adjust the width as needed */
-    margin: 0 auto; /* Center the laptop on the page */
+/* Main container to hold the chatbot on the right */
+.chatbot-container {
+    display: flex;
+    justify-content: flex-end; /* Pushes the chatbot to the right */
+    align-items: center;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background: black; /* Match chatbot theme */
+    padding-right: 2%; /* Add some spacing */
 }
 
-/* Laptop frame image */
-.laptop-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    pointer-events: none; /* Ensure the frame doesn't interfere with interaction */
-}
-
-/* Container for the scrolling content */
-.scroll-container {
-    position: absolute;
-    top: 11.5%; /* Adjust to fit the screen area of your laptop image */
-    left: 7.5%; /* Adjust to fit the screen area of your laptop image */
-    width: 85%; /* Adjust to fit the screen area of your laptop image */
-    height: 77%; /* Adjust to fit the screen area of your laptop image */
-    perspective: 1000px; /* Adds 3D perspective */
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-/* Content inside the scrolling container */
-.content {
-    transform-style: preserve-3d;
-    transition: transform 1s ease-out; /* Smooth transition for the transform */
-    transform: rotateX(15deg); /* Initial position (adjusted for inversion) */
-}
-
-/* The image or content inside the .content div */
-.hero-image {
-    width: 83%; /* Adjust the width to fit inside the screen */
-    height: 88%; /* Maintain the aspect ratio */
-    object-fit: fill; /* Ensure the image covers the content area */
-    border-radius: 14px;
-    margin-top: 45px;
-    margin: 25px;
-}
-
-/* Additional styling to make sure the page is scrollable if needed */
-body, html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: black; /* Ensure the body has a black background */
+/* Chatbot area */
+.chatbot-content {
+    width: 65%; /* Adjust to 65%-70% as needed */
+    max-width: 70%; /* Prevents excessive stretching */
+    height: 90vh; /* Prevents full height overflow */
+    max-height: 100%; /* Ensures it stays within limits */
+    overflow: hidden; /* Prevents any unwanted scrollbars */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #111; /* Optional: Adds subtle contrast */
+    border-radius: 10px; /* Optional: Makes it look sleek */
 }

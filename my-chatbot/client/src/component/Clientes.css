@@ -1,0 +1,29 @@
+.clients-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #000;
+    color: #A5FF00;
+
+  }
+
+.h2{
+    color: #A5FF00;
+    font-size: 5rem;
+  }
+
+.slick-prev,
+.slick-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.slick-prev:before,
+.slick-next:before {
+
+  opacity: 0;
+}

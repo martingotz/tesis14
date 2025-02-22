@@ -1,0 +1,13 @@
+.highlight2 {
+    color: #A5FF00;
+  }
+  .rotating-text{
+    padding: 125px 0px 10px 0px;
+    height: 100vh;
+  }
+  .rotating-text h1 {
+    font-size: 5rem;
+    font-weight: bold;
+    color: white; 
+  }
+

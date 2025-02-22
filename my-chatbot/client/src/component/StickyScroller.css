@@ -1,0 +1,120 @@
+/* Main Scroller Container */
+.scroller-container {
+    position: relative;
+    max-width: 90%;
+    margin: 0 auto;
+    height: 400vh; /* Ensures enough scroll space */
+}
+
+/* Sticky Sections Wrapper */
+.scroller-sections {
+    position: relative;
+}
+
+/* Individual Sticky Sections */
+.scroller-section {
+    position: sticky;
+    top: 10vh; /* Higher positioning */
+    height: 80vh; /* Larger cards */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: var(--stick-visibility, 0);
+    transform: scale(var(--stick-scale, 0.8));
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 60px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+/* Content Layout (50% text, 50% image) */
+.scroller-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+/* Left Side: Text (50%) */
+.scroller-text {
+    flex: 1;
+    text-align: left;
+    max-width: 40%;
+    color: white;
+}
+.scroller-text p{
+    font-size: 18px;
+    line-height: 1.6;
+    padding-top: 20px;
+}
+
+/* Right Side: Image (50%) */
+.scroller-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 50%;
+    
+}
+
+/* Image Size */
+.scroller-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10%;
+}
+
+/* Alternating Section Colors */
+.login { background: rgba(255, 255, 255, 0.1); }
+.chat { background: rgba(161, 224, 13, 0.2); color: black; }
+.info { background: rgba(90, 120, 10, 0.4); }
+.final { background: rgba(40, 80, 5, 0.2); }
+
+/* Custom h2 Styling */
+.scroller-title {
+    font-size: 28px;
+    color: #A5FF00;
+    font-weight: bold;
+}
+.scroller-title span {
+    display: block;
+    font-size: 18px;
+    color: #A5FF00;
+    font-weight: normal;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    .scroller-container {
+        height: 400vh;
+    }
+
+    .scroller-section {
+        height: 70vh;
+        top: 5vh;
+    }
+
+    .scroller-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .scroller-text {
+        padding-left: 0;
+        max-width: 100%;
+    }
+
+    .scroller-image-container {
+        max-width: 100%;
+    }
+
+    .scroller-image {
+        max-width: 80%;
+    }
+}
