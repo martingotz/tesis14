@@ -5,7 +5,6 @@ import Chatbot from './component/Chatbot';
 import Header from './component/Header';
 import Usuario from './component/usuario'; 
 import Contacto from './component/Contacto';
-import Home from './component/Home';
 import Footer from './component/Footer';
 import Carreras from './component/Carreras';
 import Cookies from './component/Cookies';
@@ -23,9 +22,9 @@ function App() {
         <div className="App">
           <Header />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/tesis14" element={<Home />} />
-            <Route path="/inicio" element={<Home />} />
+            <Route path="/" element={<Home2 />} />
+            <Route path="/tesis14" element={<Home2 />} />
+            <Route path="/inicio" element={<Home2 />} />
             <Route path="/chatbot2" element={<Chatbot />} />
             <Route path="/Usuario" element={<Usuario />} />
             <Route path="/contacto" element={<Contacto />} />
