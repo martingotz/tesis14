@@ -323,7 +323,7 @@ function ChatBot() {
       try {
         const response = await axios.post(` http://localhost:3000/chatbot`, { userInput: messageText });
         const botMessage = {
-          id: messages.length + 2,
+          id: messages.length + 2, /* Esto esta perfecto, es + 2 porque el lenght empieza en 0, asi que tiene que sumar 2 para siempre ser par  */ 
           text: response.data.chatbotResponse,
           user: "Chatbot",
           name: "Chatbot",
