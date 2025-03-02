@@ -258,6 +258,7 @@ function ChatBot() {
   const { width } = useWindowSize();
   const userEmail = localStorage.getItem('userEmail');
   const userName = userEmail ? userEmail.split('@')[0] : `user${Math.floor(Math.random() * 10000)}`;
+  const [universidad, setUniversidad] = useState("udesa");
 
   const promptOptions = [
     "¿Cuáles son las opciones de carreras universitarias o técnicaturas disponibles?",
@@ -272,34 +273,6 @@ function ChatBot() {
     "Me gustaría saber sobre las opciones de posgrado disponibles."
   ];
 
-  /* const handleOptionClick = async (option) => {
-    setLoading(true);
-    const newMessage = {
-      id: messages.length + 1,
-      text: option,
-      user: "User",
-      name: userName,
-      icon: userPhotoUrl,
-    };
-    setMessages([...messages, newMessage]);
-
-    try {
-      const response = await axios.post(`${API_BASE_URL}/openai/chat`, { userName, message: option });
-      const botMessage = {
-        id: messages.length + 2,
-        text: response.data,
-        user: "Chatbot",
-        name: "UniGPT",
-        icon: botPhotoUrl,
-      };
-      setMessages([...messages, newMessage, botMessage]);
-    } catch (error) {
-      console.error("Error fetching bot response:", error);
-    }
-    setLoading(false);
-  }; */
-
-  
 
   const sendMessage = async (event, text) => {
     event.preventDefault();
@@ -316,12 +289,11 @@ function ChatBot() {
       setInputText("");
       setShowPromptOptions(false);
   
-      // Set loading to true before sending the message
       setLoading(true);
   
-      // Send the message to the backend
+      // mandar mensaje
       try {
-        const response = await axios.post(` http://localhost:3000/chatbot`, { userInput: messageText });
+        const response = await axios.post(` http://localhost:3000/chatbot`, { userInput: messageText, universidad });
         const botMessage = {
           id: messages.length + 2, /* Esto esta perfecto, es + 2 porque el lenght empieza en 0, asi que tiene que sumar 2 para siempre ser par  */ 
           text: response.data.chatbotResponse,
@@ -333,7 +305,6 @@ function ChatBot() {
       } catch (error) {
         console.error('Error sending message to chatbot:', error);
       } finally {
-        // Set loading to false after receiving the response
         setLoading(false);
       }
     }
@@ -472,6 +443,19 @@ function ChatBot() {
     <PageContainer>
       <MainContent>
         <LeftColumn visible={isLeftColumnVisible}>
+          <div className="selector-container">
+          <label htmlFor="universidad">Selecciona la Universidad:</label>
+          <select
+            id="universidad"
+            value={universidad}
+            onChange={(e) => setUniversidad(e.target.value)}
+          >
+            <option value="udesa">Universidad de San Andrés</option>
+            <option value="uade">UADE</option>
+            <option value="utdt">Torcuato Di Tella</option>
+          </select>
+          </div>
+
           <NewChatButton onClick={startNewChat}>Nuevo Chat</NewChatButton>
           <SearchHistoryContainer>
             <SearchHistoryTitle>Historial de Chats</SearchHistoryTitle>
