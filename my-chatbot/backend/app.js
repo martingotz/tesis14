@@ -114,20 +114,19 @@ async function summarizeUserMemory(userId) {
 
 // Endpoint
   app.post('/chatbot', async (req, res) => {
-    let { userInput, userId } = req.body;
+    let { userInput, userId, universidad  } = req.body;
   
     if (!userId) {
       userId = uuidv4();
       userContexts[userId] = [];
-      userSummaries[userId] = { preferences: [], importantDetails: "", universidad: "udesa" }; // Por defecto, UDESA
+      userSummaries[userId] = { preferences: [], importantDetails: "", universidad: "udesa" };
     }
   
     userContexts[userId].push({ role: 'user', content: userInput });
   
     // Determina la universidad del usuario (por defecto esta UDESA)
-    const universidad = userSummaries[userId].universidad || "udesa";
-    const config = universidadesConfig[universidad] || universidadesConfig["udesa"];
-  
+    const config = universidadesConfig[universidad] || universidadesConfig["udesa"];  
+    
     try {
       const response = await axios.post(
         'https://api.openai.com/v1/chat/completions',
