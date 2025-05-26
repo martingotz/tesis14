@@ -14,6 +14,7 @@ const allowedOrigins = [
   'http://localhost:3001',
   "https://tesis14.onrender.com/chatbot2",
   "https://tesis14-frontend.onrender.com/chatbot2",
+  "https://tesis14-frontend.onrender.com",
 ];
 
 app.use(cors({
