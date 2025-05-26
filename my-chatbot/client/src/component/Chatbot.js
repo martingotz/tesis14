@@ -293,7 +293,7 @@ function ChatBot() {
   
       // mandar mensaje
       try {
-        const response = await axios.post(` http://localhost:3000/chatbot`, { userInput: messageText, universidad });
+        const response = await axios.post(`https://tesis14-backend1.onrender.com`, { userInput: messageText, universidad });
         const botMessage = {
           id: messages.length + 2, /* Esto esta perfecto, es + 2 porque el lenght empieza en 0, asi que tiene que sumar 2 para siempre ser par  */ 
           text: response.data.chatbotResponse,
@@ -444,17 +444,66 @@ function ChatBot() {
       <MainContent>
         <LeftColumn visible={isLeftColumnVisible}>
           <div className="selector-container">
-          <label htmlFor="universidad">Selecciona la Universidad:</label>
-          <select
-            id="universidad"
-            value={universidad}
-            onChange={(e) => setUniversidad(e.target.value)}
+      <label htmlFor="universidad" className="block mb-2 font-medium text-white">
+        Selecciona la Universidad:
+      </label>
+
+      <div className="select">
+        <div
+          className="selected"
+          data-default="Universidad de San Andrés"
+          data-one="UADE"
+          data-two="Torcuato Di Tella"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="1em"
+            viewBox="0 0 512 512"
+            className="arrow"
           >
-            <option value="udesa">Universidad de San Andrés</option>
-            <option value="uade">UADE</option>
-            <option value="utdt">Torcuato Di Tella</option>
-          </select>
+            <path
+              d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 
+              12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 
+              86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 
+              32.8 0 45.3l192 192z"
+            ></path>
+          </svg>
+        </div>
+
+        <div className="options">
+          <div title="udesa">
+            <input
+              id="udesa"
+              name="universidad"
+              type="radio"
+              checked={universidad === "udesa"}
+              onChange={() => setUniversidad("udesa")}
+            />
+            <label className="option" htmlFor="udesa" data-txt="Universidad de San Andrés"></label>
           </div>
+          <div title="uade">
+            <input
+              id="uade"
+              name="universidad"
+              type="radio"
+              checked={universidad === "uade"}
+              onChange={() => setUniversidad("uade")}
+            />
+            <label className="option" htmlFor="uade" data-txt="UADE"></label>
+          </div>
+          <div title="utdt">
+            <input
+              id="utdt"
+              name="universidad"
+              type="radio"
+              checked={universidad === "utdt"}
+              onChange={() => setUniversidad("utdt")}
+            />
+            <label className="option" htmlFor="utdt" data-txt="Torcuato Di Tella"></label>
+          </div>
+        </div>
+      </div>
+    </div>
 
           <NewChatButton onClick={startNewChat}>Nuevo Chat</NewChatButton>
           <SearchHistoryContainer>
