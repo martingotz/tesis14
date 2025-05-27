@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVolumeUp, faCopy, faSyncAlt, faThumbsDown, faThumbsUp, faPencilAlt, faMicrophone, faPaperPlane, faSliders, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faVolumeUp, faCopy, faSyncAlt, faThumbsDown, faThumbsUp, faPencilAlt, faMicrophone, faPaperPlane, faSliders, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 const userPhotoUrl = `${process.env.PUBLIC_URL}/usuario.png`;  
 const botPhotoUrl = `${process.env.PUBLIC_URL}/uni.png`;    
@@ -445,15 +445,16 @@ function ChatBot() {
         <LeftColumn visible={isLeftColumnVisible}>
           <div className="selector-container">
       <label htmlFor="universidad" className="block mb-2 font-medium text-white">
-        Selecciona la Universidad:
+        Universidad:
       </label>
 
       <div className="select">
         <div
           className="selected"
-          data-default="Universidad de San Andrés"
+          data-default="Universidades"
           data-one="UADE"
-          data-two="Torcuato Di Tella"
+          data-two="UDESA"
+          data-three="Torcuato Di Tella"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -518,7 +519,7 @@ function ChatBot() {
         <Divider visible={isLeftColumnVisible} />
         <ToggleButtonContainer>
         <button  onClick={() => width <= 768 ? startNewChat() : toggleLeftColumn()} style={{backgroundColor:'#2c2c2c'}}>
-           <FontAwesomeIcon icon={width <= 768 ? faPlus : faSliders} style={{ color: '#a0e00d', fontSize: '24px' }} />
+           <FontAwesomeIcon icon={width <= 768 ? faPenToSquare : faSliders} style={{ color: '#a0e00d', fontSize: '24px' }} />
             </button>
          </ToggleButtonContainer>
         <ChatContainer fullWidth={!isLeftColumnVisible}>
